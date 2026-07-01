@@ -220,6 +220,7 @@
             font-size: 14px;
             font-weight: 600;
             margin: 0 0 8px 0;
+            color: var(--yazi-koyu);
             height: 40px;
             overflow: hidden;
         }
@@ -254,7 +255,6 @@
             font-size: 16px;
         }
 
-        /* Sepet ve Ortak Yan Paneller */
         .sepet-penceresi, .admin-penceresi {
             position: fixed;
             top: 0;
@@ -326,7 +326,6 @@
             text-decoration: none;
         }
 
-        /* Admin Form Elementleri */
         .admin-form-grup {
             margin-bottom: 15px;
         }
@@ -484,12 +483,10 @@
         </aside>
 
         <section class="urun-alani">
-            <!-- Ürünler JavaScript ile Dinamik Olarak Buraya Gelecek -->
             <div class="urun-izgara" id="urunVitrin"></div>
         </section>
     </main>
 
-    <!-- Alışveriş Sepeti Paneli -->
     <div class="sepet-penceresi" id="sepetPenceresi">
         <div class="sepet-ust">
             <h3>Alışveriş Sepetiniz</h3>
@@ -503,7 +500,6 @@
         <a href="#" id="whatsappSiparisBtn" class="siparis-tamamla-btn" target="_blank" onclick="siparisGonder()">Siparişi WhatsApp ile Tamamla</a>
     </div>
 
-    <!-- 🛠 YÖNETİCİ (ADMIN) PANELİ -->
     <div class="admin-penceresi" id="adminPenceresi">
         <div class="sepet-ust">
             <h3>61Bazaar Mağaza Yönetimi</h3>
@@ -528,8 +524,8 @@
                 <input type="number" id="admUrunFiyat" placeholder="Örn: 240">
             </div>
             <div class="admin-form-grup">
-                <label>Görsel Linki (Boş Bırakılabilir)</label>
-                <input type="text" id="admUrunGorsel" placeholder="https://...">
+                <label>Görsel Adı (Görseller Klasöründeki Adı)</label>
+                <input type="text" id="admUrunGorsel" placeholder="Örn: urunler/mayis-cayi.jpg">
             </div>
             <button class="admin-kaydet-btn" style="width:100%;" onclick="adminUrunEkle()">Ürünü Mağazaya Ekle</button>
             
@@ -565,32 +561,30 @@
         <div class="footer-telif">&copy; 2026 61Bazaar Satış Mağazası. Tüm Hakları Saklıdır.</div>
     </footer>
 
-    <!-- TÜM MOTOR ALTYAPISI (VERİTABANI VE PANEL JAVASCRIPT) -->
     <script>
-        // Varsayılan Ürün Veritabanı (Eğer hafıza boşsa yüklenecek)
+        // Ürünlerin Varsayılan Görsel Klasör Atamaları
         const varsayilanUrunler = [
-            { id: 1, ad: "Mayıs İlk Sürgün Filiz Çayı (1000 G)", fiyat: 240, kat: "cay", gorsel: "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=400&q=80" },
-            { id: 2, ad: "Of Hasadı Altınbaş Siyah Çay (1000 G)", fiyat: 230, kat: "cay", gorsel: "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=400&q=80" },
-            { id: 3, ad: "Organik Karadeniz Çayı (500 G)", fiyat: 195, kat: "cay", gorsel: "https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?auto=format&fit=crop&w=400&q=80" },
-            { id: 4, ad: "Trabzon Elek Altı Tiryaki Çayı (500 G)", fiyat: 175, kat: "cay", gorsel: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=400&q=80" },
-            { id: 5, ad: "Çıtır Kavrulmuş İç Fındık (1000 G)", fiyat: 390, kat: "findik", gorsel: "https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=400&q=80" },
-            { id: 6, ad: "Naturel Çiğ İç Fındık (1000 G)", fiyat: 350, kat: "findik", gorsel: "https://images.unsplash.com/photo-1627914445885-3ba577b282bc?auto=format&fit=crop&w=400&q=80" },
-            { id: 7, ad: "Akçaabat Usulü Kabuklu Fındık (1000 G)", fiyat: 195, kat: "findik", gorsel: "https://images.unsplash.com/photo-1507330517424-03c01fe32992?auto=format&fit=crop&w=400&q=80" },
-            { id: 8, ad: "%100 Saf Şekersiz Fındık Ezmesi (400 G)", fiyat: 180, kat: "findik", gorsel: "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=400&q=80" },
-            { id: 9, ad: "Trabzon Süzme Yayla Balı (850 G)", fiyat: 550, kat: "gurme", gorsel: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=400&q=80" }
+            { id: 1, ad: "Mayıs İlk Sürgün Filiz Çayı (1000 G)", fiyat: 240, kat: "cay", gorsel: "urunler/mayis-cayi.jpg" },
+            { id: 2, ad: "Of Hasadı Altınbaş Siyah Çay (1000 G)", fiyat: 230, kat: "cay", gorsel: "urunler/of-cayi.jpg" },
+            { id: 3, ad: "Organik Karadeniz Çayı (500 G)", fiyat: 195, kat: "cay", gorsel: "urunler/organik-cay.jpg" },
+            { id: 4, ad: "Trabzon Elek Altı Tiryaki Çayı (500 G)", fiyat: 175, kat: "cay", gorsel: "urunler/elekalti-cay.jpg" },
+            { id: 5, ad: "Çıtır Kavrulmuş İç Fındık (1000 G)", fiyat: 390, kat: "findik", gorsel: "urunler/kavrulmus-findik.jpg" },
+            { id: 6, ad: "Naturel Çiğ İç Fındık (1000 G)", fiyat: 350, kat: "findik", gorsel: "urunler/cig-findik.jpg" },
+            { id: 7, ad: "Akçaabat Usulü Kabuklu Fındık (1000 G)", fiyat: 195, kat: "findik", gorsel: "urunler/kabuklu-findik.jpg" },
+            { id: 8, ad: "%100 Saf Şekersiz Fındık Ezmesi (400 G)", font: 180, kat: "findik", gorsel: "urunler/findik-ezmesi.jpg" },
+            { id: 9, ad: "Trabzon Süzme Yayla Balı (850 G)", fiyat: 550, kat: "gurme", gorsel: "urunler/yayla-bali.jpg" }
         ];
 
         let urunler = JSON.parse(localStorage.getItem('61bazaar_db')) || varsayilanUrunler;
         let sepet = [];
 
-        // MAĞAZA VİTRİNİNİ BASTIRMA
         function vitrinBas() {
             let vitrin = document.getElementById('urunVitrin');
             let html = '';
             urunler.forEach(urun => {
                 html += `
                     <div class="caykur-urun-kart" data-isim="${urun.ad.toLowerCase()}" data-kat="${urun.kat}">
-                        <img src="${urun.gorsel || 'https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=400&q=80'}">
+                        <img src="${urun.gorsel}" onerror="this.src='https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=400&q=80'">
                         <div class="kart-detay">
                             <h3 class="kart-urun-adi">${urun.ad}</h3>
                             <div class="kart-stok-durum"><i class="fa-solid fa-check"></i> Stokta Var</div>
@@ -606,7 +600,6 @@
             localStorage.setItem('61bazaar_db', JSON.stringify(urunler));
         }
 
-        // ARAMA VE FİLTRE MOTORLARI
         function urunArama() {
             let girdi = document.getElementById('aramaInput').value.toLowerCase();
             let kartlar = document.getElementsByClassName('caykur-urun-kart');
@@ -624,7 +617,6 @@
             }
         }
 
-        // SEPET SİSTEMİ MOTORU
         function sepeteEkle(ad, fiyat) {
             let varOlan = sepet.find(item => item.ad === ad);
             if (varOlan) { varOlan.adet += 1; } else { sepet.push({ ad: ad, fiyat: fiyat, adet: 1 }); }
@@ -655,7 +647,7 @@
 
         function siparisGonder() {
             if (sepet.length === 0) return;
-            let numara = "905000000000"; // TELEFON NUMARANIZI BURAYA YAZIN
+            let numara = "905000000000"; 
             let mesaj = "*61Bazaar Yeni Sipariş*\n\n";
             let t = 0;
             sepet.forEach(u => { mesaj += `- ${u.ad} (X${u.adet}) -> ${u.fiyat * u.adet} TL\n`; t += (u.fiyat * u.adet); });
@@ -663,25 +655,21 @@
             document.getElementById('whatsappSiparisBtn').href = `https://wa.me/${numara}?text=${encodeURIComponent(mesaj)}`;
         }
 
-        // 🛠 ADMIN PANELİ KONTROLLERİ
         function adminGirisTetikle() {
             let sifre = prompt("Lütfen Mağaza Yönetici Şifresini Giriniz:");
-            if (sifre === "6161") { // VARSAYILAN PANEL ŞİFRESİ: 6161
+            if (sifre === "6161") {
                 document.getElementById('adminPenceresi').classList.add('acik');
                 adminMevcutUrunleriListele();
-            } else {
-                alert("Hatalı Giriş Kodu!");
-            }
+            } else { alert("Hatalı Giriş Kodu!"); }
         }
 
         function adminPaneliKapat() { document.getElementById('adminPenceresi').classList.remove('acik'); }
 
-        // ADMIN: YENİ ÜRÜN EKLEME
         function adminUrunEkle() {
             let ad = document.getElementById('admUrunAd').value;
             let kat = document.getElementById('admUrunKat').value;
             let fiyat = parseInt(document.getElementById('admUrunFiyat').value);
-            let gorsel = document.getElementById('admUrunGorsel').value || 'https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=400&q=80';
+            let gorsel = document.getElementById('admUrunGorsel').value || 'urunler/mayis-cayi.jpg';
 
             if (!ad || !fiyat) { alert("Lütfen isim ve fiyat alanlarını doldurun!"); return; }
 
@@ -691,14 +679,12 @@
             vitrinBas();
             adminMevcutUrunleriListele();
             
-            // Formu Temizle
             document.getElementById('admUrunAd').value = '';
             document.getElementById('admUrunFiyat').value = '';
             document.getElementById('admUrunGorsel').value = '';
             alert("Ürün başarıyla dükkana eklendi!");
         }
 
-        // ADMIN: MEVCUT ÜRÜNLERİ LİSTELEME VE SİLME/GÜNCELLEME
         function adminMevcutUrunleriListele() {
             let alan = document.getElementById('adminMevcutUrunler');
             let html = '';
@@ -707,6 +693,7 @@
                     <div class="admin-urun-liste-satir">
                         <div>
                             <strong>${u.ad}</strong><br>
+                            <span style="font-size:11px;color:var(--yazi-acik);">Görsel: ${u.gorsel}</span><br>
                             <input type="number" value="${u.fiyat}" id="p-fiyat-${u.id}" style="width:60px;padding:3px;margin-top:5px;"> TL
                             <button onclick="adminFiyatGuncelle(${u.id}, ${index})" style="padding:3px 6px;background:var(--kurumsal-yesil);color:white;border:none;border-radius:3px;cursor:pointer;">Güncelle</button>
                         </div>
@@ -733,10 +720,7 @@
             }
         }
 
-        // İlk Açılış Motoru
-        window.onload = function() {
-            vitrinBas();
-        };
+        window.onload = function() { vitrinBas(); };
     </script>
 </body>
 </html>
