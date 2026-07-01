@@ -2,15 +2,249 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>61Bazaar | Yakında Hizmetinizde</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>61Bazaar | Doğal Trabzon Çayı ve Fındığı</title>
     <style>
-        body { background-color: #faf8f5; color: #2e3d30; font-family: sans-serif; text-align: center; padding-top: 100px; }
-        h1 { color: #1e4620; }
+        /* Genel Renk ve Tasarım Ayarları */
+        :root {
+            --ana-yesil: #2c5e3b;
+            --acik-yesil: #e8f0ea;
+            --toprak: #8b5a2b;
+            --koyu-gri: #2b2b2b;
+            --arka-plan: #fdfbf7;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--arka-plan);
+            color: var(--koyu-gri);
+        }
+
+        /* Navigasyon / Header */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--ana-yesil);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        /* Büyük Karşılama Ekranı (Hero) */
+        .hero {
+            background: linear-gradient(rgba(44, 94, 59, 0.8), rgba(44, 94, 59, 0.6)), url('https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+        }
+
+        /* Hakkımızda / Üretici Hikayesi */
+        .hikaye {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .hikaye h2 {
+            color: var(--ana-yesil);
+            font-size: 32px;
+        }
+
+        .hikaye p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Ürünler Bölümü */
+        .urunler-kapsayici {
+            max-width: 1100px;
+            margin: 0 auto 80px auto;
+            padding: 0 20px;
+        }
+
+        .urunler-baslik {
+            text-align: center;
+            color: var(--ana-yesil);
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+
+        .urun-listesi {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .urun-kart {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .urun-kart:hover {
+            transform: translateY(-5px);
+        }
+
+        .urun-gorsel {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background-color: #eee;
+        }
+
+        .urun-bilgi {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .urun-adi {
+            font-size: 22px;
+            margin: 0 0 10px 0;
+            color: var(--ana-yesil);
+        }
+
+        .urun-aciklama {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .urun-alt {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .urun-fiyat {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--toprak);
+        }
+
+        .satinal-buton {
+            background-color: var(--ana-yesil);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+
+        .satinal-buton:hover {
+            background-color: #1e4229;
+        }
+
+        /* Footer / Alt Bilgi */
+        footer {
+            background-color: var(--ana-yesil);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
     </style>
 </head>
 <body>
-    <h1>61Bazaar'a Hoş Geldiniz!</h1>
-    <p>Trabzon'un en doğal çay ve fındık lezzetleri çok yakında e-ticaret sitemizde sizlerle buluşacak.</p>
-    <p><em>Üreticiden doğrudan sofranıza...</em></p>
+
+    <!-- Üst Menü -->
+    <header>
+        <a href="#" class="logo">61BAZAAR</a>
+    </header>
+
+    <!-- Giriş Alanı -->
+    <section class="hero">
+        <h1>Doğrudan Üreticisinden Trabzon Lezzetleri</h1>
+        <p>Kendi bahçelerimizden topladığımız taptaze fındıklar ve Trabzon'un yüksek yamaçlarından gelen halis çay yaprakları.</p>
+    </section>
+
+    <!-- Biz Kimiz Alanı -->
+    <section class="hikaye">
+        <h2>Bizim Hikayemiz</h2>
+        <p>Trabzon'un bereketli topraklarında nesillerdir devam eden üretim serüvenimizi dijital dünyaya taşıyoruz. Fabrikasyon ve katkılı ürünlerden uzak, tamamen kendi üretimimiz olan çay ve fındık çeşitlerimizi, aracı olmadan doğrudan Trabzon'daki bahçelerimizden kapınıza ulaştırıyoruz. Kaliteyi ve doğallığı özleyenler için buradayız.</p>
+    </section>
+
+    <!-- Ürün Vitrini -->
+    <section class="urunler-kapsayici">
+        <h2 class="urunler-baslik">Bahçemizden Ürünler</h2>
+        
+        <div class="urun-listesi">
+            
+            <!-- Ürün 1: Fındık -->
+            <div class="urun-kart">
+                <!-- Şimdilik örnek bir görsel koydum, kendi fındık görselini buraya ekleyebilirsin -->
+                <img src="https://images.unsplash.com/photo-1627914445885-3ba577b282bc?auto=format&fit=crop&w=500&q=80" alt="Trabzon Fındığı" class="urun-gorsel">
+                <div class="urun-bilgi">
+                    <div>
+                        <h3 class="urun-adi">Çıtır Trabzon Fındığı (1 KG)</h3>
+                        <p class="urun-aciklama">Kendi bahçelerimizden elle seçilerek toplanmış, güneşte kurutulmuş, yeni mahsul iri boy Trabzon fındığı. İster kabuklu, ister iç olarak sofralarınızda.</p>
+                    </div>
+                    <div class="urun-alt">
+                        <span class="urun-fiyat">350 TL</span>
+                        <!-- İleride href="#" kısmına Shopier linkini yapıştıracağız -->
+                        <a href="#" class="satinal-buton">Satın Al</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ürün 2: Çay -->
+            <div class="urun-kart">
+                <!-- Şimdilik örnek bir görsel koydum, kendi çay görselini buraya ekleyebilirsin -->
+                <img src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=500&q=80" alt="Doğal Trabzon Çayı" class="urun-gorsel">
+                <div class="urun-bilgi">
+                    <div>
+                        <h3 class="urun-adi">Özel Sezon Trabzon Çayı (1 KG)</h3>
+                        <p class="urun-aciklama">Trabzon'un dik yamaçlarından ilk hasatta toplanan en körpe çay yaprakları. Katkısız, boyasız, buram buram Karadeniz kokan yüksek dem kalitesi.</p>
+                    </div>
+                    <div class="urun-alt">
+                        <span class="urun-fiyat">240 TL</span>
+                        <a href="#" class="satinal-buton">Satın Al</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Sayfa Altı -->
+    <footer>
+        <p>&copy; 2026 61Bazaar. Tüm Hakları Saklıdır. | Trabzon'dan Sevgilerle</p>
+    </footer>
+
 </body>
 </html>
