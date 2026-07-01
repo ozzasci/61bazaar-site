@@ -324,6 +324,7 @@
             cursor: pointer;
             text-align: center;
             text-decoration: none;
+            margin-bottom: 5px;
         }
 
         .admin-form-grup {
@@ -354,6 +355,100 @@
             font-size: 13px;
         }
 
+        /* 🤖 YAPAY ZEKA DESTEK PANELİ STİLLERİ */
+        .ai-buton {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background-color: var(--kurumsal-yesil);
+            color: white;
+            border-radius: 50px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 26px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 999;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .ai-buton:hover { transform: scale(1.05); }
+
+        .ai-penceresi {
+            position: fixed;
+            bottom: 100px;
+            left: 30px;
+            width: 340px;
+            height: 450px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+
+        .ai-ust {
+            background-color: var(--kurumsal-yesil);
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ai-mesajlar {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: #f8f9fa;
+        }
+
+        .mesaj {
+            padding: 10px 14px;
+            border-radius: 8px;
+            max-width: 80%;
+            line-height: 1.4;
+        }
+
+        .mesaj.bot { background-color: #e8f0ea; color: #0a3d20; align-self: flex-start; }
+        .mesaj.user { background-color: #dee2e6; color: #1a1a1a; align-self: flex-end; }
+
+        .ai-girdi-alani {
+            display: flex;
+            border-top: 1px solid #eee;
+            padding: 10px;
+            background: white;
+        }
+
+        .ai-girdi-alani input {
+            flex-grow: 1;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            outline: none;
+        }
+
+        .ai-girdi-alani button {
+            background: var(--kurumsal-yesil);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            margin-left: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
         .bilgi-bant {
             max-width: 1320px;
             margin: 40px auto;
@@ -373,10 +468,7 @@
             gap: 15px;
         }
 
-        .bilgi-kart i {
-            font-size: 30px;
-            color: var(--canli-kirmizi);
-        }
+        .bilgi-kart i { font-size: 30px; color: var(--canli-kirmizi); }
 
         .whatsapp-buton {
             position: fixed;
@@ -417,22 +509,9 @@
             padding-left: 10px;
         }
 
-        .footer-kolon ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-kolon a {
-            color: #bbb;
-            text-decoration: none;
-        }
-
-        .admin-giris-link {
-            color: #555;
-            text-decoration: none;
-            font-size: 11px;
-            cursor: pointer;
-        }
+        .footer-kolon ul { list-style: none; padding: 0; }
+        .footer-kolon a { color: #bbb; text-decoration: none; }
+        .admin-giris-link { color: #555; text-decoration: none; font-size: 11px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -467,8 +546,8 @@
     </div>
 
     <section class="magaza-banner">
-        <h1>61Bazaar Resmi Satış Mağazası</h1>
-        <p>Trabzon Of ve Akçaabat yamaçlarındaki kendi aile bahçelerimizden özenle paketlenen taze mahsuller online satış mağazamızda.</p>
+        <h1>61Bazaar Yapay Zeka Destekli Mağazası</h1>
+        <p>Sol alttaki akıllı asistana sorular sorarak dükkan veritabanındaki ürünleri anlık olarak sorgulayabilirsiniz.</p>
     </section>
 
     <main class="ana-govde">
@@ -487,6 +566,7 @@
         </section>
     </main>
 
+    <!-- Sepet Paneli -->
     <div class="sepet-penceresi" id="sepetPenceresi">
         <div class="sepet-ust">
             <h3>Alışveriş Sepetiniz</h3>
@@ -500,16 +580,21 @@
         <a href="#" id="whatsappSiparisBtn" class="siparis-tamamla-btn" target="_blank" onclick="siparisGonder()">Siparişi WhatsApp ile Tamamla</a>
     </div>
 
+    <!-- 🛠 ADMİN PANELİ (GELİŞMİŞ VERİ YEDEKLERİ DAHİL) -->
     <div class="admin-penceresi" id="adminPenceresi">
         <div class="sepet-ust">
             <h3>61Bazaar Mağaza Yönetimi</h3>
             <span class="sepet-kapat" onclick="adminPaneliKapat()">&times;</span>
         </div>
         <div class="admin-elemanlar">
+            <button class="admin-kaydet-btn" style="background:#023e8a;width:100%;margin-bottom:10px;" onclick="veritabaniYedekle()"><i class="fa-solid fa-download"></i> Veritabanını Bilgisayara Yedekle</button>
+            <button class="admin-kaydet-btn" style="background:#7209b7;width:100%;margin-bottom:20px;" onclick="document.getElementById('yedekDosyaGirdi').click()"><i class="fa-solid fa-upload"></i> Yedekten Geri Yükle</button>
+            <input type="file" id="yedekDosyaGirdi" style="display:none;" onchange="veritabaniYukle(event)">
+            
             <h4>Yeni Ürün Ekle</h4>
             <div class="admin-form-grup">
                 <label>Ürün Adı</label>
-                <input type="text" id="admUrunAd" placeholder="Örn: Mayıs Çayı (1 KG)">
+                <input type="text" id="admUrunAd" placeholder="Örn: Of Siyah Çayı (1 KG)">
             </div>
             <div class="admin-form-grup">
                 <label>Kategori</label>
@@ -524,14 +609,30 @@
                 <input type="number" id="admUrunFiyat" placeholder="Örn: 240">
             </div>
             <div class="admin-form-grup">
-                <label>Görsel Adı (Görseller Klasöründeki Adı)</label>
+                <label>Görsel Adı</label>
                 <input type="text" id="admUrunGorsel" placeholder="Örn: urunler/mayis-cayi.jpg">
             </div>
             <button class="admin-kaydet-btn" style="width:100%;" onclick="adminUrunEkle()">Ürünü Mağazaya Ekle</button>
             
             <hr style="margin:25px 0; border:0; border-top:1px solid #eee;">
-            <h4>Mevcut Ürünleri Yönet (Sil / Güncelle)</h4>
+            <h4>Mevcut Ürünleri Yönet</h4>
             <div id="adminMevcutUrunler"></div>
+        </div>
+    </div>
+
+    <!-- 🤖 YAPAY ZEKA ASİSTANI PENCERESİ -->
+    <div class="ai-buton" onclick="aiAsistanAcKapat()"><i class="fa-solid fa-robot"></i></div>
+    <div class="ai-penceresi" id="aiPenceresi">
+        <div class="ai-ust">
+            <span><i class="fa-solid fa-robot"></i> 61Bazaar Akıllı Asistan</span>
+            <span class="sepet-kapat" onclick="aiAsistanAcKapat()">&times;</span>
+        </div>
+        <div class="ai-mesajlar" id="aiMesajlar">
+            <div class="mesaj bot">Selamun Aleyküm hemşerim! Ben 61Bazaar akıllı dükkan asistanıyım. Of çaylarımızı, çıtır fındıklarımızı veya taze mahsullerimizi bana sorabilirsin. Nasıl yardımcı olayım?</div>
+        </div>
+        <div class="ai-girdi-alani">
+            <input type="text" id="aiGirdi" placeholder="Çay fiyatları ne kadar?..." onkeypress="if(event.key === 'Enter') aiMesajGonder()">
+            <button onclick="aiMesajGonder()"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
     </div>
 
@@ -545,24 +646,14 @@
 
     <footer>
         <div class="footer-grid">
-            <div class="footer-kolon">
-                <h4>Kurumsal</h4>
-                <ul><li>Hakkımızda</li><li>Üretim Tesisimiz</li><li>Bizim Hikayemiz</li></ul>
-            </div>
-            <div class="footer-kolon">
-                <h4>İletişim</h4>
-                <p>Of / Akçaabat / Trabzon</p>
-                <p>info@61bazaar.com.tr</p>
-            </div>
+            <div class="footer-kolon"><h4>Kurumsal</h4><ul><li>Hakkımızda</li><li>Üretim Tesisimiz</li><li>Bizim Hikayemiz</li></ul></div>
+            <div class="footer-kolon"><h4>İletişim</h4><p>Of / Akçaabat / Trabzon</p><p>info@61bazaar.com.tr</p></div>
         </div>
-        <div style="text-align:center; margin-top:30px;">
-            <span class="admin-giris-link" onclick="adminGirisTetikle()">[ Yönetici Girişi ]</span>
-        </div>
+        <div style="text-align:center; margin-top:30px;"><span class="admin-giris-link" onclick="adminGirisTetikle()">[ Yönetici Girişi ]</span></div>
         <div class="footer-telif">&copy; 2026 61Bazaar Satış Mağazası. Tüm Hakları Saklıdır.</div>
     </footer>
 
     <script>
-        // Ürünlerin Varsayılan Görsel Klasör Atamaları
         const varsayilanUrunler = [
             { id: 1, ad: "Mayıs İlk Sürgün Filiz Çayı (1000 G)", fiyat: 240, kat: "cay", gorsel: "urunler/mayis-cayi.jpg" },
             { id: 2, ad: "Of Hasadı Altınbaş Siyah Çay (1000 G)", fiyat: 230, kat: "cay", gorsel: "urunler/of-cayi.jpg" },
@@ -571,7 +662,7 @@
             { id: 5, ad: "Çıtır Kavrulmuş İç Fındık (1000 G)", fiyat: 390, kat: "findik", gorsel: "urunler/kavrulmus-findik.jpg" },
             { id: 6, ad: "Naturel Çiğ İç Fındık (1000 G)", fiyat: 350, kat: "findik", gorsel: "urunler/cig-findik.jpg" },
             { id: 7, ad: "Akçaabat Usulü Kabuklu Fındık (1000 G)", fiyat: 195, kat: "findik", gorsel: "urunler/kabuklu-findik.jpg" },
-            { id: 8, ad: "%100 Saf Şekersiz Fındık Ezmesi (400 G)", font: 180, kat: "findik", gorsel: "urunler/findik-ezmesi.jpg" },
+            { id: 8, ad: "%100 Saf Şekersiz Fındık Ezmesi (400 G)", fiyat: 180, kat: "findik", gorsel: "urunler/findik-ezmesi.jpg" },
             { id: 9, ad: "Trabzon Süzme Yayla Balı (850 G)", fiyat: 550, kat: "gurme", gorsel: "urunler/yayla-bali.jpg" }
         ];
 
@@ -675,14 +766,13 @@
 
             let yeniId = urunler.length > 0 ? urunler[urunler.length - 1].id + 1 : 1;
             urunler.push({ id: yeniId, ad: ad, fiyat: fiyat, kat: kat, gorsel: gorsel });
-            
             vitrinBas();
             adminMevcutUrunleriListele();
             
             document.getElementById('admUrunAd').value = '';
             document.getElementById('admUrunFiyat').value = '';
             document.getElementById('admUrunGorsel').value = '';
-            alert("Ürün başarıyla dükkana eklendi!");
+            alert("Ürün başarıyla eklendi!");
         }
 
         function adminMevcutUrunleriListele() {
@@ -693,7 +783,7 @@
                     <div class="admin-urun-liste-satir">
                         <div>
                             <strong>${u.ad}</strong><br>
-                            <span style="font-size:11px;color:var(--yazi-acik);">Görsel: ${u.gorsel}</span><br>
+                            <span style="font-size:11px;color:var(--yazi-acik);">Yol: ${u.gorsel}</span><br>
                             <input type="number" value="${u.fiyat}" id="p-fiyat-${u.id}" style="width:60px;padding:3px;margin-top:5px;"> TL
                             <button onclick="adminFiyatGuncelle(${u.id}, ${index})" style="padding:3px 6px;background:var(--kurumsal-yesil);color:white;border:none;border-radius:3px;cursor:pointer;">Güncelle</button>
                         </div>
@@ -713,11 +803,104 @@
         }
 
         function adminUrunSil(id) {
-            if (confirm("Bu ürünü mağazadan tamamen kaldırmak istediğinize emin misiniz?")) {
+            if (confirm("Ürünü silmek istediğinize emin misiniz?")) {
                 urunler = urunler.filter(u => u.id !== id);
                 vitrinBas();
                 adminMevcutUrunleriListele();
             }
+        }
+
+        // 💾 VERİTABANI YEDEKLEME MOTORU (EXCEL/JSON)
+        function veritabaniYedekle() {
+            let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(urunler));
+            let indirmeElementi = document.createElement('a');
+            indirmeElementi.setAttribute("href", dataStr);
+            indirmeElementi.setAttribute("download", "61bazaar_magaza_yedek.json");
+            document.body.appendChild(indirmeElementi);
+            indirmeElementi.click();
+            indirmeElementi.remove();
+        }
+
+        function veritabaniYukle(event) {
+            let dosya = event.target.files[0];
+            if (!dosya) return;
+            let okuyucu = new FileReader();
+            okuyucu.onload = function(e) {
+                try {
+                    let yuklenenVeri = JSON.parse(e.target.result);
+                    if (Array.isArray(yuklenenVeri)) {
+                        urunler = yuklenenVeri;
+                        vitrinBas();
+                        adminMevcutUrunleriListele();
+                        alert("Harika! Mağaza veritabanı yedekten başarıyla yüklendi.");
+                    } else { alert("Geçersiz yedek dosyası formatı!"); }
+                } catch (err) { alert("Yedek dosyası okunurken hata oluştu!"); }
+            };
+            okuyucu.readAsText(dosya);
+        }
+
+        // 🤖 YAPAY ZEKA DESTEK MOTORU (LOCAL SEARCH & RULE BASED AI COGNITION)
+        function aiAsistanAcKapat() { document.getElementById('aiPenceresi').style.display = document.getElementById('aiPenceresi').style.display === "flex" ? "none" : "flex"; }
+
+        function aiMesajGonder() {
+            let girdiAlani = document.getElementById('aiGirdi');
+            let mesajText = girdiAlani.value.trim();
+            if (!mesajText) return;
+
+            let mesajlarAlani = document.getElementById('aiMesajlar');
+            mesajlarAlani.innerHTML += `<div class="mesaj user">${mesajText}</div>`;
+            girdiAlani.value = '';
+            mesajlarAlani.scrollTop = mesajlarAlani.scrollHeight;
+
+            setTimeout(() => {
+                let botCevap = aiAkilliCevapUret(mesajText.toLowerCase());
+                mesajlarAlani.innerHTML += `<div class="mesaj bot">${botCevap}</div>`;
+                mesajlarAlani.scrollTop = mesajlarAlani.scrollHeight;
+            }, 600);
+        }
+
+        function aiAkilliCevapUret(soru) {
+            if (soru.includes("merhaba") || soru.includes("selam")) {
+                return "Selamun Aleyküm hemşerim, hoş geldin dükkanımıza! Çaylarımızı mı fındıklarımızı mı incelemek istersin?";
+            }
+            if (soru.includes("çay") && (soru.includes("fiyat") || soru.includes("kaç"))) {
+                let caylar = urunler.filter(u => u.kat === "cay");
+                let cevap = "Şu an dükkandaki güncel Trabzon çaylarımız ve fiyatları şunlardır:<br>";
+                caylar.forEach(c => cevap += `- ${c.ad}: <b>${c.fiyat} TL</b><br>`);
+                cevap += "<br>İstediğin ürünü yukarıdaki 'Sepete Ekle' butonuyla anında sepete atabilirsin.";
+                return cevap;
+            }
+            if (soru.includes("fındık") && (soru.includes("fiyat") || soru.includes("kaç"))) {
+                let findiklar = urunler.filter(u => u.kat === "findik");
+                let cevap = "Taptaze yeni mahsul fındık çeşitlerimizin güncel fiyatları:<br>";
+                findiklar.forEach(f => cevap += `- ${f.ad}: <b>${f.fiyat} TL</b><br>`);
+                return cevap;
+            }
+            if (soru.includes("bal") || soru.includes("gurme")) {
+                let gurme = urunler.filter(u => u.kat === "gurme");
+                if (gurme.length > 0) {
+                    let cevap = "Karadeniz yaylalarından getirdiğimiz gurme lezzetimiz:<br>";
+                    gurme.forEach(g => cevap += `- ${g.ad}: <b>${g.fiyat} TL</b><br>`);
+                    return cevap;
+                }
+                return "Şu an gurme kategorisinde aktif ürünümüz kalmadı ama taze fındıklarımıza göz atabilirsin.";
+            }
+            if (soru.includes("kargo") || soru.includes("teslim")) {
+                return "Siparişleriniz 24 saat içinde doğrudan Trabzon'dan kargoya verilir. 1500 TL ve üzeri alışverişlerinizde kargo tamamen ücretsizdir hemşerim!";
+            }
+            if (soru.includes("nasıl") && soru.includes("sipariş")) {
+                return "Çok kolay! Beğendiğin ürünün yanındaki sepet butonuna bas, ardından sağ üstteki sepetine tıklayıp 'WhatsApp ile Tamamla' butonuna bas. Siparişin otomatik telefonuma mesaj olarak düşer.";
+            }
+
+            // Genel Arama/Eşleşme Filtresi
+            let bulunanUrunler = urunler.filter(u => soru.includes(u.ad.toLowerCase().split(' ')[0]));
+            if (bulunanUrunler.length > 0) {
+                let cevap = "Aradığın ürünle ilgili bunları buldum:<br>";
+                bulunanUrunler.forEach(u => cevap += `- ${u.ad}: <b>${u.fiyat} TL</b><br>`);
+                return cevap;
+            }
+
+            return "Dediğini tam anlayamadım hemşerim, Ofli aklım karıştı. :) Ama çay, fındık, bal fiyatlarını veya kargo durumunu sorarsan tıkır tıkır cevaplayabilirim!";
         }
 
         window.onload = function() { vitrinBas(); };
