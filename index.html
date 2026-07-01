@@ -3,32 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>61Bazaar | Doğal Trabzon Çayı ve Fındığı</title>
-    <!-- İkonlar için FontAwesome Kütüphanesi -->
+    <title>61Bazaar | Trabzon Yöresel Ürünler Satış Mağazası</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --ana-yesil: #1b4332;
-            --canli-yesil: #2d6a4f;
-            --acik-yesil: #d8f3dc;
-            --toprak: #a36a00;
-            --koyu-gri: #212529;
-            --arka-plan: #f8f9fa;
+            --kurumsal-yesil: #0a3d20;
+            --canli-kirmizi: #d90429;
+            --gri-arka-plan: #f4f6f8;
+            --yazi-koyu: #1a1a1a;
+            --yazi-acik: #6c757d;
+            --altin-sarisi: #e6a100;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--arka-plan);
-            color: var(--koyu-gri);
+            background-color: var(--gri-arka-plan);
+            color: var(--yazi-koyu);
         }
 
-        /* Üst Menü */
+        /* 1. Üst Bilgi Duyuru Çubuğu (Top Bar) */
+        .top-bar {
+            background-color: var(--kurumsal-yesil);
+            color: white;
+            font-size: 13px;
+            padding: 8px 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* 2. Kurumsal Header ve Arama/Sepet Alanı */
         header {
             background-color: #ffffff;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-            padding: 15px 20px;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -37,200 +46,279 @@
             z-index: 100;
         }
 
-        .logo {
-            font-size: 26px;
-            font-weight: 800;
-            color: var(--ana-yesil);
-            text-decoration: none;
-            letter-spacing: 1px;
+        .logo-alani {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .nav-links a {
-            color: var(--koyu-gri);
+        .logo-daire {
+            background-color: var(--canli-kirmizi);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 800;
+            font-size: 20px;
+        }
+
+        .logo-yazi {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--kurumsal-yesil);
             text-decoration: none;
-            margin-left: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .arama-bari {
+            display: flex;
+            align-items: center;
+            background: #f0f2f5;
+            border-radius: 20px;
+            padding: 8px 15px;
+            width: 35%;
+        }
+
+        .arama-bari input {
+            border: none;
+            background: none;
+            outline: none;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .arama-bari i {
+            color: var(--yazi-acik);
+        }
+
+        .header-ikonlar {
+            display: flex;
+            gap: 25px;
+            font-size: 20px;
+            color: var(--kurumsal-yesil);
+        }
+
+        .header-ikonlar a {
+            color: inherit;
+            text-decoration: none;
+            position: relative;
+        }
+
+        /* Kategori Navigasyonu */
+        .kategori-nav {
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            padding: 12px 40px;
+            display: flex;
+            gap: 30px;
             font-weight: 600;
+            font-size: 15px;
+        }
+
+        .kategori-nav a {
+            color: var(--yazi-koyu);
+            text-decoration: none;
             transition: color 0.2s;
         }
 
-        .nav-links a:hover {
-            color: var(--canli-yesil);
+        .kategori-nav a:hover, .kategori-nav a.aktif {
+            color: var(--canli-kirmizi);
         }
 
-        /* Büyük Karşılama Ekranı (Hero) */
-        .hero {
-            background: linear-gradient(rgba(27, 67, 50, 0.85), rgba(45, 106, 79, 0.7)), url('https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+        /* Mağaza Vitrini / Banner */
+        .magaza-banner {
+            background: linear-gradient(to right, rgba(10, 61, 32, 0.9), rgba(10, 61, 32, 0.4)), url('https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
             color: white;
-            padding: 120px 20px;
-            text-align: center;
+            padding: 60px 40px;
+            margin: 20px 40px;
+            border-radius: 8px;
         }
 
-        .hero h1 {
-            font-size: 46px;
-            margin-bottom: 15px;
-            font-weight: 800;
+        .magaza-banner h1 {
+            font-size: 36px;
+            margin: 0 0 10px 0;
+            font-weight: 700;
         }
 
-        .hero p {
-            font-size: 20px;
-            max-width: 700px;
-            margin: 0 auto 30px auto;
+        .magaza-banner p {
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0;
             opacity: 0.9;
         }
 
-        /* Öne Çıkan Özellik Rozetleri */
-        .rozetler {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            max-width: 1100px;
-            margin: -40px auto 40px auto;
-            background: white;
-            padding: 30px 20px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            gap: 20px;
-        }
-
-        .rozet-kutu {
-            text-align: center;
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .rozet-kutu i {
-            font-size: 36px;
-            color: var(--canli-yesil);
-            margin-bottom: 10px;
-        }
-
-        .rozet-kutu h3 {
-            margin: 5px 0;
-            font-size: 18px;
-            color: var(--ana-yesil);
-        }
-
-        .rozet-kutu p {
-            margin: 0;
-            font-size: 14px;
-            color: #6c757d;
-        }
-
-        /* Hikayemiz Alanı */
-        .hikaye {
-            max-width: 800px;
-            margin: 80px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-
-        .hikaye h2 {
-            color: var(--ana-yesil);
-            font-size: 36px;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        .hikaye p {
-            font-size: 18px;
-            line-height: 1.8;
-            color: #495057;
-        }
-
-        /* Ürünler Vitrini */
-        .urunler-kapsayici {
-            max-width: 1100px;
-            margin: 0 auto 100px auto;
-            padding: 0 20px;
-        }
-
-        .urunler-baslik {
-            text-align: center;
-            color: var(--ana-yesil);
-            font-size: 36px;
-            margin-bottom: 50px;
-            font-weight: 700;
-        }
-
-        .urun-listesi {
+        /* ÇAYKUR Tarzı Ürün Grid Düzeni */
+        .ana-gövde {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: 240px 1fr;
             gap: 30px;
         }
 
-        .urun-kart {
+        /* Yan Filtre Paneli */
+        .yan-panel {
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            height: fit-content;
+        }
+
+        .yan-panel h3 {
+            margin-top: 0;
+            font-size: 16px;
+            border-bottom: 2px solid var(--kurumsal-yesil);
+            padding-bottom: 8px;
+            color: var(--kurumsal-yesil);
+        }
+
+        .yan-panel ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .yan-panel li {
+            padding: 10px 0;
+            font-size: 14px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+        }
+
+        .yan-panel li:hover {
+            color: var(--canli-kirmizi);
+        }
+
+        /* Ürün Kartları Alanı */
+        .urun-izgara {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .caykur-urun-kart {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
             overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
             flex-direction: column;
-            border: 1px solid #dee2e6;
+            transition: box-shadow 0.2s;
         }
 
-        .urun-kart:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        .caykur-urun-kart:hover {
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
         }
 
-        .urun-gorsel {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
+        .kart-gorsel-link {
+            text-align: center;
+            padding: 15px;
+            background: #fff;
+            display: block;
         }
 
-        .urun-bilgi {
-            padding: 20px;
+        .caykur-urun-kart img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: contain;
+        }
+
+        .kart-detay {
+            padding: 15px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            border-top: 1px solid #f0f0f0;
         }
 
-        .urun-adi {
-            font-size: 20px;
-            margin: 0 0 10px 0;
-            color: var(--ana-yesil);
-            font-weight: 700;
-        }
-
-        .urun-aciklama {
-            font-size: 14px;
-            color: #6c757d;
-            line-height: 1.5;
-            margin-bottom: 20px;
-            height: 65px;
+        .kart-urun-adi {
+            font-size: 15px;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+            color: var(--yazi-koyu);
+            height: 40px;
             overflow: hidden;
         }
 
-        .urun-alt {
+        .kart-stok-durum {
+            font-size: 12px;
+            color: #2a9d8f;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .kart-fiyat-satir {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: auto;
         }
 
-        .urun-fiyat {
-            font-size: 22px;
+        .kart-fiyat {
+            font-size: 18px;
             font-weight: 700;
-            color: var(--toprak);
+            color: var(--canli-kirmizi);
         }
 
-        .satinal-buton {
-            background-color: var(--canli-yesil);
+        .sepet-ekle-btn {
+            background-color: var(--kurumsal-yesil);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-size: 15px;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
             cursor: pointer;
-            font-weight: bold;
+            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             transition: background 0.2s;
-            text-decoration: none;
         }
 
-        .satinal-buton:hover {
-            background-color: var(--ana-yesil);
+        .sepet-ekle-btn:hover {
+            background-color: var(--canli-kirmizi);
+        }
+
+        /* Bilgi Kutuları */
+        .bilgi-bant {
+            max-width: 1320px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 0 40px;
+        }
+
+        .bilgi-kart {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bilgi-kart i {
+            font-size: 30px;
+            color: var(--canli-kirmizi);
+        }
+
+        .bilgi-kart h4 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+        }
+
+        .bilgi-kart p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--yazi-acik);
         }
 
         /* Sabit WhatsApp Butonu */
@@ -249,207 +337,241 @@
             font-size: 30px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             z-index: 1000;
-            transition: transform 0.3s;
             text-decoration: none;
         }
 
-        .whatsapp-buton:hover {
-            transform: scale(1.1);
-        }
-
-        /* Footer */
+        /* Kurumsal Footer */
         footer {
-            background-color: var(--ana-yesil);
-            color: white;
-            padding: 60px 20px 30px 20px;
-            margin-top: 100px;
-        }
-
-        .footer-icerik {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 40px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 40px;
-            margin-bottom: 30px;
-        }
-
-        .footer-alan {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .footer-alan h4 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .footer-alan p, .footer-alan li {
+            background-color: #222;
+            color: #ccc;
+            padding: 50px 40px 20px 40px;
             font-size: 14px;
-            color: #adb5bd;
-            line-height: 1.6;
         }
 
-        .footer-alan ul {
+        .footer-grid {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 40px;
+        }
+
+        .footer-kolon h4 {
+            color: white;
+            margin-top: 0;
+            font-size: 16px;
+            border-left: 3px solid var(--canli-kirmizi);
+            padding-left: 10px;
+        }
+
+        .footer-kolon ul {
             list-style: none;
             padding: 0;
         }
 
-        .footer-alan i {
-            margin-right: 10px;
-            color: var(--acik-yesil);
+        .footer-kolon li {
+            padding: 6px 0;
         }
 
-        .footer-alt {
+        .footer-kolon a {
+            color: #bbb;
+            text-decoration: none;
+        }
+
+        .footer-kolon a:hover {
+            color: white;
+        }
+
+        .footer-telif {
             text-align: center;
-            font-size: 14px;
-            color: #adb5bd;
+            padding-top: 20px;
+            color: #666;
+            font-size: 13px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Üst Menü -->
+    <!-- 1. Üst Duyuru Çubuğu -->
+    <div class="top-bar">
+        <i class="fa-solid fa-truck"></i> 1500 TL ve Üzeri Alışverişlerinizde Kargo Ücretsiz! | Trabzon'dan Doğrudan Teslimat
+    </div>
+
+    <!-- 2. Kurumsal Üst Menü -->
     <header>
-        <a href="#" class="logo">61BAZAAR</a>
-        <div class="nav-links">
-            <a href="#urunler">Ürünlerimiz</a>
-            <a href="#hikayemiz">Hikayemiz</a>
-            <a href="#iletisim">İletişim</a>
+        <div class="logo-alani">
+            <div class="logo-daire">61</div>
+            <a href="#" class="logo-yazi">61BAZAAR</a>
+        </div>
+        
+        <div class="arama-bari">
+            <input type="text" placeholder="Mağazada çay veya fındık arayın...">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <div class="header-ikonlar">
+            <a href="#"><i class="fa-regular fa-user"></i></a>
+            <a href="#"><i class="fa-regular fa-heart"></i></a>
+            <a href="#"><i class="fa-solid fa-basket-shopping"></i></a>
         </div>
     </header>
 
-    <!-- Giriş Alanı -->
-    <section class="hero">
-        <h1>Doğrudan Üreticisinden Trabzon Lezzetleri</h1>
-        <p>Kendi bahçelerimizden topladığımız taptaze fındıklar ve yüksek yamaçlardan gelen katkısız Trabzon çayları.</p>
+    <!-- Kategori Çubuğu -->
+    <div class="kategori-nav">
+        <a href="#" class="aktif">Ana Sayfa</a>
+        <a href="#">Trabzon Siyah Çayları</a>
+        <a href="#">Giresun/Trabzon Fındıkları</a>
+        <a href="#">Yöresel Ezmeler</a>
+        <a href="#">Hakkımızda</a>
+    </div>
+
+    <!-- Büyük Mağaza Bannerı -->
+    <section class="magaza-banner">
+        <h1>61Bazaar Resmi Satış Mağazası</h1>
+        <p>Trabzon Of ve Akçaabat yamaçlarındaki kendi aile bahçelerimizden özenle paketlenen en taze mahsuller resmi online satış mağazamızda.</p>
     </section>
 
-    <!-- Güven Rozetleri -->
-    <section class="rozetler">
-        <div class="rozet-kutu">
-            <i class="fa-solid fa-leaf"></i>
-            <h3>100% Doğal Üretim</h3>
-            <p>Katkısız, koruyucusuz el emeği lezzetler.</p>
-        </div>
-        <div class="rozet-kutu">
-            <i class="fa-solid fa-truck-ramp-box"></i>
-            <h3>Trabzon'dan Kargo</h3>
-            <p>Doğrudan memleketinden kapınıza teslim.</p>
-        </div>
-        <div class="rozet-kutu">
-            <i class="fa-solid fa-handshake"></i>
-            <h3>Üreticiden Doğrudan</h3>
-            <p>Aracısız, en taze mahsul garantisi.</p>
-        </div>
-    </section>
-
-    <!-- Biz Kimiz Alanı -->
-    <section id="hikayemiz" class="hikaye">
-        <h2>Bizim Hikayemiz</h2>
-        <p>Trabzon'un bereketli topraklarında nesillerdir devam eden aile üretim serüvenimizi dijital dünyaya taşıyoruz. Fabrikasyon ürünlerden uzak, tamamen kendi bahçelerimizden el emeğiyle topladığımız çay ve fındık çeşitlerimizi, aracı olmadan doğrudan kapınıza ulaştırıyoruz. Kaliteyi ve gerçek Karadeniz doğallığını özleyenler için buradayız.</p>
-    </section>
-
-    <!-- Ürün Vitrini -->
-    <section id="urunler" class="urunler-kapsayici">
-        <h2 class="urunler-baslik">Bahçemizden Gurme Lezzetler</h2>
+    <!-- 3. Ana Gövde: Yan Filtre + Ürün Listesi -->
+    <main class="ana-gövde">
         
-        <div class="urun-listesi">
-            
-            <!-- Ürün 1: Çiğ Fındık -->
-            <div class="urun-kart">
-                <img src="https://images.unsplash.com/photo-1627914445885-3ba577b282bc?auto=format&fit=crop&w=500&q=80" alt="Çiğ Trabzon Fındığı" class="urun-gorsel">
-                <div class="urun-bilgi">
-                    <div>
-                        <h3 class="urun-adi">Çiğ İç Fındık (1 KG)</h3>
-                        <p class="urun-aciklama">Bahçemizden taptaze toplanmış, güneşte kurutulmuş, hiçbir işlem görmemiş yüksek besin değerli çiğ Trabzon fındığı.</p>
-                    </div>
-                    <div class="urun-alt">
-                        <span class="urun-fiyat">350 TL</span>
-                        <a href="#" class="satinal-buton">Satın Al</a>
+        <!-- Sol Menü Kategorileri -->
+        <aside class="yan-panel">
+            <h3>Kategoriler</h3>
+            <ul>
+                <li>Mayıs Hasadı Çaylar</li>
+                <li>Çiğ & Kavrulmuş Fındık</li>
+                <li>%100 Saf Fındık Ezmesi</li>
+                <li>Hediyelik Yöresel Setler</li>
+            </ul>
+        </aside>
+
+        <!-- Sağ Taraf: Ürün Vitrini -->
+        <section class="urun-alanı">
+            <div class="urun-izgara">
+                
+                <!-- Ürün 1 -->
+                <div class="caykur-urun-kart">
+                    <a href="#" class="kart-gorsel-link">
+                        <img src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=400&q=80" alt="Mayıs Çayı">
+                    </a>
+                    <div class="kart-detay">
+                        <h3 class="kart-urun-adi">61Bazaar Altınbaş Mayıs Sürgünü Siyah Çay (1000 G)</h3>
+                        <div class="kart-stok-durum"><i class="fa-solid fa-check"></i> Stokta Var</div>
+                        <div class="kart-fiyat-satir">
+                            <span class="kart-fiyat">240,00 TL</span>
+                            <button class="sepet-ekle-btn"><i class="fa-solid fa-cart-plus"></i></button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Ürün 2: Kavrulmuş Fındık -->
-            <div class="urun-kart">
-                <img src="https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=500&q=80" alt="Kavrulmuş Fındık" class="urun-gorsel">
-                <div class="urun-bilgi">
-                    <div>
-                        <h3 class="urun-adi">Çıtır Kavrulmuş Fındık (1 KG)</h3>
-                        <p class="urun-aciklama">Özel fırınlarımızda tam kıvamında kavrulmuş, kokusu ve çıtırlığı üzerinde, çay yanına eşsiz Trabzon lezzeti.</p>
-                    </div>
-                    <div class="urun-alt">
-                        <span class="urun-fiyat">390 TL</span>
-                        <a href="#" class="satinal-buton">Satın Al</a>
+                <!-- Ürün 2 -->
+                <div class="caykur-urun-kart">
+                    <a href="#" class="kart-gorsel-link">
+                        <img src="https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=400&q=80" alt="Kavrulmuş Fındık">
+                    </a>
+                    <div class="kart-detay">
+                        <h3 class="kart-urun-adi">61Bazaar Lüks Çıtır Kavrulmuş İç Fındık (1000 G)</h3>
+                        <div class="kart-stok-durum"><i class="fa-solid fa-check"></i> Stokta Var</div>
+                        <div class="kart-fiyat-satir">
+                            <span class="kart-fiyat">390,00 TL</span>
+                            <button class="sepet-ekle-btn"><i class="fa-solid fa-cart-plus"></i></button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Ürün 3: Özel Sezon Çay -->
-            <div class="urun-kart">
-                <img src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=500&q=80" alt="Doğal Trabzon Çayı" class="urun-gorsel">
-                <div class="urun-bilgi">
-                    <div>
-                        <h3 class="urun-adi">Mayıs Hasadı Siyah Çay (1 KG)</h3>
-                        <p class="urun-aciklama">Yılın ilk ve en kaliteli hasadı olan Mayıs sürgününden toplanmış, yüksek dem oranına sahip, buram buram Trabzon kokan katkısız çay.</p>
-                    </div>
-                    <div class="urun-alt">
-                        <span class="urun-fiyat">240 TL</span>
-                        <a href="#" class="satinal-buton">Satın Al</a>
+                <!-- Ürün 3 -->
+                <div class="caykur-urun-kart">
+                    <a href="#" class="kart-gorsel-link">
+                        <img src="https://images.unsplash.com/photo-1627914445885-3ba577b282bc?auto=format&fit=crop&w=400&q=80" alt="Çiğ Fındık">
+                    </a>
+                    <div class="kart-detay">
+                        <h3 class="kart-urun-adi">61Bazaar Premium Doğal Çiğ İç Fındık (1000 G)</h3>
+                        <div class="kart-stok-durum"><i class="fa-solid fa-check"></i> Stokta Var</div>
+                        <div class="kart-fiyat-satir">
+                            <span class="kart-fiyat">350,00 TL</span>
+                            <button class="sepet-ekle-btn"><i class="fa-solid fa-cart-plus"></i></button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Ürün 4: Fındık Ezmesi -->
-            <div class="urun-kart">
-                <img src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=500&q=80" alt="Doğal Fındık Ezmesi" class="urun-gorsel">
-                <div class="urun-bilgi">
-                    <div>
-                        <h3 class="urun-adi">100% Doğal Fındık Ezmesi (400G)</h3>
-                        <p class="urun-aciklama">İçerisinde hiçbir yapay yağ, koruyucu veya yoğun şeker barındırmayan, sadece kendi fındıklarımızdan üretilen sürülebilir saf lezzet.</p>
-                    </div>
-                    <div class="urun-alt">
-                        <span class="urun-fiyat">180 TL</span>
-                        <a href="#" class="satinal-buton">Satın Al</a>
+                <!-- Ürün 4 -->
+                <div class="caykur-urun-kart">
+                    <a href="#" class="kart-gorsel-link">
+                        <img src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=400&q=80" alt="Fındık Ezmesi">
+                    </a>
+                    <div class="kart-detay">
+                        <h3 class="kart-urun-adi">61Bazaar %100 Katkısız Saf Fındık Ezmesi (400 G)</h3>
+                        <div class="kart-stok-durum"><i class="fa-solid fa-check"></i> Stokta Var</div>
+                        <div class="kart-fiyat-satir">
+                            <span class="kart-fiyat">180,00 TL</span>
+                            <button class="sepet-ekle-btn"><i class="fa-solid fa-cart-plus"></i></button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
+        </section>
+    </main>
+
+    <!-- 4. Alt Bilgi Kurumsal Bantlar -->
+    <section class="bilgi-bant">
+        <div class="bilgi-kart">
+            <i class="fa-solid fa-shield-halved"></i>
+            <div>
+                <h4>Güvenli Alışveriş</h4>
+                <p>256-Bit SSL Koruma Altyapısı</p>
+            </div>
+        </div>
+        <div class="bilgi-kart">
+            <i class="fa-solid fa-rotate-left"></i>
+            <div>
+                <h4>Kolay İade Garantisi</h4>
+                <p>Şartsız Koşulsuz İade İmkanı</p>
+            </div>
+        </div>
+        <div class="bilgi-kart">
+            <i class="fa-solid fa-store"></i>
+            <div>
+                <h4>Doğrudan Üreticiden</h4>
+                <p>Aracısız En Taze Yeni Mahsul</p>
+            </div>
         </div>
     </section>
 
-    <!-- Sabit WhatsApp İletişim Butonu (Telefon numaranı 905xx şeklinde güncelleyebilirsin) -->
-    <a href="https://wa.me/905000000000?text=Merhaba,%2061Bazaar%20sitenizden%20bilgi%20almak%20istiyorum." class="whatsapp-buton" target="_blank">
+    <!-- Sabit WhatsApp İletişim Hattı -->
+    <a href="https://wa.me/905000000000?text=Merhaba,%2061Bazaar%20mağazanızdan%20sipariş%20vermek%20istiyorum." class="whatsapp-buton" target="_blank">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- Sayfa Altı / Footer -->
-    <footer id="iletisim">
-        <div class="footer-icerik">
-            <div class="footer-alan">
-                <h4>61BAZAAR</h4>
-                <p>Trabzon'un dik yamaçlarından ve bereketli bahçelerinden gelen geleneksel lezzetleri sofranıza taşıyoruz.</p>
-            </div>
-            <div class="footer-alan">
-                <h4>İletişim Bilgileri</h4>
+    <!-- Kurumsal Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-kolon">
+                <h4>Kurumsal</h4>
                 <ul>
-                    <li><i class="fa-solid fa-location-dot"></i> Of / Akçaabat / Trabzon</li>
-                    <li><i class="fa-solid fa-envelope"></i> info@61bazaar.com.tr</li>
-                    <li><i class="fa-solid fa-phone"></i> +90 (500) 000 00 00</li>
+                    <li><a href="#">Hakkımızda</a></li>
+                    <li><a href="#">Üretim Tesisimiz</a></li>
+                    <li><a href="#">Bizim Hikayemiz</a></li>
                 </ul>
             </div>
-            <div class="footer-alan">
-                <h4>Çalışma Saatleri</h4>
-                <p>Haftanın her günü bahçemizde üretimdeyiz. Siparişleriniz en geç 24 saat içinde Trabzon'dan kargoya verilir.</p>
+            <div class="footer-kolon">
+                <h4>Müşteri İlişkileri</h4>
+                <ul>
+                    <li><a href="#">Sıkça Sorulan Sorular</a></li>
+                    <li><a href="#">Kargo ve Teslimat</a></li>
+                    <li><a href="#">Mesafeli Satış Sözleşmesi</a></li>
+                </ul>
+            </div>
+            <div class="footer-kolon">
+                <h4>İletişim</h4>
+                <p><i class="fa-solid fa-map-marker-alt"></i> Of / Akçaabat / Trabzon</p>
+                <p><i class="fa-solid fa-envelope"></i> info@61bazaar.com.tr</p>
             </div>
         </div>
-        <div class="footer-alt">
-            <p>&copy; 2026 61Bazaar. Tüm Hakları Saklıdır. | Trabzon'dan Sevgilerle</p>
+        <div class="footer-telif">
+            &copy; 2026 61Bazaar Satış Mağazası. Tüm Hakları Saklıdır.
         </div>
     </footer>
 
