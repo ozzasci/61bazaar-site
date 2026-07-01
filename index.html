@@ -12,7 +12,6 @@
             --gri-arka-plan: #f4f6f8;
             --yazi-koyu: #1a1a1a;
             --yazi-acik: #6c757d;
-            --altin-sarisi: #e6a100;
         }
 
         body {
@@ -23,7 +22,6 @@
             color: var(--yazi-koyu);
         }
 
-        /* 1. Üst Bilgi Duyuru Çubuğu (Top Bar) */
         .top-bar {
             background-color: var(--kurumsal-yesil);
             color: white;
@@ -33,7 +31,6 @@
             font-weight: 500;
         }
 
-        /* 2. Kurumsal Header ve Arama/Sepet Alanı */
         header {
             background-color: #ffffff;
             border-bottom: 1px solid #e0e0e0;
@@ -70,7 +67,6 @@
             font-weight: 800;
             color: var(--kurumsal-yesil);
             text-decoration: none;
-            letter-spacing: 0.5px;
         }
 
         .arama-bari {
@@ -90,10 +86,6 @@
             font-size: 14px;
         }
 
-        .arama-bari i {
-            color: var(--yazi-acik);
-        }
-
         .header-ikonlar {
             display: flex;
             gap: 25px;
@@ -101,13 +93,29 @@
             color: var(--kurumsal-yesil);
         }
 
-        .header-ikonlar a {
+        .header-ikonlar a, .sepet-tetikleyici {
             color: inherit;
             text-decoration: none;
             position: relative;
+            cursor: pointer;
         }
 
-        /* Kategori Navigasyonu */
+        .sepet-sayac {
+            position: absolute;
+            top: -10px;
+            right: -12px;
+            background-color: var(--canli-kirmizi);
+            color: white;
+            font-size: 11px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
         .kategori-nav {
             background-color: #ffffff;
             box-shadow: 0 4px 6px rgba(0,0,0,0.02);
@@ -115,42 +123,21 @@
             display: flex;
             gap: 30px;
             font-weight: 600;
-            font-size: 15px;
         }
 
         .kategori-nav a {
             color: var(--yazi-koyu);
             text-decoration: none;
-            transition: color 0.2s;
         }
 
-        .kategori-nav a:hover, .kategori-nav a.aktif {
-            color: var(--canli-kirmizi);
-        }
-
-        /* Mağaza Vitrini / Banner */
         .magaza-banner {
             background: linear-gradient(to right, rgba(10, 61, 32, 0.9), rgba(10, 61, 32, 0.4)), url('https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
             color: white;
-            padding: 60px 40px;
+            padding: 50px 40px;
             margin: 20px 40px;
             border-radius: 8px;
         }
 
-        .magaza-banner h1 {
-            font-size: 36px;
-            margin: 0 0 10px 0;
-            font-weight: 700;
-        }
-
-        .magaza-banner p {
-            font-size: 16px;
-            max-width: 600px;
-            margin: 0;
-            opacity: 0.9;
-        }
-
-        /* ÇAYKUR Tarzı Ürün Grid Düzeni */
         .ana-gövde {
             max-width: 1400px;
             margin: 0 auto;
@@ -160,7 +147,6 @@
             gap: 30px;
         }
 
-        /* Yan Filtre Paneli */
         .yan-panel {
             background: white;
             padding: 20px;
@@ -171,7 +157,6 @@
 
         .yan-panel h3 {
             margin-top: 0;
-            font-size: 16px;
             border-bottom: 2px solid var(--kurumsal-yesil);
             padding-bottom: 8px;
             color: var(--kurumsal-yesil);
@@ -180,7 +165,6 @@
         .yan-panel ul {
             list-style: none;
             padding: 0;
-            margin: 0;
         }
 
         .yan-panel li {
@@ -194,7 +178,6 @@
             color: var(--canli-kirmizi);
         }
 
-        /* Ürün Kartları Alanı */
         .urun-izgara {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -208,24 +191,13 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: box-shadow 0.2s;
-        }
-
-        .caykur-urun-kart:hover {
-            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-        }
-
-        .kart-gorsel-link {
-            text-align: center;
-            padding: 15px;
-            background: #fff;
-            display: block;
         }
 
         .caykur-urun-kart img {
             max-width: 100%;
             height: 200px;
-            object-fit: contain;
+            object-fit: cover;
+            padding: 10px;
         }
 
         .kart-detay {
@@ -234,30 +206,20 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            border-top: 1px solid #f0f0f0;
         }
 
         .kart-urun-adi {
             font-size: 15px;
             font-weight: 600;
             margin: 0 0 8px 0;
-            color: var(--yazi-koyu);
             height: 40px;
             overflow: hidden;
-        }
-
-        .kart-stok-durum {
-            font-size: 12px;
-            color: #2a9d8f;
-            font-weight: bold;
-            margin-bottom: 15px;
         }
 
         .kart-fiyat-satir {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: auto;
         }
 
         .kart-fiyat {
@@ -275,53 +237,80 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background 0.2s;
         }
 
-        .sepet-ekle-btn:hover {
-            background-color: var(--canli-kirmizi);
-        }
-
-        /* Bilgi Kutuları */
-        .bilgi-bant {
-            max-width: 1320px;
-            margin: 40px auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            padding: 0 40px;
-        }
-
-        .bilgi-kart {
+        /* 3. AÇILIR SEPET YAN PANELİ (Slide-out Cart) */
+        .sepet-penceresi {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 360px;
+            height: 100%;
             background: white;
-            border: 1px solid #e0e0e0;
-            padding: 20px;
-            border-radius: 6px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: right 0.3s ease;
             display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .sepet-penceresi.acik {
+            right: 0;
+        }
+
+        .sepet-ust {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
         }
 
-        .bilgi-kart i {
-            font-size: 30px;
-            color: var(--canli-kirmizi);
-        }
-
-        .bilgi-kart h4 {
-            margin: 0 0 5px 0;
-            font-size: 16px;
-        }
-
-        .bilgi-kart p {
-            margin: 0;
-            font-size: 13px;
+        .sepet-kapat {
+            font-size: 24px;
+            cursor: pointer;
             color: var(--yazi-acik);
         }
 
-        /* Sabit WhatsApp Butonu */
+        .sepet-elemanlar {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 15px 0;
+        }
+
+        .sepet-urun-satir {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f9f9f9;
+            padding-bottom: 10px;
+        }
+
+        .sepet-toplam-alan {
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .siparis-tamamla-btn {
+            background-color: #25d366;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+
         .whatsapp-buton {
             position: fixed;
             bottom: 30px;
@@ -336,244 +325,234 @@
             align-items: center;
             font-size: 30px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-            text-decoration: none;
-        }
-
-        /* Kurumsal Footer */
-        footer {
-            background-color: #222;
-            color: #ccc;
-            padding: 50px 40px 20px 40px;
-            font-size: 14px;
-        }
-
-        .footer-grid {
-            max-width: 1320px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 40px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 40px;
-        }
-
-        .footer-kolon h4 {
-            color: white;
-            margin-top: 0;
-            font-size: 16px;
-            border-left: 3px solid var(--canli-kirmizi);
-            padding-left: 10px;
-        }
-
-        .footer-kolon ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-kolon li {
-            padding: 6px 0;
-        }
-
-        .footer-kolon a {
-            color: #bbb;
-            text-decoration: none;
-        }
-
-        .footer-kolon a:hover {
-            color: white;
-        }
-
-        .footer-telif {
-            text-align: center;
-            padding-top: 20px;
-            color: #666;
-            font-size: 13px;
+            z-index: 999;
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. Üst Duyuru Çubuğu -->
     <div class="top-bar">
-        <i class="fa-solid fa-truck"></i> 1500 TL ve Üzeri Alışverişlerinizde Kargo Ücretsiz! | Trabzon'dan Doğrudan Teslimat
+        <i class="fa-solid fa-truck"></i> Taptaze Mahsuller Doğrudan Trabzon'dan Kapınıza Teslim!
     </div>
 
-    <!-- 2. Kurumsal Üst Menü -->
     <header>
         <div class="logo-alani">
             <div class="logo-daire">61</div>
             <a href="#" class="logo-yazi">61BAZAAR</a>
         </div>
         
+        <!-- FUNCTION 1: ANLIK ARAMA BARBARI -->
         <div class="arama-bari">
-            <input type="text" placeholder="Mağazada çay veya fındık arayın...">
+            <input type="text" id="aramaInput" onkeyup="urunArama()" placeholder="Mağazada çay veya fındık arayın...">
             <i class="fa-solid fa-magnifying-glass"></i>
         </div>
 
         <div class="header-ikonlar">
-            <a href="#"><i class="fa-regular fa-user"></i></a>
-            <a href="#"><i class="fa-regular fa-heart"></i></a>
-            <a href="#"><i class="fa-solid fa-basket-shopping"></i></a>
+            <a class="sepet-tetikleyici" onclick="sepetiAcKapat()">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <div class="sepet-sayac" id="sepetSayac">0</div>
+            </a>
         </div>
     </header>
 
-    <!-- Kategori Çubuğu -->
     <div class="kategori-nav">
-        <a href="#" class="aktif">Ana Sayfa</a>
-        <a href="#">Trabzon Siyah Çayları</a>
-        <a href="#">Giresun/Trabzon Fındıkları</a>
-        <a href="#">Yöresel Ezmeler</a>
-        <a href="#">Hakkımızda</a>
+        <a href="#">Ana Sayfa</a>
+        <a href="#">Trabzon Çayları</a>
+        <a href="#">Doğal Fındıklar</a>
     </div>
 
-    <!-- Büyük Mağaza Bannerı -->
     <section class="magaza-banner">
-        <h1>61Bazaar Resmi Satış Mağazası</h1>
-        <p>Trabzon Of ve Akçaabat yamaçlarındaki kendi aile bahçelerimizden özenle paketlenen en taze mahsuller resmi online satış mağazamızda.</p>
+        <h1>61Bazaar Aktif Satış Mağazası</h1>
+        <p>Aşağıdaki sepet sistemini test edebilir, eklediğiniz ürünleri WhatsApp üzerinden anında siparişe dönüştürebilirsiniz.</p>
     </section>
 
-    <!-- 3. Ana Gövde: Yan Filtre + Ürün Listesi -->
     <main class="ana-gövde">
-        
-        <!-- Sol Menü Kategorileri -->
         <aside class="yan-panel">
             <h3>Kategoriler</h3>
             <ul>
-                <li>Mayıs Hasadı Çaylar</li>
-                <li>Çiğ & Kavrulmuş Fındık</li>
-                <li>%100 Saf Fındık Ezmesi</li>
-                <li>Hediyelik Yöresel Setler</li>
+                <li onclick="kategoriFiltre('hepsi')">Tüm Ürünler</li>
+                <li onclick="kategoriFiltre('cay')">Trabzon Çayları</li>
+                <li onclick="kategoriFiltre('findik')">Doğal Fındıklar</li>
             </ul>
         </aside>
 
-        <!-- Sağ Taraf: Ürün Vitrini -->
         <section class="urun-alanı">
-            <div class="urun-izgara">
-                
-                <!-- Ürün 1 -->
-                <div class="caykur-urun-kart">
-                    <a href="#" class="kart-gorsel-link">
-                        <img src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=400&q=80" alt="Mayıs Çayı">
-                    </a>
+            <div class="urun-izgara" id="urunVitrin">
+                <!-- Ürünler JavaScript ile aşağıda dinamik yönetiliyor ama arama için buradalar -->
+                <div class="caykur-urun-kart" data-isim="mayis surgunu siyah cay" data-kat="cay">
+                    <img src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=400&q=80">
                     <div class="kart-detay">
-                        <h3 class="kart-urun-adi">61Bazaar Altınbaş Mayıs Sürgünü Siyah Çay (1000 G)</h3>
-                        <div class="kart-stok-durum"><i class="fa-solid fa-check"></i> Stokta Var</div>
+                        <h3 class="kart-urun-adi">Mayıs Sürgünü Siyah Çay (1000 G)</h3>
                         <div class="kart-fiyat-satir">
-                            <span class="kart-fiyat">240,00 TL</span>
-                            <button class="sepet-ekle-btn"><i class="fa-solid fa-cart-plus"></i></button>
+                            <span class="kart-fiyat">240 TL</span>
+                            <button class="sepet-ekle-btn" onclick="sepeteEkle('Mayıs Sürgünü Siyah Çay', 240)"><i class="fa-solid fa-cart-plus"></i></button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Ürün 2 -->
-                <div class="caykur-urun-kart">
-                    <a href="#" class="kart-gorsel-link">
-                        <img src="https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=400&q=80" alt="Kavrulmuş Fındık">
-                    </a>
+                <div class="caykur-urun-kart" data-isim="lukscitirkavrulmus ic findik" data-kat="findik">
+                    <img src="https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=400&q=80">
                     <div class="kart-detay">
-                        <h3 class="kart-urun-adi">61Bazaar Lüks Çıtır Kavrulmuş İç Fındık (1000 G)</h3>
-                        <div class="kart-stok-durum"><i class="fa-solid fa-check"></i> Stokta Var</div>
+                        <h3 class="kart-urun-adi">Lüks Çıtır Kavrulmuş İç Fındık (1000 G)</h3>
                         <div class="kart-fiyat-satir">
-                            <span class="kart-fiyat">390,00 TL</span>
-                            <button class="sepet-ekle-btn"><i class="fa-solid fa-cart-plus"></i></button>
+                            <span class="kart-fiyat">390 TL</span>
+                            <button class="sepet-ekle-btn" onclick="sepeteEkle('Kavrulmuş İç Fındık', 390)"><i class="fa-solid fa-cart-plus"></i></button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Ürün 3 -->
-                <div class="caykur-urun-kart">
-                    <a href="#" class="kart-gorsel-link">
-                        <img src="https://images.unsplash.com/photo-1627914445885-3ba577b282bc?auto=format&fit=crop&w=400&q=80" alt="Çiğ Fındık">
-                    </a>
+                <div class="caykur-urun-kart" data-isim="premium dogal cig ic findik" data-kat="findik">
+                    <img src="https://images.unsplash.com/photo-1627914445885-3ba577b282bc?auto=format&fit=crop&w=400&q=80">
                     <div class="kart-detay">
-                        <h3 class="kart-urun-adi">61Bazaar Premium Doğal Çiğ İç Fındık (1000 G)</h3>
-                        <div class="kart-stok-durum"><i class="fa-solid fa-check"></i> Stokta Var</div>
+                        <h3 class="kart-urun-adi">Premium Doğal Çiğ İç Fındık (1000 G)</h3>
                         <div class="kart-fiyat-satir">
-                            <span class="kart-fiyat">350,00 TL</span>
-                            <button class="sepet-ekle-btn"><i class="fa-solid fa-cart-plus"></i></button>
+                            <span class="kart-fiyat">350 TL</span>
+                            <button class="sepet-ekle-btn" onclick="sepeteEkle('Doğal Çiğ İç Fındık', 350)"><i class="fa-solid fa-cart-plus"></i></button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Ürün 4 -->
-                <div class="caykur-urun-kart">
-                    <a href="#" class="kart-gorsel-link">
-                        <img src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=400&q=80" alt="Fındık Ezmesi">
-                    </a>
+                <div class="caykur-urun-kart" data-isim="katkisiz saf findik ezmesi" data-kat="findik">
+                    <img src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=400&q=80">
                     <div class="kart-detay">
-                        <h3 class="kart-urun-adi">61Bazaar %100 Katkısız Saf Fındık Ezmesi (400 G)</h3>
-                        <div class="kart-stok-durum"><i class="fa-solid fa-check"></i> Stokta Var</div>
+                        <h3 class="kart-urun-adi">%100 Katkısız Saf Fındık Ezmesi (400 G)</h3>
                         <div class="kart-fiyat-satir">
-                            <span class="kart-fiyat">180,00 TL</span>
-                            <button class="sepet-ekle-btn"><i class="fa-solid fa-cart-plus"></i></button>
+                            <span class="kart-fiyat">180 TL</span>
+                            <button class="sepet-ekle-btn" onclick="sepeteEkle('Saf Fındık Ezmesi', 180)"><i class="fa-solid fa-cart-plus"></i></button>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
     </main>
 
-    <!-- 4. Alt Bilgi Kurumsal Bantlar -->
-    <section class="bilgi-bant">
-        <div class="bilgi-kart">
-            <i class="fa-solid fa-shield-halved"></i>
-            <div>
-                <h4>Güvenli Alışveriş</h4>
-                <p>256-Bit SSL Koruma Altyapısı</p>
-            </div>
+    <!-- FUNCTION 2: DİNAMİK AÇILIR SEPET PANELİ -->
+    <div class="sepet-penceresi" id="sepetPenceresi">
+        <div class="sepet-ust">
+            <h3>Alışveriş Sepetiniz</h3>
+            <span class="sepet-kapat" onclick="sepetiAcKapat()">&times;</span>
         </div>
-        <div class="bilgi-kart">
-            <i class="fa-solid fa-rotate-left"></i>
-            <div>
-                <h4>Kolay İade Garantisi</h4>
-                <p>Şartsız Koşulsuz İade İmkanı</p>
-            </div>
+        <div class="sepet-elemanlar" id="sepetIcerik">
+            <!-- Sepete eklenen ürünler buraya listelenecek -->
+            <p style="color:var(--yazi-acik); text-align:center;">Sepetiniz henüz boş.</p>
         </div>
-        <div class="bilgi-kart">
-            <i class="fa-solid fa-store"></i>
-            <div>
-                <h4>Doğrudan Üreticiden</h4>
-                <p>Aracısız En Taze Yeni Mahsul</p>
-            </div>
+        <div class="sepet-toplam-alan">
+            <span>Toplam:</span>
+            <span id="sepetToplam">0 TL</span>
         </div>
-    </section>
+        <a href="#" id="whatsappSiparisBtn" class="siparis-tamamla-btn" target="_blank" onclick="siparisGonder()">Siparişi WhatsApp ile Tamamla</a>
+    </div>
 
-    <!-- Sabit WhatsApp İletişim Hattı -->
-    <a href="https://wa.me/905000000000?text=Merhaba,%2061Bazaar%20mağazanızdan%20sipariş%20vermek%20istiyorum." class="whatsapp-buton" target="_blank">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+    <!-- JAVASCRIPT: TÜM FONKSİYONLARIN MOTORU -->
+    <script>
+        let sepet = [];
 
-    <!-- Kurumsal Footer -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-kolon">
-                <h4>Kurumsal</h4>
-                <ul>
-                    <li><a href="#">Hakkımızda</a></li>
-                    <li><a href="#">Üretim Tesisimiz</a></li>
-                    <li><a href="#">Bizim Hikayemiz</a></li>
-                </ul>
-            </div>
-            <div class="footer-kolon">
-                <h4>Müşteri İlişkileri</h4>
-                <ul>
-                    <li><a href="#">Sıkça Sorulan Sorular</a></li>
-                    <li><a href="#">Kargo ve Teslimat</a></li>
-                    <li><a href="#">Mesafeli Satış Sözleşmesi</a></li>
-                </ul>
-            </div>
-            <div class="footer-kolon">
-                <h4>İletişim</h4>
-                <p><i class="fa-solid fa-map-marker-alt"></i> Of / Akçaabat / Trabzon</p>
-                <p><i class="fa-solid fa-envelope"></i> info@61bazaar.com.tr</p>
-            </div>
-        </div>
-        <div class="footer-telif">
-            &copy; 2026 61Bazaar Satış Mağazası. Tüm Hakları Saklıdır.
-        </div>
-    </footer>
+        // 1. ANLIK ARAMA FONKSİYONU
+        function urunArama() {
+            let girdi = document.getElementById('aramaInput').value.toLowerCase();
+            let kartlar = document.getElementsByClassName('caykur-urun-kart');
+            
+            for (let i = 0; i < kartlar.length; i++) {
+                let urunAdi = kartlar[i].getAttribute('data-isim');
+                if (urunAdi.includes(girdi)) {
+                    kartlar[i].style.display = "";
+                } else {
+                    kartlar[i].style.display = "none";
+                }
+            }
+        }
 
+        // KATEGORİ FİLTRELEME
+        function kategoriFiltre(kat) {
+            let kartlar = document.getElementsByClassName('caykur-urun-kart');
+            for (let i = 0; i < kartlar.length; i++) {
+                if (kat === 'hepsi' || kartlar[i].getAttribute('data-kat') === kat) {
+                    kartlar[i].style.display = "";
+                } else {
+                    kartlar[i].style.display = "none";
+                }
+            }
+        }
+
+        // 2. SEPETE ÜRÜN EKLEME MOTORU
+        function sepeteEkle(ad, fiyat) {
+            let varOlan = sepet.find(item => item.ad === ad);
+            if (varOlan) {
+                varOlan.adet += 1;
+            } else {
+                sepet.push({ ad: ad, fiyat: fiyat, adet: 1 });
+            }
+            sepetiGuncelle();
+            
+            // Sepet panelini otomatik açarak kullanıcıya eklendiğini göster
+            document.getElementById('sepetPenceresi').classList.add('acik');
+        }
+
+        // SEPETİ AÇ / KAPAT
+        function sepetiAcKapat() {
+            document.getElementById('sepetPenceresi').classList.toggle('acik');
+        }
+
+        // 3. SEPETİ ANLIK GÜNCELLEME VE LİSTELEME
+        function sepetiGuncelle() {
+            let sepetIcerik = document.getElementById('sepetIcerik');
+            let sepetSayac = document.getElementById('sepetSayac');
+            let sepetToplam = document.getElementById('sepetToplam');
+            
+            if (sepet.length === 0) {
+                sepetIcerik.innerHTML = '<p style="color:var(--yazi-acik); text-align:center;">Sepetiniz henüz boş.</p>';
+                sepetSayac.innerText = 0;
+                sepetToplam.innerText = '0 TL';
+                return;
+            }
+
+            let toplamAdet = 0;
+            let toplamTutar = 0;
+            let html = '';
+
+            sepet.forEach((urun, indeks) => {
+                toplamAdet += urun.adet;
+                toplamTutar += (urun.fiyat * urun.adet);
+                html += `
+                    <div class="sepet-urun-satir">
+                        <div>
+                            <strong style="font-size:14px;">${urun.ad}</strong><br>
+                            <span style="font-size:13px; color:var(--yazi-acik);">${urun.fiyat} TL x ${urun.adet}</span>
+                        </div>
+                        <button onclick="sepettenSil(${indeks})" style="background:none; border:none; color:var(--canli-kirmizi); cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+            });
+
+            sepetIcerik.innerHTML = html;
+            sepetSayac.innerText = toplamAdet;
+            sepetToplam.innerText = toplamTutar + ' TL';
+        }
+
+        // SEPETTEN ÜRÜN SİLME
+        function sepettenSil(indeks) {
+            sepet.splice(indeks, 1);
+            sepetiGuncelle();
+        }
+
+        // 4. WHATSAPP SİPARİŞ ENTEGRASYONU
+        function siparisGonder() {
+            if (sepet.length === 0) return;
+            
+            let numara = "905000000000"; // BURAYA KENDİ TRABZON NUMARANI YAZACAKSIN
+            let mesaj = "*61Bazaar Resmi Mağazası Siparişi*\n\n";
+            let toplamTutar = 0;
+
+            sepet.forEach(urun => {
+                mesaj += `- ${urun.ad} (Adet: ${urun.adet}) -> ${urun.fiyat * urun.adet} TL\n`;
+                toplamTutar += (urun.fiyat * urun.adet);
+            });
+
+            mesaj += `\n*Genel Toplam:* ${toplamTutar} TL\n\nSiparişimi onaylamak ve kargo bilgilerimi iletmek istiyorum.`;
+            
+            let url = `https://wa.me/${numara}?text=${encodeURIComponent(mesaj)}`;
+            document.getElementById('whatsappSiparisBtn').href = url;
+        }
+    </script>
 </body>
 </html>
