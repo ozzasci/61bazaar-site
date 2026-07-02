@@ -201,12 +201,11 @@
         .kart-yorum-formu select { font-size: 11px; padding: 4px; margin-bottom: 4px; width: 100%; box-sizing: border-box; }
         .kart-yorum-formu button { background: var(--kurumsal-yesil); color: white; border: none; font-size: 11px; padding: 4px 8px; border-radius: 2px; cursor: pointer; width: 100%; }
 
-        /* 📝 ÖZEL HAKKIMIZDA & SSS SAYFA DÜZENİ STİLLERİ */
         .kurumsal-sayfa-alani {
             max-width: 1200px;
             margin: 30px auto;
             padding: 0 40px;
-            display: none; /* Dinamik tetiklenecek */
+            display: none;
         }
         .kurumsal-kart {
             background: white;
@@ -230,7 +229,6 @@
         .sss-soru { font-weight: bold; color: var(--kurumsal-yesil); display: flex; justify-content: space-between; align-items: center; }
         .sss-cevap { font-size: 14px; color: #555; margin-top: 8px; line-height: 1.6; display: none; background: #fafafa; padding: 10px; border-radius: 4px; }
 
-        /* SEPET VE DİĞER PANELLER */
         .sepet-penceresi, .admin-penceresi { position: fixed; top: 0; right: -100%; width: 460px; height: 100%; background: white; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 1000; transition: right 0.3s ease; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
         .sepet-penceresi.acik, .admin-penceresi.acik { right: 0; }
         .sepet-ust { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 15px; }
@@ -377,7 +375,6 @@
         </div>
     </header>
 
-    <!-- KATEGORİ VE KURUMSAL MENÜ NAVİGASYONU -->
     <div class="kategori-nav" id="kategoriNavLinks">
         <a href="#" onclick="sayfaGoster('vitrin')">
             <i class="fa-solid fa-house-chimney"></i>
@@ -395,14 +392,12 @@
             <i class="fa-solid fa-jar"></i>
             <span id="navGurme">Yöresel Bal & Gurme</span>
         </a>
-        <!-- HAKKIMIZDA DİNAMİK SEKME EKLEMESİ -->
         <a href="#" onclick="sayfaGoster('kurumsal')">
             <i class="fa-solid fa-circle-info"></i>
             <span id="navHakkimizda">Hakkımızda & SSS</span>
         </a>
     </div>
 
-    <!-- VİTRİN ANA GÖVDE ALANI -->
     <div id="anaVitrinSayfasi">
         <section class="magaza-banner">
             <h1 id="txtBannerTitle">Doğrudan Trabzon Of Vadisi'nden Kapınıza</h1>
@@ -455,11 +450,10 @@
         </main>
     </div>
 
-    <!-- 📝 ÖZEL KURUMSAL SAYFA ALANI: HAKKIMIZDA, İŞLEYİŞ VE SSS -->
     <div id="kurumsalBilgiSayfasi" class="kurumsal-sayfa-alani">
         <div class="kurumsal-kart">
             <h2><i class="fa-solid fa-seedling"></i> Hikayemiz ve Hakkımızda</h2>
-            <p>61Bazaar, Trabzon Of Vadisi'nin bereketli topraklarından fışkıran o meşhur doğallığı tüm dünyaya açmak amacıyla kurulmuş yeni nesil dijital bir gurme köprüdür. Nesillerdir ailemizden devraldığımız çay ve doğal fındık üreticiliği kültürünü, araya hiçbir komisyoncu, kabzımal veya toptancı sokmadan doğrudan bahçelerimizden paketleyip kapınıza ulaştırıyoruz. Misyonumuz, endüstriyel boyalı çayların ve bekletilmiş bayat kuru yemişlerin aksine, Karadeniz’in o saf dağ havasını ve taze mahsul kokusunu sofralarınıza taşımaktır.</p>
+            <p>61Bazaar, Trabzon Of Vadisi'nin bereketli topraklarından fışkıran o meşhur doğallığı tüm dünyaya açmak amacıyla kurulmuş yeni nesil dijital bir gurme köprüdür. Nesillerdir ailemizden devraldığımız çay og doğal fındık üreticiliği kültürünü, araya hiçbir komisyoncu, kabzımal veya toptancı sokmadan doğrudan bahçelerimizden paketleyip kapınıza ulaştırıyoruz. Misyonumuz, endüstriyel boyalı çayların ve bekletilmiş bayat kuru yemişlerin aksine, Karadeniz’in o saf dağ havasını ve taze mahsul kokusunu sofralarınıza taşımaktır.</p>
         </div>
 
         <div class="kurumsal-kart">
@@ -479,7 +473,7 @@
                 <div class="isleyis-adim">
                     <i class="fa-solid fa-box-open"></i>
                     <h4>3. Taze Paketleme</h4>
-                    <p>Siparişiniz düştüğü an Of tesislerimizde güncel stoktan ayrılır, hediye kartı notunuz varsa eklenir ve korumalı paketlerle kargoya hazır hale gelir.</p>
+                    <p>Siparişiniz düştüğü an Of tesislerimizde güncel stoktan ayrılır, hediye kartı notunuz varsa eklenir og korumalı paketlerle kargoya hazır hale gelir.</p>
                 </div>
                 <div class="isleyis-adim">
                     <i class="fa-solid fa-truck-ramp-box"></i>
@@ -512,7 +506,6 @@
         </div>
     </div>
 
-    <!-- SHOPPING CART PANEL -->
     <div class="sepet-penceresi" id="sepetPenceresi">
         <div class="sepet-ust">
             <h3 id="txtCartTitle">Alışveriş Sepetiniz</h3>
@@ -576,7 +569,6 @@
         <button id="anaSiparisBtn" class="siparis-tamamla-btn" onclick="siparisGonder()">Siparişi WhatsApp ile Tamamla</button>
     </div>
 
-    <!-- 3D SECURE MODAL -->
     <div class="secure-modal" id="secureModal">
         <div class="secure-kutu">
             <h3><i class="fa-solid fa-shield-halved" style="color:#1e3c72;"></i> Banka Onay Ekranı</h3>
@@ -586,7 +578,6 @@
         </div>
     </div>
 
-    <!-- ADMIN PANEL -->
     <div class="admin-penceresi" id="adminPenceresi">
         <div class="sepet-ust"><h3>61Bazaar Global Yönetim Paneli</h3><span class="sepet-kapat" onclick="adminPaneliKapat()">&times;</span></div>
         <div class="admin-elemanlar">
@@ -611,7 +602,7 @@
             <div class="admin-form-grup"><label>Müşteri Yorumu</label><input type="text" id="admUrunYorum" placeholder="Örn: Çok beğendik."></div>
             <div class="admin-form-grup">
                 <label>Ürün Fotoğrafı</label><input type="text" id="admUrunGorsel" placeholder="Görsel linki..." readonly style="background:#f0f2f5;">
-                <label class="resim-yukle-btn" id="yuklemeEtiketi"><i class="fa-solid fa-image"></i> Fotoğraf Seç ve Yükle<input type="file" id="admResimDosya" accept="image/*" style="display:none;" onchange="adminResimYukle(event)"></label>
+                <label class="resim-yukle-btn" id="yuklemeEtiketi"><i class="fa-solid fa-image"></i> Fotoğraf Seç og Yükle<input type="file" id="admResimDosya" accept="image/*" style="display:none;" onchange="adminResimYukle(event)"></label>
             </div>
             <button class="admin-kaydet-btn" style="width:100%;" onclick="adminUrunEkle()">Ürünü Mağazaya Ekle</button>
             <hr style="margin:20px 0; border:none; border-top:1px solid #eee;">
@@ -620,10 +611,8 @@
         </div>
     </div>
 
-    <!-- FOMO -->
     <div class="fomo-bildirim" id="fomoBildirimKutusu"><i class="fa-solid fa-bag-shopping"></i><div id="fomoMetin"><b>Ahmet K. (Ankara)</b> az önce fındık sipariş verdi!</div></div>
 
-    <!-- AI -->
     <div class="ai-buton" onclick="aiAsistanAcKapat()"><i class="fa-solid fa-robot"></i></div>
     <div class="ai-penceresi" id="aiPenceresi">
         <div class="ai-ust"><span id="txtAiTitle"><i class="fa-solid fa-robot"></i> 61Bazaar Akıllı Asistan</span><span class="sepet-kapat" onclick="aiAsistanAcKapat()">&times;</span></div>
@@ -637,7 +626,6 @@
         <div class="bilgi-kart"><i class="fa-solid fa-store"></i><div><h4>Doğrudan Üreticiden</h4><p>Aracısız En Taze Yeni Mahsul</p></div></div>
     </section>
 
-    <!-- 🛠️ İLETİŞİM NUMARANIZ TAMAMEN BURAYA VE SABİT WHATSAPP BUTONUNA BAĞLANDI -->
     <a href="https://wa.me/905309082276?text=Sipariş" class="whatsapp-buton" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 
     <footer>
@@ -658,7 +646,7 @@
         const diller = {
             tr: {
                 topBanner: "<i class='fa-solid fa-truck'></i> 1500 TL ve Üzeri Alışverişlerinizde Kargo Ücretsiz!", promo: "<i class='fa-solid fa-fire'></i> SÜPER MAHSUL FIRSATI: Bugün Tüm Fındık Çeşitlerinde Geçerli Ekstra İndirim!",
-                kalanSure: "Kalan Süre:", bannerTitle: "Doğrudan Trabzon Of Vadisi'nden Kapınıza", bannerDesc: "Of'un meşhur dik yamaçlarından toplanan Mayıs ayı hasadı çaylarımızı ve yeşilin en saf tonuyla beslenen taptaze fındıklarımızı, hiçbir aracı olmadan doğrudan kendi memleketimizden sofranıza ulaştırıyoruz.",
+                kalanSure: "Kalan Süre:", bannerTitle: "Doğrudan Trabzon Of Vadisi'nden Kapınıza", bannerDesc: "Of'un meşhur dik yamaçlarından toplanan Mayıs ayı hasadı çaylarimizi ve yeşilin en saf tonuyla beslenen taptaze fındıklarımızı, hiçbir aracı olmadan doğrudan kendi memleketimizden sofranıza ulaştırıyoruz.",
                 mixTitle: "Kendine Özel Trabzon Çay Harmanını Yarat", mixDesc: "Aşağıdaki çubukları kaydırarak dilediğin çay türünden kendi özel 1 KG harman paketini oluşturabilirsin!",
                 mixCay1: "Mayıs İlk Sürgün Filiz Çayı", mixCay2: "Of Hasadı Altınbaş Siyah Çay", mixTotal: "Toplam Ağırlık:", mixPrice: "Fiyat:", mixAdd: "Özel Harmanı Sepete Ekle",
                 sideCatTitle: "Kategoriler", cartTitle: "Alışveriş Sepetiniz", formTitle: "Kargo Teslimat Bilgileri", cartTotalLabel: "Toplam:", aiTitle: "61Bazaar Akıllı Asistan",
@@ -792,7 +780,6 @@
             }
         }
 
-        // 🛠️ HAKKIMIZDA VE VİTRİN DEĞİŞİM MOTORU
         function sayfaGoster(sayfaId) {
             if(sayfaId === 'vitrin') {
                 document.getElementById('anaVitrinSayfasi').style.display = "block";
@@ -942,7 +929,7 @@
 
         function odemeYontemiSec(tip) {
             seciliOdemeYontemi = tip;
-            document.getElementById('btnOdemeWA').classList.remove('aktif'); document.getElementById('btnOdemeKapida').classList.remove('aktif'); document.getElementById('btnOdemeKart').classList.remove('aktif');
+            document.getElementById('btnOdemeWA').classList.remove('aktif'); document.getElementById('btnOdemeCampida').classList.remove('aktif'); document.getElementById('btnOdemeKart').classList.remove('aktif');
             document.getElementById(`btnOdeme${tip === 'WA' ? 'WA' : (tip === 'KAPIDA' ? 'Kapida' : 'Kart')}`).classList.add('aktif');
             document.getElementById('kartOdemeAlani').style.display = tip === 'KART' ? 'block' : 'none';
             odemeButonMetniGuncelle();
@@ -1026,7 +1013,47 @@
         function grafikGuncelle() { if(document.getElementById('adminPenceresi').classList.contains('acik')) grafikBaslat(); }
 
         function adminResimYukle(event) { let dosya = event.target.files[0]; if (!dosya) return; let etiket = document.getElementById('yuklemeEtiketi'); etiket.innerHTML = 'Yükleniyor...'; let formData = new FormData(); formData.append("image", dosya); fetch(`https://api.imgbb.com/1/upload?key=452de0403df321620adab22aa9d52412`, { method: "POST", body: formData }).then(response => response.json()).then(result => { if (result.success) { document.getElementById('admUrunGorsel').value = result.data.url; etiket.innerHTML = 'Yüklendi!'; } }); }
-        function adminUrunEkle() { let ad = document.getElementById('admUrunAd').value; let kat = document.getElementById('admUrunKat').value; let fiyat = parseInt(document.getElementById('admUrunFiyat').value); let puan = parseInt(document.getElementById('admUrunPuan').value) || 5; let stok = parseInt(document.getElementById('admUrunStok').value) || 20; let yorum = document.getElementById('admUrunYorum').value || "Yeni mahsulümüz."; let gorsel = document.getElementById('admUrunGorsel').value || 'urunler/mayis-cayi.jpg'; if (!ad || !fiyat) return; urunler.push({ id: yeniId, ad: ad, fiyat: fiyat, kat: kat, gorsel: gorsel, geom: yorum, puan: puan, stok: stok }); vitrinBas(); adminMevcutUrunleriListele(); alert("Eklendi!"); }
+        
+        function adminUrunEkle() { 
+            let ad = document.getElementById('admUrunAd').value.trim(); 
+            let kat = document.getElementById('admUrunKat').value; 
+            let fiyat = parseInt(document.getElementById('admUrunFiyat').value); 
+            let puan = parseInt(document.getElementById('admUrunPuan').value) || 5; 
+            let stok = parseInt(document.getElementById('admUrunStok').value) || 20; 
+            let yorum = document.getElementById('admUrunYorum').value.trim() || "Yeni mahsulümüz."; 
+            let gorsel = document.getElementById('admUrunGorsel').value.trim() || 'urunler/mayis-cayi.jpg'; 
+
+            if (!ad || !fiyat || isNaN(fiyat)) { 
+                alert("Lütfen Ürün Adı ve Fiyat alanlarını eksiksiz doldurun hemşerim!"); 
+                return; 
+            } 
+
+            let yeniId = urunler.length > 0 ? Math.max(...urunler.map(u => u.id)) + 1 : 1;
+
+            urunler.push({ 
+                id: yeniId, 
+                ad: ad, 
+                fiyat: fiyat, 
+                kat: kat, 
+                gorsel: gorsel, 
+                yorum: yorum, 
+                puan: puan, 
+                stok: stok 
+            }); 
+
+            vitrinBas(); 
+            adminMevcutUrunleriListele(); 
+            
+            document.getElementById('admUrunAd').value = '';
+            document.getElementById('admUrunFiyat').value = '';
+            document.getElementById('admUrunYorum').value = '';
+            document.getElementById('admUrunGorsel').value = '';
+            let etiket = document.getElementById('yuklemeEtiketi');
+            if(etiket) etiket.innerHTML = '<i class="fa-solid fa-image"></i> Fotoğraf Seç ve Yükle';
+
+            alert(`🎉 "${ad}" başarıyla dükkan vitrinine ve yönetim paneline eklenmiştir hemşerim!`); 
+        }
+
         function adminMevcutUrunleriListele() { let alan = document.getElementById('adminMevcutUrunler'); let html = ''; urunler.forEach((u, index) => { html += `<div class="admin-urun-liste-satir"><div><strong>${u.ad}</strong><br>Stok: <b>${u.stok}</b> | Puan: <b>${u.puan}⭐</b><br>${u.fiyat} TL</div><button onclick="adminUrunSil(${u.id})" style="background:none;border:none;color:var(--canli-kirmizi);cursor:pointer;"><i class="fa-solid fa-trash"></i></button></div>`; }); alan.innerHTML = html; }
         function adminUrunSil(id) { if (confirm("Silinsin mi?")) { urunler = urunler.filter(u => u.id !== id); vitrinBas(); adminMevcutUrunleriListele(); } }
 
