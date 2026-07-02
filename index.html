@@ -97,7 +97,7 @@
         .kategori-nav { background-color: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.02); padding: 12px 40px; display: flex; gap: 30px; font-weight: 600; }
         .kategori-nav a { color: var(--yazi-koyu); text-decoration: none; }
 
-        /* 🌟 YENİ NESİL PREMIUM BANNER ALANI STİLLERİ */
+        /* 🌟 YENİ NESİL SAF TRABZON & OF VURGULU BANNER */
         .magaza-banner {
             background: linear-gradient(135deg, rgba(10, 61, 32, 0.95), rgba(4, 34, 17, 0.85)), url('https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
             color: white;
@@ -117,7 +117,6 @@
             font-size: 200px;
             font-weight: 900;
             color: rgba(255, 255, 255, 0.04);
-            font-family: Arial, sans-serif;
             pointer-events: none;
         }
         .magaza-banner h1 { font-size: 38px; margin: 0 0 12px 0; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
@@ -179,7 +178,7 @@
         .kart-yorum-formu select { font-size: 11px; padding: 4px; margin-bottom: 4px; width: 100%; box-sizing: border-box; }
         .kart-yorum-formu button { background: var(--kurumsal-yesil); color: white; border: none; font-size: 11px; padding: 4px 8px; border-radius: 2px; cursor: pointer; width: 100%; }
 
-        .sepet-penceresi, .admin-penceresi { position: fixed; top: 0; right: -100%; width: 460px; height: 100%; background: white; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 1000; transition: right 0.3s ease; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
+        .sepet-penceresi, .admin-penceresi { position: fixed; top: 0; right: -100%; width: 440px; height: 100%; background: white; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 1000; transition: right 0.3s ease; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
         .sepet-penceresi.acik, .admin-penceresi.acik { right: 0; }
         .sepet-ust { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 15px; }
         .sepet-kapat { font-size: 24px; cursor: pointer; color: var(--yazi-acik); }
@@ -223,18 +222,12 @@
         .secure-kutu h3 { margin-top: 0; color: #1e3c72; }
         .secure-kutu input { width: 100%; padding: 10px; font-size: 16px; text-align: center; margin: 15px 0; border: 1px solid #ccc; border-radius: 4px; }
 
-        .admin-form-grup { margin-bottom: 15px; }
-        .admin-form-grup label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; }
-        .admin-form-grup input, .admin-form-grup select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .resim-yukle-btn { background-color: #f0f2f5; border: 1px dashed #ccc; padding: 10px; text-align: center; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 600; display: block; margin-top: 5px; }
-
-        .admin-urun-liste-satir { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; font-size: 13px; }
-
+        /* 🛠️ FOMO BİLDİRİM MOTORU (AÇILIR KAPANIR VE MOBİL SIFIR HATALI) */
         .fomo-bildirim {
             position: fixed;
             bottom: 110px;
-            right: -350px;
-            width: 300px;
+            right: -380px;
+            width: 310px;
             background: white;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
@@ -243,11 +236,14 @@
             align-items: center;
             gap: 12px;
             z-index: 998;
-            transition: right 0.5s ease-in-out;
             border-left: 4px solid var(--canli-kirmizi);
             font-size: 12px;
+            box-sizing: border-box;
+            transition: transform 0.5s ease-in-out; /* Kaydırma kilitlenmesini engellemek için transform motoruna geçildi */
         }
-        .fomo-bildirim.goster { right: 30px; }
+        .fomo-bildirim.goster {
+            transform: translateX(-410px); /* Sağdan kusursuzca içeri fırlatır */
+        }
         .fomo-bildirim i { font-size: 20px; color: var(--canli-kirmizi); }
 
         .ai-buton { position: fixed; bottom: 30px; left: 30px; background-color: var(--kurumsal-yesil); color: white; border-radius: 50px; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; font-size: 26px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 999; cursor: pointer; }
@@ -284,7 +280,8 @@
             .yan-panel { display: none; }
             .urun-izgara { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
             .sepet-penceresi, .admin-penceresi { width: 100%; right: -100%; }
-            .fomo-bildirim { width: calc(100% - 40px); left: 20px; bottom: 100px; }
+            .fomo-bildirim { width: calc(100% - 40px); right: -100%; left: auto; bottom: 100px; }
+            .fomo-bildirim.goster { transform: translateX(calc(-100vw + 20px)); }
         }
     </style>
 </head>
@@ -337,14 +334,14 @@
         <a href="#" onclick="kategoriFiltre('gurme')">Yöresel Bal & Gurme</a>
     </div>
 
-    <!-- 🌟 YENİ VE DOĞAL KARŞILAMA BANNER ALANI -->
+    <!-- 🌟 SAF TRABZON & OF VURGULU BANNER ALANI (AKÇAABAT KALDIRILDI) -->
     <section class="magaza-banner">
-        <h1 id="txtBannerTitle">Toprağın En Saf Hali, Doğrudan Trabzon'dan</h1>
-        <p id="txtBannerDesc">Of'un dik yamaçlarından toplanan Mayıs ayı hasadı çaylarımızı ve Akçaabat bahçelerimizin taptaze, çıtır fındıklarını hiçbir aracı olmadan, saf ve el değmemiş lezzetiyle kapınıza ulaştırıyoruz.</p>
+        <h1 id="txtBannerTitle">Doğrudan Trabzon Of Vadisi'nden Kapınıza</h1>
+        <p id="txtBannerDesc">Of'un meşhur dik yamaçlarından toplanan Mayıs ayı hasadı çaylarımızı ve yeşilin en saf tonuyla beslenen taptaze fındıklarımızı, hiçbir aracı olmadan doğrudan kendi memleketimizden sofranıza ulaştırıyoruz.</p>
         <div class="banner-rozetler">
-            <div class="banner-rozet"><i class="fa-solid fa-leaf"></i> %100 Doğal Hasat</div>
-            <div class="banner-rozet"><i class="fa-solid fa-jar"></i> Geleneksel Üretim</div>
-            <div class="banner-rozet"><i class="fa-solid fa-house-chimney-crack"></i> Doğrudan Üreticiden</div>
+            <div class="banner-rozet"><i class="fa-solid fa-leaf"></i> %100 Of Hasadı</div>
+            <div class="banner-rozet"><i class="fa-solid fa-jar"></i> Karadeniz Doğallığı</div>
+            <div class="banner-rozet"><i class="fa-solid fa-house-chimney-crack"></i> Aracısız Üretim</div>
         </div>
     </section>
 
@@ -532,10 +529,10 @@
         </div>
     </div>
 
-    <!-- FOMO -->
+    <!-- 🔔 FOMO BİLDİRİM BALONU (YENİLENMİŞ YUMUŞAK SÜRÜM) -->
     <div class="fomo-bildirim" id="fomoBildirimKutusu">
         <i class="fa-solid fa-bag-shopping"></i>
-        <div id="fomoMetin"><b>Ahmet K. (Trabzon)</b> az önce fındık sipariş verdi!</div>
+        <div id="fomoMetin"><b>Ahmet K. (Ankara)</b> az önce fındık sipariş verdi!</div>
     </div>
 
     <!-- AI -->
@@ -562,7 +559,7 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-kolon"><h4>Kurumsal</h4><ul><li>Hakkımızda</li><li>Üretim Tesisimiz</li></ul></div>
-            <div class="footer-kolon"><h4>İletişim</h4><p>Of / Akçaabat / Trabzon</p></div>
+            <div class="footer-kolon"><h4>İletişim</h4><p>Of / Trabzon</p></div>
         </div>
         <div style="text-align:center; margin-top:20px;"><span class="admin-giris-link" onclick="adminGirisTetikle()">[ Yönetici Girişi ]</span></div>
         <div class="footer-telif">&copy; 2026 61Bazaar Global Mağazası. Tüm Hakları Saklıdır.</div>
@@ -572,7 +569,7 @@
         const diller = {
             tr: {
                 topBanner: "<i class='fa-solid fa-truck'></i> 1500 TL ve Üzeri Alışverişlerinizde Kargo Ücretsiz!", promo: "<i class='fa-solid fa-fire'></i> SÜPER MAHSUL FIRSATI: Bugün Tüm Fındık Çeşitlerinde Geçerli Ekstra İndirim!",
-                kalanSure: "Kalan Süre:", bannerTitle: "Toprağın En Saf Hali, Doğrudan Trabzon'dan", bannerDesc: "Of'un dik yamaçlarından toplanan Mayıs ayı hasadı çaylarimizi ve Akçaabat bahçelerimizin taptaze, çıtır fındıklarını hiçbir aracı olmadan, saf ve el değmemiş lezzetiyle kapınıza ulaştırıyoruz.",
+                kalanSure: "Kalan Süre:", bannerTitle: "Doğrudan Trabzon Of Vadisi'nden Kapınıza", bannerDesc: "Of'un meşhur dik yamaçlarından toplanan Mayıs ayı hasadı çaylarımızı ve yeşilin en saf tonuyla beslenen taptaze fındıklarımızı, hiçbir aracı olmadan doğrudan kendi memleketimizden sofranıza ulaştırıyoruz.",
                 mixTitle: "Kendine Özel Trabzon Çay Harmanını Yarat", mixDesc: "Aşağıdaki çubukları kaydırarak dilediğin çay türünden kendi özel 1 KG harman paketini oluşturabilirsin!",
                 mixCay1: "Mayıs İlk Sürgün Filiz Çayı", mixCay2: "Of Hasadı Altınbaş Siyah Çay", mixTotal: "Toplam Ağırlık:", mixPrice: "Fiyat:", mixAdd: "Özel Harmanı Sepete Ekle",
                 sideCatTitle: "Kategoriler", cartTitle: "Alışveriş Sepetiniz", formTitle: "Kargo Teslimat Bilgileri", cartTotalLabel: "Toplam:", aiTitle: "61Bazaar Akıllı Asistan",
@@ -582,7 +579,7 @@
             },
             en: {
                 topBanner: "<i class='fa-solid fa-truck'></i> Free Shipping on orders over $50!", promo: "<i class='fa-solid fa-fire'></i> HARVEST OFFER: Special discount today on all Hazelnut products!",
-                kalanSure: "Remaining Time:", bannerTitle: "Purest Form of Soil, Directly from Trabzon", bannerDesc: "We deliver our black teas harvested in May from the steep slopes of Of and fresh, crispy hazelnuts from Akçaabat orchards directly to your door without any middlemen.",
+                kalanSure: "Remaining Time:", bannerTitle: "Directly From Trabzon Of Valley To Your Door", bannerDesc: "We deliver our black teas harvested in May from the famous steep slopes of Of and fresh hazelnuts nourished by the purest shade of green, directly from our own hometown to your table without any middlemen.",
                 mixTitle: "Create Your Custom Black Tea Blend", mixDesc: "Slide the bars below to create your customized 1 KG premium black tea package!",
                 mixCay1: "May First Shoot Sprouts Tea", mixCay2: "Of Harvest Altinbas Black Tea", mixTotal: "Total Weight:", mixPrice: "Price:", mixAdd: "Add Custom Blend to Cart",
                 sideCatTitle: "Categories", cartTitle: "Your Shopping Cart", formTitle: "Shipping & Delivery Information", cartTotalLabel: "Total:", aiTitle: "61Bazaar AI Assistant",
@@ -592,8 +589,8 @@
             },
             ar: {
                 topBanner: "<i class='fa-solid fa-truck'></i> شحن مجاني للطلبات الأكثر من 50 دولار!", promo: "<i class='fa-solid fa-fire'></i> عرض الحصاد: خصم خاص اليوم على جميع منتجات البندق!",
-                kalanSure: "الوقت المتبقي:", bannerTitle: "أنقى صور الأرض، مباشرة من طرابزون", bannerDesc: "نقوم بتوصيل الشاي الأسود الذي يتم حصاده في شهر مايو من منحدرات أوف الشديدة والبندق المقرمش الطازج من بساتين أكشابات مباشرة إلى باب منزلك دون أي وسطاء.",
-                mixTitle: "اصنع مزيج الشاي الخاص بك", mixDesc: "قم بتحريك الأشرطة أدناه لإنشاء عبوة شاي طrabzon المخصصة بوزن 1 كجم!",
+                kalanSure: "الوقت المتبقي:", bannerTitle: "مباشرة من وادي أوف في طرابزون إلى باب منزلك", bannerDesc: "نحن نقدم لك الشاي الأسود الذي يتم حصاده في شهر مايو من منحدرات أوف الشهيرة والشديدة والبندق الطازج المغذى بأنقى ظلال اللون الأخضر، مباشرة من مسقط رأسنا إلى مائدتك دون أي وسطاء.",
+                mixTitle: "اصنع مزيج الشاي الخاص بك", mixDesc: "قم بتحريك الأشرطة أدناه لإنشاء عبوة شاي طرابزون المخصصة بوزن 1 كجم!",
                 mixCay1: "شاي مايو النبتة الأولى", mixCay2: "شاي أوف التينباش الأسود", mixTotal: "الوقت الكلي:", mixPrice: "السعر:", mixAdd: "أضf المزيج إلى السلة",
                 sideCatTitle: "الفئات", cartTitle: "سلة التسوق الخاصة بك", formTitle: "معلومات الشحن والتوصيل", cartTotalLabel: "المجموع:", aiTitle: "61Bazaar المساعد الذكي",
                 aiWelcome: "أهلاً بك يا أخي! أنا مساعد متجر 61Bazaar الذكي. يمكنك الاستفسار عن الأسعار الحالية أو الكوبونات.",
@@ -609,7 +606,7 @@
             { id: 4, ad: "Trabzon Elek Altı Tiryaki Çayı (500 G)", fiyat: 175, kat: "cay", gorsel: "urunler/elekalti-cay.jpg", yorum: "Asla toz yok, cam gibi berrak demleniyor. - Selim B.", puan: 4, stok: 0 },
             { id: 5, ad: "Çıtır Kavrulmuş İç Fındık (1000 G)", fiyat: 390, kat: "findik", gorsel: "urunler/kavrulmus-findik.jpg", yorum: "Çıtır çıtır, kavrulma derecesi mükemmel. - Ali Osman T.", puan: 5, stok: 8 },
             { id: 6, ad: "Naturel Çiğ İç Fındık (1000 G)", fiyat: 350, kat: "findik", gorsel: "urunler/cig-findik.jpg", yorum: "Çok lezzetli ve besleyici, yeni mahsul. - Zeynep D.", puan: 5, stok: 20 },
-            { id: 7, ad: "Akçaabat Usulü Kabuklu Fındık (1000 G)", fiyat: 195, kat: "findik", gorsel: "urunler/kabuklu-findik.jpg", yorum: "Eski usul kırması çok keyifli, içi dolu dolu. - İbrahim G.", puan: 4, stok: 4 },
+            { id: 7, ad: "Trabzon Kabuklu Lezzet Fındığı (1000 G)", fiyat: 195, kat: "findik", gorsel: "urunler/kabuklu-findik.jpg", yorum: "Eski usul kırması çok keyifli, içi dolu dolu. - İbrahim G.", puan: 4, stok: 4 },
             { id: 8, ad: "%100 Saf Şekersiz Fındık Ezmesi (400 G)", fiyat: 180, kat: "findik", gorsel: "urunler/findik-ezmesi.jpg", yorum: "Piyasadaki yağlı ezmelerden değil, tamamen saf! - Canan S.", puan: 5, stok: 1 },
             { id: 9, ad: "Trabzon Süzme Yayla Balı (850 G)", fiyat: 550, kat: "gurme", gorsel: "urunler/yayla-bali.jpg", yorum: "Çay yanına muazzam gidiyor, gerçek bal kokusu var. - Oğuz B.", puan: 5, stok: 6 }
         ];
@@ -770,17 +767,25 @@
             alert("Özel çay harmanınız sepete eklendi!");
         }
 
+        /* 🛠️ YENİLENMİŞ FOMO MOTORU (MOBİLDE SIKIŞMA SORUNU GİDERİLDİ) */
         function fomoMotoru() {
-            const isimler = ["Ahmet K. (Ankara)", "Mustafa Y. (İstanbul)", "Mehmet B. (Trabzon)", "Fatma S. (Ankara)"];
+            const isimler = ["Ahmet K. (Ankara)", "Mustafa Y. (İstanbul)", "Mehmet B. (Trabzon)", "Fatma S. (Ankara)", "Oğuz B. (Ankara)"];
             const urunIsimleri = ["2 KG Çıtır Kavrulmuş Fındık", "1 KG Mayıs Filiz Çayı", "850G Süzme Yayla Balı"];
             const zamanlar = ["az önce", "2 dakika önce", "4 dakika önce"];
+            
             setInterval(() => {
                 let rIsim = isimler[Math.floor(Math.random() * isimler.length)];
                 let rUrun = urunIsimleri[Math.floor(Math.random() * urunIsimleri.length)];
                 let rZaman = zamanlar[Math.floor(Math.random() * zamanlar.length)];
+                
                 document.getElementById('fomoMetin').innerHTML = `<b>${rIsim}</b> ${rZaman} <b>${rUrun}</b> sipariş verdi!`;
-                let kutu = document.getElementById('fomoBildirimKutusu'); kutu.classList.add('goster');
-                setTimeout(() => { kutu.classList.remove('goster'); }, 5000);
+                let kutu = document.getElementById('fomoBildirimKutusu'); 
+                
+                kutu.classList.add('goster'); // Transform ile açılır
+
+                setTimeout(() => { 
+                    kutu.classList.remove('goster'); // 5 saniye sonra transform ile kapanır
+                }, 5000);
             }, 22000);
         }
 
@@ -1090,7 +1095,7 @@
 
         function aiAkilliCevapUret(soru) {
             let kur = dovizKurlari[gecerliDoviz]; let simge = dovizSimgeleri[gecerliDoviz];
-            if (soru.includes("merhaba") || soru.includes("selam")) return "Aleyküm Selam hemşerim dükkana hoş geldin! Stok durumunu veya fiyatları canlı veritabanından çekebilirim.";
+            if (soru.includes("merhaba") || soru.includes("selam")) return "Aleyküm Selam hemşerim dükkana hoş geldin! Of çaylarımızın güncel fiyatlarını veya stoklarını söyleyebilirim.";
             if (soru.includes("çay") && (soru.includes("fiyat") || soru.includes("ne kadar"))) {
                 let caylar = urunler.filter(u => u.kat === "cay"); let cevap = "<b>Canlı Çay Listesi:</b><br>";
                 caylar.forEach(c => cevap += `- ${c.ad}: <b>${Math.round(c.fiyat * kur)} ${simge}</b> (Stok: ${c.stok})<br>`); return cevap;
@@ -1099,7 +1104,7 @@
                 let findiklar = urunler.filter(u => u.kat === "findik"); let cevap = "<b>Canlı Fındık Listesi:</b><br>";
                 findiklar.forEach(f => cevap += `- ${f.ad}: <b>${Math.round(f.fiyat * kur)} ${simge}</b> (Stok: ${f.stok})<br>`); return cevap;
             }
-            return "Şu an anlayamadım hemşerim. Ama çay veya fındık fiyatlarını sorarsan stoklarıyla birlikte canlı söylerim!";
+            return "Şu an anlayamadım hemşerim. Çay veya fındık fiyatlarını sorarsan anlık canlı tablodan bakıp söylerim!";
         }
 
         window.onload = function() { vitrinBas(); geriSayimBaslat(); karisimHesapla(); fomoMotoru(); };
