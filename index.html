@@ -97,11 +97,11 @@
         .kategori-nav { background-color: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.02); padding: 12px 40px; display: flex; gap: 30px; font-weight: 600; }
         .kategori-nav a { color: var(--yazi-koyu); text-decoration: none; }
 
-        /* 🌟 YENİ NESİL SAF TRABZON & OF VURGULU BANNER */
+        /* 🌿 📸 YENİ ÇAY VE FINDIK GÖRSELLİ PREMIUM BANNER ALANI */
         .magaza-banner {
-            background: linear-gradient(135deg, rgba(10, 61, 32, 0.95), rgba(4, 34, 17, 0.85)), url('https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            background: linear-gradient(135deg, rgba(10, 61, 32, 0.92), rgba(4, 34, 17, 0.8)), url('https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
             color: white;
-            padding: 60px 40px;
+            padding: 65px 40px;
             margin: 20px 40px;
             border-radius: 12px;
             box-shadow: 0 6px 20px rgba(10, 61, 32, 0.15);
@@ -178,7 +178,7 @@
         .kart-yorum-formu select { font-size: 11px; padding: 4px; margin-bottom: 4px; width: 100%; box-sizing: border-box; }
         .kart-yorum-formu button { background: var(--kurumsal-yesil); color: white; border: none; font-size: 11px; padding: 4px 8px; border-radius: 2px; cursor: pointer; width: 100%; }
 
-        .sepet-penceresi, .admin-penceresi { position: fixed; top: 0; right: -100%; width: 440px; height: 100%; background: white; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 1000; transition: right 0.3s ease; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
+        .sepet-penceresi, .admin-penceresi { position: fixed; top: 0; right: -100%; width: 460px; height: 100%; background: white; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 1000; transition: right 0.3s ease; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
         .sepet-penceresi.acik, .admin-penceresi.acik { right: 0; }
         .sepet-ust { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 15px; }
         .sepet-kapat { font-size: 24px; cursor: pointer; color: var(--yazi-acik); }
@@ -222,7 +222,6 @@
         .secure-kutu h3 { margin-top: 0; color: #1e3c72; }
         .secure-kutu input { width: 100%; padding: 10px; font-size: 16px; text-align: center; margin: 15px 0; border: 1px solid #ccc; border-radius: 4px; }
 
-        /* 🛠️ FOMO BİLDİRİM MOTORU (AÇILIR KAPANIR VE MOBİL SIFIR HATALI) */
         .fomo-bildirim {
             position: fixed;
             bottom: 110px;
@@ -239,10 +238,10 @@
             border-left: 4px solid var(--canli-kirmizi);
             font-size: 12px;
             box-sizing: border-box;
-            transition: transform 0.5s ease-in-out; /* Kaydırma kilitlenmesini engellemek için transform motoruna geçildi */
+            transition: transform 0.5s ease-in-out;
         }
         .fomo-bildirim.goster {
-            transform: translateX(-410px); /* Sağdan kusursuzca içeri fırlatır */
+            transform: translateX(-410px);
         }
         .fomo-bildirim i { font-size: 20px; color: var(--canli-kirmizi); }
 
@@ -334,10 +333,10 @@
         <a href="#" onclick="kategoriFiltre('gurme')">Yöresel Bal & Gurme</a>
     </div>
 
-    <!-- 🌟 SAF TRABZON & OF VURGULU BANNER ALANI (AKÇAABAT KALDIRILDI) -->
+    <!-- 🌟 %100 SAF TRABZON VE OF VURGULU, ÇAY VE FINDIK GÖRSELLİ YENİ BANNER -->
     <section class="magaza-banner">
         <h1 id="txtBannerTitle">Doğrudan Trabzon Of Vadisi'nden Kapınıza</h1>
-        <p id="txtBannerDesc">Of'un meşhur dik yamaçlarından toplanan Mayıs ayı hasadı çaylarımızı ve yeşilin en saf tonuyla beslenen taptaze fındıklarımızı, hiçbir aracı olmadan doğrudan kendi memleketimizden sofranıza ulaştırıyoruz.</p>
+        <p id="txtBannerDesc">Of'un bulutlarla kaplı dik yamaçlarından özenle seçilen ilk sürgün Mayıs çaylarını ve Trabzon topraklarının can verdiği en dolgun, taptaze fındıkları hiçbir aracı olmadan doğrudan kendi memleketimizden sofranıza ulaştırıyoruz.</p>
         <div class="banner-rozetler">
             <div class="banner-rozet"><i class="fa-solid fa-leaf"></i> %100 Of Hasadı</div>
             <div class="banner-rozet"><i class="fa-solid fa-jar"></i> Karadeniz Doğallığı</div>
@@ -529,7 +528,7 @@
         </div>
     </div>
 
-    <!-- 🔔 FOMO BİLDİRİM BALONU (YENİLENMİŞ YUMUŞAK SÜRÜM) -->
+    <!-- 🔔 FOMO BİLDİRİM BALONU -->
     <div class="fomo-bildirim" id="fomoBildirimKutusu">
         <i class="fa-solid fa-bag-shopping"></i>
         <div id="fomoMetin"><b>Ahmet K. (Ankara)</b> az önce fındık sipariş verdi!</div>
@@ -590,7 +589,7 @@
             ar: {
                 topBanner: "<i class='fa-solid fa-truck'></i> شحن مجاني للطلبات الأكثر من 50 دولار!", promo: "<i class='fa-solid fa-fire'></i> عرض الحصاد: خصم خاص اليوم على جميع منتجات البندق!",
                 kalanSure: "الوقت المتبقي:", bannerTitle: "مباشرة من وادي أوف في طرابزون إلى باب منزلك", bannerDesc: "نحن نقدم لك الشاي الأسود الذي يتم حصاده في شهر مايو من منحدرات أوف الشهيرة والشديدة والبندق الطازج المغذى بأنقى ظلال اللون الأخضر، مباشرة من مسقط رأسنا إلى مائدتك دون أي وسطاء.",
-                mixTitle: "اصنع مزيج الشاي الخاص بك", mixDesc: "قم بتحريك الأشرطة أدناه لإنشاء عبوة شاي طرابزون المخصصة بوزن 1 كجم!",
+                mixTitle: "اصنع مزيج الشاي الخاص بك", mixDesc: "قم بتحريك الأشرطة أدناه لإنشاء عبوة şاي طرابزون المخصصة بوزن 1 كجم!",
                 mixCay1: "شاي مايو النبتة الأولى", mixCay2: "شاي أوف التينباش الأسود", mixTotal: "الوقت الكلي:", mixPrice: "السعر:", mixAdd: "أضf المزيج إلى السلة",
                 sideCatTitle: "الفئات", cartTitle: "سلة التسوق الخاصة بك", formTitle: "معلومات الشحن والتوصيل", cartTotalLabel: "المجموع:", aiTitle: "61Bazaar المساعد الذكي",
                 aiWelcome: "أهلاً بك يا أخي! أنا مساعد متجر 61Bazaar الذكي. يمكنك الاستفسار عن الأسعار الحالية أو الكوبونات.",
@@ -704,8 +703,6 @@
             }
         }
 
-        function puanFiltre(puan) { vitrinBas(puan); }
-
         function toggleHediyeNotu() {
             let chk = document.getElementById('chkHediyePaketi').checked;
             document.getElementById('txtHediyeNotu').style.display = chk ? "block" : "none";
@@ -767,7 +764,6 @@
             alert("Özel çay harmanınız sepete eklendi!");
         }
 
-        /* 🛠️ YENİLENMİŞ FOMO MOTORU (MOBİLDE SIKIŞMA SORUNU GİDERİLDİ) */
         function fomoMotoru() {
             const isimler = ["Ahmet K. (Ankara)", "Mustafa Y. (İstanbul)", "Mehmet B. (Trabzon)", "Fatma S. (Ankara)", "Oğuz B. (Ankara)"];
             const urunIsimleri = ["2 KG Çıtır Kavrulmuş Fındık", "1 KG Mayıs Filiz Çayı", "850G Süzme Yayla Balı"];
@@ -777,15 +773,10 @@
                 let rIsim = isimler[Math.floor(Math.random() * isimler.length)];
                 let rUrun = urunIsimleri[Math.floor(Math.random() * urunIsimleri.length)];
                 let rZaman = zamanlar[Math.floor(Math.random() * zamanlar.length)];
-                
                 document.getElementById('fomoMetin').innerHTML = `<b>${rIsim}</b> ${rZaman} <b>${rUrun}</b> sipariş verdi!`;
                 let kutu = document.getElementById('fomoBildirimKutusu'); 
-                
-                kutu.classList.add('goster'); // Transform ile açılır
-
-                setTimeout(() => { 
-                    kutu.classList.remove('goster'); // 5 saniye sonra transform ile kapanır
-                }, 5000);
+                kutu.classList.add('goster');
+                setTimeout(() => { kutu.classList.remove('goster'); }, 5000);
             }, 22000);
         }
 
@@ -936,7 +927,7 @@
             let il = document.getElementById('krgIl').value;
             let ilce = document.getElementById('krgIlce').value.trim();
             let adres = document.getElementById('krgAdres').value.trim();
-            if (!adSoyad || !telefon || !adres || !il) { alert("Lütfen kargo teslimat alanlarını eksiksiz doldurun hemşerim!"); return; }
+            if (!adSoyad || !telefon || !adres || !il) { alert("Lütfen kargo teslimat alanlarını eksikosiz doldurun hemşerim!"); return; }
 
             if(seciliOdemeYontemi === 'KART') {
                 let kNo = document.getElementById('kartNo').value.trim();
@@ -1069,7 +1060,7 @@
             let yorum = document.getElementById('admUrunYorum').value || "Yeni mahsulümüz."; let gorsel = document.getElementById('admUrunGorsel').value || 'urunler/mayis-cayi.jpg';
             if (!ad || !fiyat) return;
             let yeniId = urunler.length > 0 ? urunler[urunler.length - 1].id + 1 : 1;
-            urunler.push({ id: yeniId, ad: ad, fiyat: fiyat, kat: kat, gorsel: gorsel, yorum: yorum, puan: puan, stok: stok });
+            urunler.push({ id: yeniId, ad: ad, fiyat: fiyat, kat: kat, gorsel: gorsel, geom: yorum, puan: puan, stok: stok });
             vitrinBas(); adminMevcutUrunleriListele(); alert("Ürün ve stok başarıyla eklendi!");
         }
 
