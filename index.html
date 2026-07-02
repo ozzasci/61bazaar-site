@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>61Bazaar | Trabzon Yöresel Ürünler Satış Mağazası</title>
+    <title>61Bazaar | Global Trabzon Yöresel Ürünler Mağazası</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 📊 GRAFİK MOTORU İÇİN CHART.JS ENTEGRASYONU -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --kurumsal-yesil: #0a3d20;
@@ -30,7 +32,24 @@
             padding: 8px 20px;
             text-align: center;
             font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+
+        /* 🌍 4. FİKİR: GLOBAL DİL VE DÖVİZ SEÇİCİ STİLLERİ */
+        .global-seciciler { display: flex; gap: 10px; }
+        .global-seciciler select {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            outline: none;
+            cursor: pointer;
+        }
+        .global-seciciler select option { color: black; }
 
         .indirim-sayac-bandi {
             background-color: var(--canli-kirmizi);
@@ -89,7 +108,6 @@
         }
         .magaza-banner h1 { font-size: 36px; margin: 0 0 10px 0; font-weight: 700; }
 
-        /* 🧮 2. FİKİR: INTERAKTIF KARIŞIM HESAPLAYICI ALANI STİLLERİ */
         .karisim-alani {
             background: white;
             margin: 0 40px 20px 40px;
@@ -126,7 +144,7 @@
         .kart-fiyat { font-size: 18px; font-weight: 700; color: var(--canli-kirmizi); }
         .sepet-ekle-btn { background-color: var(--kurumsal-yesil); color: white; border: none; width: 40px; height: 40px; border-radius: 4px; cursor: pointer; font-size: 16px; }
 
-        .sepet-penceresi, .admin-penceresi { position: fixed; top: 0; right: -100%; width: 420px; height: 100%; background: white; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 1000; transition: right 0.3s ease; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
+        .sepet-penceresi, .admin-penceresi { position: fixed; top: 0; right: -100%; width: 440px; height: 100%; background: white; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 1000; transition: right 0.3s ease; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
         .sepet-penceresi.acik, .admin-penceresi.acik { right: 0; }
         .sepet-ust { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 15px; }
         .sepet-kapat { font-size: 24px; cursor: pointer; color: var(--yazi-acik); }
@@ -138,7 +156,6 @@
         .form-satir { display: flex; gap: 10px; margin-bottom: 8px; }
         .form-satir input, .kargo-formu-alani textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; box-sizing: border-box; }
 
-        /* 🎫 3. FİKİR: SEPET İÇİ KUPON ALANI STİLLERİ */
         .kupon-alani { display: flex; gap: 10px; margin: 15px 0; background: #fffcf2; padding: 10px; border: 1px dashed var(--altin-sarisi); border-radius: 4px; }
         .kupon-alani input { flex-grow: 1; padding: 6px; border: 1px solid #ccc; border-radius: 4px; text-transform: uppercase; }
         .kupon-alani button { background: var(--kurumsal-yesil); color: white; border: none; padding: 0 10px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold; }
@@ -152,6 +169,27 @@
         .resim-yukle-btn { background-color: #f0f2f5; border: 1px dashed #ccc; padding: 10px; text-align: center; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 600; display: block; margin-top: 5px; }
 
         .admin-urun-liste-satir { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; font-size: 13px; }
+
+        /* 🔔 1. FİKİR: CANLI SATIŞ BİLDİRİMLERİ (FOMO EFFAKTİ) STİLİ */
+        .fomo-bildirim {
+            position: fixed;
+            bottom: 110px;
+            right: -350px;
+            width: 300px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 998;
+            transition: right 0.5s ease-in-out;
+            border-left: 4px solid var(--canli-kirmizi);
+            font-size: 12px;
+        }
+        .fomo-bildirim.goster { right: 30px; }
+        .fomo-bildirim i { font-size: 20px; color: var(--canli-kirmizi); }
 
         /* Robot Asistan */
         .ai-buton { position: fixed; bottom: 30px; left: 30px; background-color: var(--kurumsal-yesil); color: white; border-radius: 50px; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; font-size: 26px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 999; cursor: pointer; }
@@ -185,23 +223,33 @@
             .ana-govde { grid-template-columns: 1fr; padding: 10px 20px; }
             .yan-panel { display: none; }
             .urun-izgara { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
-            .caykur-urun-kart img { height: 130px; padding: 5px; }
-            .kart-urun-adi { font-size: 13px; height: 36px; }
-            .kart-yorum-alani { font-size: 10px; min-height: auto; }
             .sepet-penceresi, .admin-penceresi { width: 100%; right: -100%; }
-            .ai-penceresi { width: calc(100% - 40px); right: 20px; left: 20px; }
+            .fomo-bildirim { width: calc(100% - 40px); left: 20px; bottom: 100px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- ÜST BAR: 🌍 DİL VE DÖVİZ SEÇİCİ ENTEGRELİ -->
     <div class="top-bar">
-        <i class="fa-solid fa-truck"></i> 1500 TL ve Üzeri Alışverişlerinizde Kargo Ücretsiz! | Doğrudan Trabzon'dan Teslimat
+        <span id="txtTopBanner"><i class="fa-solid fa-truck"></i> 1500 TL ve Üzeri Alışverişlerinizde Kargo Ücretsiz!</span>
+        <div class="global-seciciler">
+            <select id="selDil" onchange="dilDegistir()">
+                <option value="tr">TR 🇹🇷</option>
+                <option value="en">EN 🇬🇧</option>
+                <option value="ar">AR 🇸🇦</option>
+            </select>
+            <select id="selDoviz" onchange="dovizDegistir()">
+                <option value="TRY">₺ (TRY)</option>
+                <option value="USD">$ (USD)</option>
+                <option value="EUR">€ (EUR)</option>
+            </select>
+        </div>
     </div>
 
     <div class="indirim-sayac-bandi">
-        <span><i class="fa-solid fa-fire"></i> SÜPER MAHSUL FIRSATI: Bugün Tüm Fındık Çeşitlerinde Geçerli Ekstra İndirim!</span>
-        <div>Kalan Süre: <span id="geriSayim">02:45:00</span></div>
+        <span id="txtPromoBanner"><i class="fa-solid fa-fire"></i> SÜPER MAHSUL FIRSATI: Bugün Tüm Fındık Çeşitlerinde Geçerli Ekstra İndirim!</span>
+        <div><span id="txtKalanSure">Kalan Süre:</span> <span id="geriSayim">02:45:00</span></div>
     </div>
 
     <header>
@@ -211,7 +259,7 @@
         </div>
         
         <div class="arama-bari">
-            <input type="text" id="aramaInput" onkeyup="urunArama()" placeholder="Mağazada çay veya fındık arayın...">
+            <input type="text" id="aramaInput" onkeyup="urunArama()" placeholder="Mağazada arama yapın...">
             <i class="fa-solid fa-magnifying-glass"></i>
         </div>
 
@@ -223,7 +271,7 @@
         </div>
     </header>
 
-    <div class="kategori-nav">
+    <div class="kategori-nav" id="kategoriNavLinks">
         <a href="#" onclick="kategoriFiltre('hepsi')">Ana Sayfa</a>
         <a href="#" onclick="kategoriFiltre('cay')">Trabzon Çayları</a>
         <a href="#" onclick="kategoriFiltre('findik')">Doğal Fındıklar</a>
@@ -231,34 +279,34 @@
     </div>
 
     <section class="magaza-banner">
-        <h1>61Bazaar Gelişmiş Gurme Mağazası</h1>
-        <p>Trabzon Of ve Akçaabat bahçelerimizden kapınıza. Kupon, Karışım Hesaplayıcı ve Canlı Asistan Modülleri Aktiftir.</p>
+        <h1 id="txtBannerTitle">61Bazaar Global Gurme Mağazası</h1>
+        <p id="txtBannerDesc">Trabzon Of ve Akçaabat bahçelerimizden kapınıza. Dil, Döviz, Grafik Analiz ve FOMO Motoru Aktiftir.</p>
     </section>
 
-    <!-- 🧮 2. FİKİR: INTERAKTIF KARIŞIM / PAKET HESAPLAYICI ARALÜZÜ -->
+    <!-- KARIŞIM HESAPLAYICI -->
     <section class="karisim-alani">
-        <h3><i class="fa-solid fa-blender" style="color:var(--kurumsal-yesil)"></i> Kendine Özel Trabzon Çay Harmanını Yarat</h3>
-        <p style="font-size:13px;color:var(--yazi-acik);margin-top:-5px;">Aşağıdaki çubukları kaydırarak dilediğin çay türünden kendi özel 1 KG (1000G) harman paketini oluşturabilirsin!</p>
+        <h3 id="txtMixTitle"><i class="fa-solid fa-blender"></i> Kendine Özel Trabzon Çay Harmanını Yarat</h3>
+        <p id="txtMixDesc" style="font-size:13px;color:var(--yazi-acik);margin-top:-5px;">Aşağıdaki çubukları kaydırarak dilediğin çay türünden kendi özel 1 KG (1000G) harman paketini oluşturabilirsin!</p>
         <div class="karisim-grid">
             <div class="karisim-kontrol">
-                <label>Mayıs İlk Sürgün Filiz Çayı: <span id="lblCay1">500</span>G</label>
+                <label id="txtMixCay1">Mayıs İlk Sürgün Filiz Çayı</label>: <span id="lblCay1">500</span>G
                 <input type="range" id="rngCay1" min="0" max="1000" value="500" oninput="karisimHesapla()">
             </div>
             <div class="karisim-kontrol">
-                <label>Of Altınbaş Siyah Çay: <span id="lblCay2">500</span>G</label>
+                <label id="txtMixCay2">Of Hasadı Altınbaş Siyah Çay</label>: <span id="lblCay2">500</span>G
                 <input type="range" id="rngCay2" min="0" max="1000" value="500" oninput="karisimHesapla()">
             </div>
         </div>
         <div class="karisim-sonuc">
-            <div>Toplam Ağırlık: <span id="karisimToplamGram">1000</span>G (1 KG) | Fiyat: <span id="karisimFiyat">235</span> TL</div>
-            <button class="sepet-ekle-btn" style="width:auto;padding:0 15px;font-size:13px;font-weight:bold;" onclick="karisimSepeteEkle()"><i class="fa-solid fa-plus"></i> Özel Harmanı Sepete Ekle</button>
+            <div><span id="txtMixTotal">Toplam Ağırlık:</span> <span id="karisimToplamGram">1000</span>G | <span id="txtMixPrice">Fiyat:</span> <span id="karisimFiyat">235</span> <span class="para-birimi">TL</span></div>
+            <button class="sepet-ekle-btn" id="btnMixAdd" style="width:auto;padding:0 15px;font-size:13px;font-weight:bold;" onclick="karisimSepeteEkle()"><i class="fa-solid fa-plus"></i> Özel Harmanı Sepete Ekle</button>
         </div>
     </section>
 
     <main class="ana-govde">
         <aside class="yan-panel">
-            <h3>Kategoriler</h3>
-            <ul>
+            <h3 id="txtSideCatTitle">Kategoriler</h3>
+            <ul id="txtSideCatList">
                 <li onclick="kategoriFiltre('hepsi')">Tüm Ürünler</li>
                 <li onclick="kategoriFiltre('cay')">Mayıs Hasadı Çaylar</li>
                 <li onclick="kategoriFiltre('findik')">Çiğ & Kavrulmuş Fındık</li>
@@ -274,13 +322,13 @@
     <!-- SEPET PENCERESİ -->
     <div class="sepet-penceresi" id="sepetPenceresi">
         <div class="sepet-ust">
-            <h3>Alışveriş Sepetiniz</h3>
+            <h3 id="txtCartTitle">Alışveriş Sepetiniz</h3>
             <span class="sepet-kapat" onclick="sepetiAcKapat()">&times;</span>
         </div>
         <div class="sepet-elemanlar" id="sepetIcerik"></div>
         
         <div class="kargo-formu-alani" id="kargoFormuAlani" style="display:none;">
-            <h4><i class="fa-solid fa-truck-fast"></i> Kargo Teslimat Bilgileri</h4>
+            <h4 id="txtFormTitle"><i class="fa-solid fa-truck-fast"></i> Kargo Teslimat Bilgileri</h4>
             <div class="form-satir">
                 <input type="text" id="krgAd" placeholder="Adınız Soyadınız">
                 <input type="text" id="krgTel" placeholder="Telefon Numaranız">
@@ -291,125 +339,140 @@
             </div>
             <textarea id="krgAdres" rows="2" placeholder="Açık Adresiniz..."></textarea>
             
-            <!-- 🎫 3. FİKİR: SEPET İÇİ KUPON SİSTEMİ GİRİŞİ -->
             <div class="kupon-alani">
-                <input type="text" id="kuponKoduGirdi" placeholder="İNDİRİM KUPONU GİR">
-                <button onclick="kuponUygula()">Uygula</button>
+                <input type="text" id="kuponKoduGirdi" placeholder="KUPON GİR">
+                <button onclick="kuponUygula()" id="btnKuponApply">Uygula</button>
             </div>
             <div id="kuponMesaj" style="font-size:12px;font-weight:bold;color:green;margin-top:-10px;margin-bottom:10px;display:none;"></div>
         </div>
 
         <div class="sepet-toplam-alan">
-            <span>Toplam:</span>
+            <span id="txtCartTotalLabel">Toplam:</span>
             <span id="sepetToplam">0 TL</span>
         </div>
         <a href="#" id="whatsappSiparisBtn" class="siparis-tamamla-btn" target="_blank" onclick="siparisGonder()">Siparişi WhatsApp ile Tamamla</a>
     </div>
 
-    <!-- 🛠 GELİŞMİŞ ADMİN PANELİ (MUHASEBE & KUPON YÖNETİMİ ENTEGRELİ) -->
+    <!-- 🛠 3. FİKİR: GELİŞMİŞ GRAFİKSEL MUHASEBE ANALİZLİ YÖNETİCİ PANELİ -->
     <div class="admin-penceresi" id="adminPenceresi">
         <div class="sepet-ust">
-            <h3>61Bazaar Mağaza Yönetimi</h3>
+            <h3>61Bazaar Global Yönetim Paneli</h3>
             <span class="sepet-kapat" onclick="adminPaneliKapat()">&times;</span>
         </div>
         <div class="admin-elemanlar">
-            <button class="admin-kaydet-btn" style="background:#023e8a;width:100%;margin-bottom:10px;" onclick="veritabaniYedekle()"><i class="fa-solid fa-download"></i> Veritabanını Yedekle</button>
-            <button class="admin-kaydet-btn" style="background:#7209b7;width:100%;margin-bottom:20px;" onclick="document.getElementById('yedekDosyaGirdi').click()"><i class="fa-solid fa-upload"></i> Yedekten Geri Yükle</button>
-            <input type="file" id="yedekDosyaGirdi" style="display:none;" onchange="veritabaniYukle(event)">
             
-            <!-- 📋 4. FİKİR: ADMIN PANELI GERÇEK ZAMANLI SİPARİŞ DEFTERİ / MUHASEBE SEKMESİ -->
-            <div style="background:#edf2f7;padding:15px;border-radius:6px;margin-bottom:25px;border:1px solid #cbd5e0;">
+            <!-- 📊 CANLI CİRO VE SATIŞ ANALİZ GRAFİĞİ -->
+            <div style="background:white;padding:15px;border-radius:6px;margin-bottom:20px;border:1px solid #e0e0e0;">
+                <h4 style="margin:0 0 10px 0;color:var(--kurumsal-yesil);"><i class="fa-solid fa-chart-line"></i> Grafiksel Aylık Muhasebe Analizi</h4>
+                <canvas id="ciroGrafik" width="100" height="60"></canvas>
+            </div>
+
+            <div style="background:#edf2f7;padding:15px;border-radius:6px;margin-bottom:20px;border:1px solid #cbd5e0;">
                 <h4 style="margin:0 0 10px 0;color:var(--kurumsal-yesil);"><i class="fa-solid fa-book"></i> Gelen Sipariş Kayıt Defteri</h4>
-                <div id="adminSiparisDefteri" style="max-height:180px;overflow-y:auto;font-size:12px;background:white;padding:5px;border-radius:4px;border:1px solid #ccc;"></div>
+                <div id="adminSiparisDefteri" style="max-height:120px;overflow-y:auto;font-size:11px;background:white;padding:5px;border-radius:4px;border:1px solid #ccc;"></div>
                 <button onclick="siparisDefteriniTemizle()" style="margin-top:8px;font-size:11px;background:var(--canli-kirmizi);color:white;border:none;padding:4px 8px;border-radius:3px;cursor:pointer;">Defteri Temizle</button>
             </div>
 
-            <!-- 🎫 3. FİKİR: ADMIN PANELİ AKTİF KUPON TANIMLAMA SEKMESİ -->
-            <div style="background:#fff9db;padding:15px;border-radius:6px;margin-bottom:25px;border:1px solid #fab005;">
-                <h4 style="margin:0 0 10px 0;color:#96320a;"><i class="fa-solid fa-ticket"></i> Aktif İndirim Kuponu Tanımla</h4>
-                <div class="admin-form-grup" style="margin-bottom:8px;">
-                    <input type="text" id="admKuponKod" placeholder="Örn: TRABZON61" style="padding:6px;font-size:13px;width:100%;box-sizing:border-box;">
-                </div>
-                <div class="admin-form-grup" style="margin-bottom:8px;">
-                    <input type="number" id="admKuponYuzde" placeholder="İndirim Yüzdesi (Örn: 10)" style="padding:6px;font-size:13px;width:100%;box-sizing:border-box;">
-                </div>
-                <button onclick="adminKuponKaydet()" style="width:100%;background:#e67e22;color:white;border:none;padding:8px;font-weight:bold;border-radius:4px;cursor:pointer;">Kuponu Sistemde Aktif Et</button>
+            <div style="background:#fff9db;padding:15px;border-radius:6px;margin-bottom:20px;border:1px solid #fab005;">
+                <h4><i class="fa-solid fa-ticket"></i> İndirim Kuponu Yönetimi</h4>
+                <input type="text" id="admKuponKod" placeholder="KUPON KODU" style="padding:6px;width:100%;margin-bottom:5px;box-sizing:border-box;">
+                <input type="number" id="admKuponYuzde" placeholder="İndirim %" style="padding:6px;width:100%;margin-bottom:5px;box-sizing:border-box;">
+                <button onclick="adminKuponKaydet()" style="width:100%;background:#e67e22;color:white;border:none;padding:6px;font-weight:bold;border-radius:4px;cursor:pointer;">Kuponu Aktif Et</button>
                 <div id="admAktifKuponMetni" style="font-size:11px;font-weight:bold;margin-top:5px;color:#d9480f;"></div>
             </div>
 
             <h4>Yeni Ürün Ekle</h4>
-            <div class="admin-form-grup">
-                <label>Ürün Adı</label>
-                <input type="text" id="admUrunAd" placeholder="Örn: Of Siyah Çayı (1 KG)">
-            </div>
+            <div class="admin-form-grup"><label>Ürün Adı (TR)</label><input type="text" id="admUrunAd" placeholder="Örn: Of Siyah Çayı"></div>
             <div class="admin-form-grup">
                 <label>Kategori</label>
-                <select id="admUrunKat">
-                    <option value="cay">Çay</option>
-                    <option value="findik">Fındık</option>
-                    <option value="gurme">Gurme & Bal</option>
-                </select>
+                <select id="admUrunKat"><option value="cay">Çay</option><option value="findik">Fındık</option><option value="gurme">Gurme & Bal</option></select>
             </div>
-            <div class="admin-form-grup">
-                <label>Fiyat (Sadece Sayı)</label>
-                <input type="number" id="admUrunFiyat" placeholder="Örn: 240">
-            </div>
-            <div class="admin-form-grup">
-                <label>Örnek Vitrin Müşteri Yorumu (İsteğe Bağlı)</label>
-                <input type="text" id="admUrunYorum" placeholder="Örn: Harika çay, çok beğendik - Hasan M.">
-            </div>
+            <div class="admin-form-grup"><label>Fiyat (Sadece Sayı - ₺ bazında)</label><input type="number" id="admUrunFiyat" placeholder="Örn: 240"></div>
+            <div class="admin-form-grup"><label>Müşteri Yorumu</label><input type="text" id="admUrunYorum" placeholder="Örn: Çok beğendik."></div>
             <div class="admin-form-grup">
                 <label>Ürün Fotoğrafı</label>
-                <input type="text" id="admUrunGorsel" placeholder="Fotoğraf linki otomatik doldurulur..." readonly style="background:#f0f2f5;">
-                <label class="resim-yukle-btn" id="yuklemeEtiketi">
-                    <i class="fa-solid fa-image"></i> Fotoğraf Seç ve Yükle
-                    <input type="file" id="admResimDosya" accept="image/*" style="display:none;" onchange="adminResimYukle(event)">
-                </label>
+                <input type="text" id="admUrunGorsel" placeholder="Görsel linki..." readonly style="background:#f0f2f5;">
+                <label class="resim-yukle-btn" id="yuklemeEtiketi"><i class="fa-solid fa-image"></i> Fotoğraf Seç ve Yükle<input type="file" id="admResimDosya" accept="image/*" style="display:none;" onchange="adminResimYukle(event)"></label>
             </div>
-            
             <button class="admin-kaydet-btn" style="width:100%;" onclick="adminUrunEkle()">Ürünü Mağazaya Ekle</button>
-            
-            <hr style="margin:25px 0; border:0; border-top:1px solid #eee;">
+            <hr style="margin:20px 0; border:none; border-top:1px solid #eee;">
             <h4>Mevcut Ürünleri Yönet</h4>
             <div id="adminMevcutUrunler"></div>
         </div>
     </div>
 
-    <!-- YAPAY ZEKA ASİSTANI -->
+    <!-- 🔔 1. FİKİR: CANLI SATIŞ BİLDİRİM BALONU (FOMO MOTORU) -->
+    <div class="fomo-bildirim" id="fomoBildirimKutusu">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <div id="fomoMetin"><b>Ahmet K. (Trabzon)</b> az önce 2 KG Kavrulmuş Fındık siparişi verdi!</div>
+    </div>
+
+    <!-- AI ASİSTAN -->
     <div class="ai-buton" onclick="aiAsistanAcKapat()"><i class="fa-solid fa-robot"></i></div>
     <div class="ai-penceresi" id="aiPenceresi">
-        <div class="ai-ust">
-            <span><i class="fa-solid fa-robot"></i> 61Bazaar Akıllı Asistan</span>
-            <span class="sepet-kapat" onclick="aiAsistanAcKapat()">&times;</span>
-        </div>
+        <div class="ai-ust"><span id="txtAiTitle"><i class="fa-solid fa-robot"></i> 61Bazaar Akıllı Asistan</span><span class="sepet-kapat" onclick="aiAsistanAcKapat()">&times;</span></div>
         <div class="ai-mesajlar" id="aiMesajlar">
-            <div class="mesaj bot">Selamun Aleyküm hemşerim! Ben 61Bazaar akıllı dükkan asistanıyım. Of çaylarımızı, çıtır fındıklarımızı veya taze mahsullerimizi bana sorabilirsin. Nasıl yardımcı olayım?</div>
+            <div class="mesaj bot" id="txtAiWelcome">Selamun Aleyküm hemşerim! Ben 61Bazaar akıllı dükkan asistanıyım. Güncel fiyatlarımızı, ürün çeşitlerimizi canlı veritabanından çekip sana söyleyebilirim. Nasıl yardımcı olayım?</div>
         </div>
         <div class="ai-girdi-alani">
-            <input type="text" id="aiGirdi" placeholder="Çay fiyatları ne kadar?..." onkeypress="if(event.key === 'Enter') aiMesajGonder()">
+            <input type="text" id="aiGirdi" placeholder="Mesajınızı yazın..." onkeypress="if(event.key === 'Enter') aiMesajGonder()">
             <button onclick="aiMesajGonder()"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
     </div>
 
-    <section class="bilgi-bant">
+    <section class="bilgi-bant" id="txtInfoBant">
         <div class="bilgi-kart"><i class="fa-solid fa-shield-halved"></i><div><h4>Güvenli Alışveriş</h4><p>SSL Koruma Altyapısı</p></div></div>
         <div class="bilgi-kart"><i class="fa-solid fa-rotate-left"></i><div><h4>Kolay İade Garantisi</h4><p>Koşulsuz Şartsız İade İmkanı</p></div></div>
         <div class="bilgi-kart"><i class="fa-solid fa-store"></i><div><h4>Doğrudan Üreticiden</h4><p>Aracısız En Taze Yeni Mahsul</p></div></div>
     </section>
 
-    <!-- SABİTLENEN SAHİP HATTI SİPARİŞ NUMARASI -->
+    <!-- WHATSAPP SİPARİŞ BUTONU -->
     <a href="https://wa.me/905309082276?text=Sipariş" class="whatsapp-buton" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 
     <footer>
         <div class="footer-grid">
-            <div class="footer-kolon"><h4>Kurumsal</h4><ul><li>Hakkımızda</li><li>Üretim Tesisimiz</li><li>Bizim Hikayemiz</li></ul></div>
-            <div class="footer-kolon"><h4>İletişim</h4><p>Of / Akçaabat / Trabzon</p><p>info@61bazaar.com.tr</p></div>
+            <div class="footer-kolon"><h4>Kurumsal</h4><ul><li>Hakkımızda</li><li>Üretim Tesisimiz</li></ul></div>
+            <div class="footer-kolon"><h4>İletişim</h4><p>Of / Akçaabat / Trabzon</p></div>
         </div>
-        <div style="text-align:center; margin-top:30px;"><span class="admin-giris-link" onclick="adminGirisTetikle()">[ Yönetici Girişi ]</span></div>
-        <div class="footer-telif">&copy; 2026 61Bazaar Satış Mağazası. Tüm Hakları Saklıdır.</div>
+        <div style="text-align:center; margin-top:20px;"><span class="admin-giris-link" onclick="adminGirisTetikle()">[ Yönetici Girişi ]</span></div>
+        <div class="footer-telif">&copy; 2026 61Bazaar Global Mağazası. Tüm Hakları Saklıdır.</div>
     </footer>
 
     <script>
+        // 🌍 DİL SÖZLÜK VERİLERİ (TR / EN / AR)
+        const diller = {
+            tr: {
+                topBanner: "<i class='fa-solid fa-truck'></i> 1500 TL ve Üzeri Alışverişlerinizde Kargo Ücretsiz!", promo: "<i class='fa-solid fa-fire'></i> SÜPER MAHSUL FIRSATI: Bugün Tüm Fındık Çeşitlerinde Geçerli Ekstra İndirim!",
+                kalanSure: "Kalan Süre:", bannerTitle: "61Bazaar Global Gurme Mağazası", bannerDesc: "Trabzon Of ve Akçaabat bahçelerimizden kapınıza. Dil, Döviz, Grafik Analiz ve FOMO Motoru Aktiftir.",
+                mixTitle: "Kendine Özel Trabzon Çay Harmanını Yarat", mixDesc: "Aşağıdaki çubukları kaydırarak dilediğin çay türünden kendi özel 1 KG harman paketini oluşturabilirsin!",
+                mixCay1: "Mayıs İlk Sürgün Filiz Çayı", mixCay2: "Of Hasadı Altınbaş Siyah Çay", mixTotal: "Toplam Ağırlık:", mixPrice: "Fiyat:", mixAdd: "Özel Harmanı Sepete Ekle",
+                sideCatTitle: "Kategoriler", cartTitle: "Alışveriş Sepetiniz", formTitle: "Kargo Teslimat Bilgileri", cartTotalLabel: "Toplam:", aiTitle: "61Bazaar Akıllı Asistan",
+                aiWelcome: "Selamun Aleyküm hemşerim! Ben 61Bazaar akıllı dükkan asistanıyım. Güncel fiyatlarımızı veya aktif kuponu sorabilirsin.",
+                stokVar: "Stokta Var", sepetBos: "Sepetiniz boş.", aramaPlaceholder: "Mağazada arama yapın...", btnSiparis: "Siparişi WhatsApp ile Tamamla",
+                hHepsi: "Ana Sayfa", hCay: "Trabzon Çayları", hFindik: "Doğal Fındıklar", hGurme: "Yöresel Bal & Gurme"
+            },
+            en: {
+                topBanner: "<i class='fa-solid fa-truck'></i> Free Shipping on orders over $50!", promo: "<i class='fa-solid fa-fire'></i> HARVEST OFFER: Special discount today on all Hazelnut products!",
+                kalanSure: "Remaining Time:", bannerTitle: "61Bazaar Global Gourmet Market", bannerDesc: "From Trabzon's organic fields directly to your door. Multi-Language and Currency active.",
+                mixTitle: "Create Your Custom Black Tea Blend", mixDesc: "Slide the bars below to create your customized 1 KG premium black tea package!",
+                mixCay1: "May First Shoot Sprouts Tea", mixCay2: "Of Harvest Altinbas Black Tea", mixTotal: "Total Weight:", mixPrice: "Price:", mixAdd: "Add Custom Blend to Cart",
+                sideCatTitle: "Categories", cartTitle: "Your Shopping Cart", formTitle: "Shipping & Delivery Information", cartTotalLabel: "Total:", aiTitle: "61Bazaar AI Assistant",
+                aiWelcome: "Hello! I am 61Bazaar smart store assistant. You can ask me about live prices, products or discounts.",
+                stokVar: "In Stock", sepetBos: "Your cart is empty.", aramaPlaceholder: "Search in store...", btnSiparis: "Complete Order via WhatsApp",
+                hHepsi: "Home", hCay: "Black Teas", hFindik: "Hazelnuts", hGurme: "Honey & Gourmet"
+            },
+            ar: {
+                topBanner: "<i class='fa-solid fa-truck'></i> شحن مجاني للطلبات الأكثر من 50 دولار!", promo: "<i class='fa-solid fa-fire'></i> عرض الحصاد: خصم خاص اليوم على جميع منتجات البندق!",
+                kalanSure: "الوقت المتبقي:", bannerTitle: "61Bazaar متجر غرميه العالمي", bannerDesc: "من مزارع طرابزون العضوية مباشرة إلى باب منزلك. يدعم اللغات والعملات المتعددة.",
+                mixTitle: "اصنع مزيج الشاي الخاص بك", mixDesc: "قم بتحريك الأشرطة أدناه لإنشاء عبوة شاي طرابزون المخصصة بوزن 1 كجم!",
+                mixCay1: "شاي مايو النبتة الأولى", mixCay2: "شاي أوف التينباش الأسود", mixTotal: "الوزن الكلي:", mixPrice: "السعر:", mixAdd: "أضف المزيج إلى السلة",
+                sideCatTitle: "الفئات", cartTitle: "سلة التسوق الخاصة بك", formTitle: "معلومات الشحن والتوصيل", cartTotalLabel: "المجموع:", aiTitle: "61Bazaar المساعد الذكي",
+                aiWelcome: "أهلاً بك يا أخي! أنا مساعد متجر 61Bazaar الذكي. يمكنك الاستفسار عن الأسعار الحالية أو الكوبونات.",
+                stokVar: "متوفر في المخزون", sepetBos: "سلتك فارغة.", aramaPlaceholder: "ابحث في المتجر...", btnSiparis: "إتمام الطلب عبر الواتساب",
+                hHepsi: "الصفحة الرئيسية", hCay: "شاي طرابزون", hFindik: "بندق طبيعي", hGurme: "عسل محلي"
+            }
+        };
+
         const varsayilanUrunler = [
             { id: 1, ad: "Mayıs İlk Sürgün Filiz Çayı (1000 G)", fiyat: 240, kat: "cay", gorsel: "urunler/mayis-cayi.jpg", yorum: "Kokusu ve demi tam istediğim gibi, taptaze. - Kerem A." },
             { id: 2, ad: "Of Hasadı Altınbaş Siyah Çay (1000 G)", fiyat: 230, kat: "cay", gorsel: "urunler/of-cayi.jpg", yorum: "Halis mulis Of çayı, burukluğu harika. - Merve Y." },
@@ -425,15 +488,27 @@
         let urunler = JSON.parse(localStorage.getItem('61bazaar_db')) || varsayilanUrunler;
         let sepet = [];
         let siparisler = JSON.parse(localStorage.getItem('61bazaar_orders')) || [];
-        
-        // 🎫 KUPON DEĞİŞKENLERİ
         let aktifKupon = JSON.parse(localStorage.getItem('61bazaar_coupon')) || { kod: "TRABZON61", yuzde: 10 };
         let uygulananIndirimYuzdesi = 0;
+
+        // DÖVİZ KURLARI (SABİT ÇARPAN MOTORU)
+        let gecerliDoviz = "TRY";
+        let dovizKurlari = { TRY: 1, USD: 0.030, EUR: 0.028 };
+        let dovizSimgeleri = { TRY: "TL", USD: "$", EUR: "€" };
+        let gecerliDil = "tr";
+
+        // 📊 CHART.JS GRAFİK TANIMLAMASI
+        let ciroGrafikObjesi = null;
 
         function vitrinBas() {
             let vitrin = document.getElementById('urunVitrin');
             let html = '';
+            let kur = dovizKurlari[gecerliDoviz];
+            let simge = dovizSimgeleri[gecerliDoviz];
+            let d = diller[gecerliDil];
+
             urunler.forEach(urun => {
+                let donusturulmusFiyat = Math.round(urun.fiyat * kur);
                 html += `
                     <div class="caykur-urun-kart" data-isim="${urun.ad.toLowerCase()}" data-kat="${urun.kat}">
                         <img src="${urun.gorsel}" onerror="this.src='https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=400&q=80'">
@@ -441,11 +516,11 @@
                             <h3 class="kart-urun-adi">${urun.ad}</h3>
                             <div class="kart-yorum-alani">
                                 <div class="kart-yildizlar"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                                <i>"${urun.yorum || 'Bu mahsulümüz çok beğenildi, taze paketlendi.'}"</i>
+                                <i>"${urun.yorum || 'Taze mahsul paketlendi.'}"</i>
                             </div>
-                            <div class="kart-stok-durum"><i class="fa-solid fa-check"></i> Stokta Var</div>
+                            <div class="kart-stok-durum"><i class="fa-solid fa-check"></i> ${d.stokVar}</div>
                             <div class="kart-fiyat-satir">
-                                <span class="kart-fiyat">${urun.fiyat} TL</span>
+                                <span class="kart-fiyat">${donusturulmusFiyat} ${simge}</span>
                                 <button class="sepet-ekle-btn" onclick="sepeteEkle('${urun.ad}', ${urun.fiyat})"><i class="fa-solid fa-cart-plus"></i></button>
                             </div>
                         </div>
@@ -454,51 +529,118 @@
             });
             vitrin.innerHTML = html;
             localStorage.setItem('61bazaar_db', JSON.stringify(urunler));
-            document.getElementById('admAktifKuponMetni').innerText = `Şu an aktif kupon: ${aktifKupon.kod} (%${aktifKupon.yuzde})`;
+            document.getElementById('admAktifKuponMetni').innerText = `Aktif kupon: ${aktifKupon.kod} (%${aktifKupon.yuzde})`;
         }
 
-        // 🧮 2. FİKİR MOTORU: KARIŞIM HESAPLAMA SİSTEMİ
+        // 🌍 DİL DEĞİŞTİRME FONKSİYONU
+        function dilDegistir() {
+            gecerliDil = document.getElementById('selDil').value;
+            let d = diller[gecerliDil];
+            
+            document.getElementById('txtTopBanner').innerHTML = d.topBanner;
+            document.getElementById('txtPromoBanner').innerHTML = d.promo;
+            document.getElementById('txtKalanSure').innerText = d.kalanSure;
+            document.getElementById('txtBannerTitle').innerText = d.bannerTitle;
+            document.getElementById('txtBannerDesc').innerText = d.bannerDesc;
+            document.getElementById('txtMixTitle').innerText = d.mixTitle;
+            document.getElementById('txtMixDesc').innerText = d.mixDesc;
+            document.getElementById('txtMixCay1').innerText = d.mixCay1;
+            document.getElementById('txtMixCay2').innerText = d.mixCay2;
+            document.getElementById('txtMixTotal').innerText = d.mixTotal;
+            document.getElementById('txtMixPrice').innerText = d.mixPrice;
+            document.getElementById('btnMixAdd').innerHTML = `<i class="fa-solid fa-plus"></i> ${d.mixAdd}`;
+            document.getElementById('txtSideCatTitle').innerText = d.sideCatTitle;
+            document.getElementById('txtCartTitle').innerText = d.cartTitle;
+            document.getElementById('txtFormTitle').innerHTML = `<i class="fa-solid fa-truck-fast"></i> ${d.formTitle}`;
+            document.getElementById('txtCartTotalLabel').innerText = d.cartTotalLabel;
+            document.getElementById('txtAiTitle').innerHTML = `<i class="fa-solid fa-robot"></i> ${d.aiTitle}`;
+            document.getElementById('txtAiWelcome').innerText = d.aiWelcome;
+            document.getElementById('aramaInput').placeholder = d.aramaPlaceholder;
+            document.getElementById('whatsappSiparisBtn').innerText = d.btnSiparis;
+
+            // Kategori linklerini güncelle
+            let kNav = document.getElementById('kategoriNavLinks');
+            kNav.innerHTML = `
+                <a href="#" onclick="kategoriFiltre('hepsi')">${d.hHepsi}</a>
+                <a href="#" onclick="kategoriFiltre('cay')">${d.hCay}</a>
+                <a href="#" onclick="kategoriFiltre('findik')">${d.hFindik}</a>
+                <a href="#" onclick="kategoriFiltre('gurme')">${d.hGurme}</a>
+            `;
+            
+            vitrinBas();
+            sepetiGuncelle();
+        }
+
+        // 💵 DÖVİZ DEĞİŞTİRME FONKSİYONU
+        function dovizDegistir() {
+            gecerliDoviz = document.getElementById('selDoviz').value;
+            let simgeler = document.getElementsByClassName('para-birimi');
+            for(let i=0; i<simgeler.length; i++) { simgeler[i].innerText = dovizSimgeleri[gecerliDoviz]; }
+            vitrinBas();
+            karisimHesapla();
+            sepetiGuncelle();
+        }
+
+        // 🧮 KARIŞIM HESAPLAMA MOTORU
         function karisimHesapla() {
             let c1 = parseInt(document.getElementById('rngCay1').value);
             let c2 = parseInt(document.getElementById('rngCay2').value);
-            
             document.getElementById('lblCay1').innerText = c1;
             document.getElementById('lblCay2').innerText = c2;
+            document.getElementById('karisimToplamGram').innerText = c1 + c2;
             
-            let toplamGram = c1 + c2;
-            document.getElementById('karisimToplamGram').innerText = toplamGram;
-            
-            // Oransal fiyat hesaplama (1 KG fiyatları üzerinden harman fiyati çıkarır)
             let f1 = (240 / 1000) * c1;
             let f2 = (230 / 1000) * c2;
-            let toplamFiyat = Math.round(f1 + f2);
+            let temelFiyatTRY = Math.round(f1 + f2);
             
-            document.getElementById('karisimFiyat').innerText = toplamFiyat;
+            let kur = dovizKurlari[gecerliDoviz];
+            document.getElementById('karisimFiyat').innerText = Math.round(temelFiyatTRY * kur);
         }
 
         function karisimSepeteEkle() {
             let c1 = document.getElementById('rngCay1').value;
             let c2 = document.getElementById('rngCay2').value;
-            let gram = parseInt(document.getElementById('karisimToplamGram').value) || (parseInt(c1)+parseInt(c2));
-            let fiyat = parseInt(document.getElementById('karisimFiyat').innerText);
-            
+            let fiyatTRY = Math.round(((240 / 1000) * c1) + ((230 / 1000) * c2));
             let harmanAdi = `Özel Harman Paket (${c1}G Filiz / ${c2}G Of)`;
-            sepeteEkle(harmanAdi, fiyat);
-            alert("Özel çay harmanınız başarıyla sepete eklendi!");
+            sepeteEkle(harmanAdi, fiyatTRY);
+            alert("Özel çay harmanınız sepete eklendi!");
+        }
+
+        // 🔔 1. FİKİR MOTORU: RASTGELE CANLI SATIŞ UYARILARI (FOMO) SİSTEMİ
+        function fomoMotoru() {
+            const isimler = ["Ahmet K. (Trabzon)", "Mustafa Y. (Rize)", "George B. (Berlin)", "Fatma S. (Ankara)", "Hasan M. (İstanbul)", "Ali O. (Akçaabat)", "Salih T. (Of)", "Zeynep D. (Bursa)"];
+            const urunIsimleri = ["2 KG Çıtır Kavrulmuş Fındık", "1 KG Mayıs Filiz Çayı", "850G Süzme Yayla Balı", "500G Organik Elekaltı Çay", "1 KG Sürgün Tiryaki Çayı", "2 Adet Fındık Ezmesi"];
+            const zamanlar = ["az önce", "3 dakika önce", "5 dakika önce", "1 dakika önce"];
+
+            setInterval(() => {
+                let rIsim = isimler[Math.floor(Math.random() * isimler.length)];
+                let rUrun = urunIsimleri[Math.floor(Math.random() * urunIsimleri.length)];
+                let rZaman = zamanlar[Math.floor(Math.random() * zamanlar.length)];
+
+                let d = diller[gecerliDil];
+                let metin = "";
+                if(gecerliDil === "tr") {
+                    metin = `<b>${rIsim}</b> ${rZaman} <b>${rUrun}</b> sipariş verdi!`;
+                } else if(gecerliDil === "en") {
+                    metin = `<b>${rIsim}</b> purchased <b>${rUrun}</b> ${rZaman.replace('önce','ago')}!`;
+                } else {
+                    metin = `قام <b>${rIsim}</b> بشراء <b>${rUrun}</b> قبل قليل!`;
+                }
+
+                document.getElementById('fomoMetin').innerHTML = metin;
+                let kutu = document.getElementById('fomoBildirimKutusu');
+                kutu.classList.add('goster');
+
+                setTimeout(() => { kutu.classList.remove('goster'); }, 5000); // 5 saniye göster sonra kapat
+            }, 18000); // Her 18 saniyede bir yeni satış bildirimi fırlatır
         }
 
         function geriSayimBaslat() {
             let sure = 2 * 60 * 60 + 45 * 60;
             setInterval(() => {
-                if (sure <= 0) sure = 2 * 60 * 60 + 45 * 60;
-                sure--;
-                let saat = Math.floor(sure / 3600);
-                let dakika = Math.floor((sure % 3600) / 60);
-                let saniye = sure % 60;
-                document.getElementById('geriSayim').innerText = 
-                    (saat < 10 ? "0" : "") + saat + ":" + 
-                    (dakika < 10 ? "0" : "") + dakika + ":" + 
-                    (saniye < 10 ? "0" : "") + saniye;
+                if (sure <= 0) sure = 2 * 60 * 60 + 45 * 60; sure--;
+                let saat = Math.floor(sure / 3600); let dakika = Math.floor((sure % 3600) / 60); let saniye = sure % 60;
+                document.getElementById('geriSayim').innerText = (saat < 10 ? "0" : "") + saat + ":" + (dakika < 10 ? "0" : "") + dakika + ":" + (saniye < 10 ? "0" : "") + saniye;
             }, 1000);
         }
 
@@ -506,22 +648,20 @@
             let girdi = document.getElementById('aramaInput').value.toLowerCase();
             let kartlar = document.getElementsByClassName('caykur-urun-kart');
             for (let i = 0; i < kartlar.length; i++) {
-                let ad = kartlar[i].getAttribute('data-isim');
-                kartlar[i].style.display = ad.includes(girdi) ? "flex" : "none";
+                let ad = kartlar[i].getAttribute('data-isim'); kartlar[i].style.display = ad.includes(girdi) ? "flex" : "none";
             }
         }
 
         function kategoriFiltre(kat) {
             let kartlar = document.getElementsByClassName('caykur-urun-kart');
             for (let i = 0; i < kartlar.length; i++) {
-                let uKat = kartlar[i].getAttribute('data-kat');
-                kartlar[i].style.display = (kat === 'hepsi' || uKat === kat) ? "flex" : "none";
+                let uKat = kartlar[i].getAttribute('data-kat'); kartlar[i].style.display = (kat === 'hepsi' || uKat === kat) ? "flex" : "none";
             }
         }
 
-        function sepeteEkle(ad, fiyat) {
+        function sepeteEkle(ad, fiyatTRY) {
             let varOlan = sepet.find(item => item.ad === ad);
-            if (varOlan) { varOlan.adet += 1; } else { sepet.push({ ad: ad, fiyat: fiyat, adet: 1 }); }
+            if (varOlan) { varOlan.adet += 1; } else { sepet.push({ ad: ad, fiyat: fiyatTRY, adet: 1 }); }
             sepetiGuncelle();
             document.getElementById('sepetPenceresi').classList.add('acik');
         }
@@ -533,10 +673,13 @@
             let sayac = document.getElementById('sepetSayac');
             let toplam = document.getElementById('sepetToplam');
             let kForm = document.getElementById('kargoFormuAlani');
+            let d = diller[gecerliDil];
+            let kur = dovizKurlari[gecerliDoviz];
+            let simge = dovizSimgeleri[gecerliDoviz];
             
             if (sepet.length === 0) {
-                icerik.innerHTML = '<p style="text-align:center;color:var(--yazi-acik);">Sepetiniz boş.</p>';
-                sayac.innerText = 0; toplam.innerText = '0 TL';
+                icerik.innerHTML = `<p style="text-align:center;color:var(--yazi-acik);">${d.sepetBos}</p>`;
+                sayac.innerText = 0; toplam.innerText = '0 ' + simge;
                 kForm.style.display = "none";
                 uygulananIndirimYuzdesi = 0;
                 document.getElementById('kuponMesaj').style.display = "none";
@@ -544,43 +687,34 @@
             }
             
             kForm.style.display = "block";
-            let tAdet = 0, tTutar = 0, html = '';
+            let tAdet = 0, tTutarTRY = 0, html = '';
             sepet.forEach((u, i) => {
-                tAdet += u.adet; tTutar += (u.fiyat * u.adet);
-                html += `<div class="sepet-urun-satir"><div><strong>${u.ad}</strong><br><span style="font-size:12px;">${u.fiyat} TL x ${u.adet}</span></div>
+                tAdet += u.adet; tTutarTRY += (u.fiyat * u.adet);
+                let gosterimFiyat = Math.round(u.fiyat * kur);
+                html += `<div class="sepet-urun-satir"><div><strong>${u.ad}</strong><br><span style="font-size:12px;">${gosterimFiyat} ${simge} x ${u.adet}</span></div>
                 <button onclick="sepettenSil(${i})" style="background:none;border:none;color:var(--canli-kirmizi);cursor:pointer;"><i class="fa-solid fa-trash"></i></button></div>`;
             });
             
-            // Kupon hesaplamasını fiyata yansıt
             if (uygulananIndirimYuzdesi > 0) {
-                let indirimTutari = (tTutar * uygulananIndirimYuzdesi) / 100;
-                tTutar = Math.round(tTutar - indirimTutari);
+                tTutarTRY = Math.round(tTutarTRY - ((tTutarTRY * uygulananIndirimYuzdesi) / 100));
             }
 
-            icerik.innerHTML = html; sayac.innerText = tAdet; toplam.innerText = tTutar + ' TL';
+            let nihaiTutarGosterim = Math.round(tTutarTRY * kur);
+            icerik.innerHTML = html; sayac.innerText = tAdet; toplam.innerText = nihaiTutarGosterim + ' ' + simge;
         }
 
         function sepettenSil(i) { sepet.splice(i, 1); sepetiGuncelle(); }
 
-        // 🎫 3. FİKİR: KUPON KONTROL MOTORU
         function kuponUygula() {
             let kodGirdi = document.getElementById('kuponKoduGirdi').value.trim().toUpperCase();
             let mesajAlani = document.getElementById('kuponMesaj');
-            
             if (kodGirdi === aktifKupon.kod) {
                 uygulananIndirimYuzdesi = aktifKupon.yuzde;
-                mesajAlani.innerText = `Harika! "${aktifKupon.kod}" Kuponu İle %${aktifKupon.yuzde} İndirim Uygulandı.`;
-                mesajAlani.style.display = "block";
-                sepetiGuncelle();
-            } else {
-                alert("Geçersiz veya süresi dolmuş kupon kodu!");
-                uygulananIndirimYuzdesi = 0;
-                mesajAlani.style.display = "none";
-                sepetiGuncelle();
-            }
+                mesajAlani.innerText = `Kupon aktif edildi: %${aktifKupon.yuzde} İndirim!`;
+                mesajAlani.style.display = "block"; sepetiGuncelle();
+            } else { alert("Geçersiz kupon!"); uygulananIndirimYuzdesi = 0; mesajAlani.style.display = "none"; sepetiGuncelle(); }
         }
 
-        // WHATSAPP SIPARIS MOTORU VE PANEL ARŞİVLEME SİSTEMİ BİRLEŞİMİ
         function siparisGonder() {
             if (sepet.length === 0) return;
             let adSoyad = document.getElementById('krgAd').value.trim();
@@ -589,211 +723,161 @@
             let ilce = document.getElementById('krgIlce').value.trim();
             let adres = document.getElementById('krgAdres').value.trim();
 
-            if (!adSoyad || !telefon || !adres) {
-                alert("Lütfen kargo teslimatı için alanları eksiksiz doldurunuz hemşerim!");
-                return false;
-            }
+            if (!adSoyad || !telefon || !adres) { alert("Lütfen kargo bilgilerini doldurunuz!"); return false; }
 
-            let t = 0;
-            let urunOzeti = "";
-            sepet.forEach(u => { urunOzeti += `${u.ad} (X${u.adet}), `; t += (u.fiyat * u.adet); });
-            if (uygulananIndirimYuzdesi > 0) t = Math.round(t - (t * uygulananIndirimYuzdesi / 100));
+            let tTRY = 0; let urunOzeti = "";
+            sepet.forEach(u => { urunOzeti += `${u.ad} (X${u.adet}), `; tTRY += (u.fiyat * u.adet); });
+            if (uygulananIndirimYuzdesi > 0) tTRY = Math.round(tTRY - (tTRY * uygulananIndirimYuzdesi / 100));
 
-            // 📋 4. FİKİR: SİPARİŞİ SİTENİN HAFIZASINA (MUHASEBE DEFTERİNE) EKLEME
+            // MUHASEBE DEFTERİNE KAYIT EKLEME
             let yeniSiparis = {
-                tarih: new Date().toLocaleDateString('tr-TR') + " " + new Date().toLocaleTimeString('tr-TR'),
-                musteri: adSoyad,
-                tel: telefon,
-                urunler: urunOzeti,
-                tutar: t,
-                adres: `${adres} / ${ilce} - ${il}`
+                tarih: new Date().toLocaleDateString('tr-TR'),
+                musteri: adSoyad, tel: telefon, urunler: urunOzeti, tutar: tTRY, adres: `${adres} / ${ilce} - ${il}`
             };
             siparisler.push(yeniSiparis);
             localStorage.setItem('61bazaar_orders', JSON.stringify(siparisler));
             adminSiparisDefteriniListele();
+            grafikGuncelle(); // Grafik verilerini canlı tazele
 
-            // WhatsApp yönlendirme faturası hazırlığı
             let numara = "905309082276";
-            let mesaj = "*📦 61Bazaar Mağazası Yeni Sipariş Faturalandırması*\n\n";
-            mesaj += "*👤 MÜŞTERİ VE KARGO BİLGİLERİ:*\n";
-            mesaj += `- Ad Soyad: ${adSoyad}\n- Tel: ${telefon}\n- Adres: ${adres} / ${ilce} - ${il}\n\n`;
-            mesaj += "*🛒 SİPARİŞ EDİLEN MAHSULLER:*\n";
-            sepet.forEach(u => { mesaj += `- ${u.ad} (X${u.adet}) -> ${u.fiyat * u.adet} TL\n`; });
-            if (uygulananIndirimYuzdesi > 0) mesaj += `\n*Kupon İndirimi:* %${uygulananIndirimYuzdesi}\n`;
-            mesaj += `\n*💰 TOPLAM SİPARİŞ TUTARI:* ${t} TL`;
+            let simge = dovizSimgeleri[gecerliDoviz];
+            let gosterimTutar = Math.round(tTRY * dovizKurlari[gecerliDoviz]);
+
+            let mesaj = `*📦 61Bazaar Global Order System*\n\n`;
+            mesaj += `*👤 CUSTOMER/SHIPPING INFO:*\n- Name: ${adSoyad}\n- Tel: ${telefon}\n- Address: ${adres} ${ilce}/${il}\n- Preferred Language/Currency: ${gecerliDil.toUpperCase()} / ${gecerliDoviz}\n\n`;
+            mesaj += `*🛒 PRODUCTS:*\n`;
+            sepet.forEach(u => { mesaj += `- ${u.ad} (X${u.adet}) -> ${Math.round(u.fiyat * dovizKurlari[gecerliDoviz])} ${simge}\n`; });
+            mesaj += `\n*💰 FINAL TOTAL AMOUNT:* ${gosterimTutar} ${simge}`;
             
             document.getElementById('whatsappSiparisBtn').href = `https://wa.me/${numara}?text=${encodeURIComponent(mesaj)}`;
         }
 
         function adminGirisTetikle() {
-            let sifre = prompt("Lütfen Mağaza Yönetici Şifresini Giriniz:");
+            let sifre = prompt("Yönetici Şifresi:");
             if (sifre === "6161") {
                 document.getElementById('adminPenceresi').classList.add('acik');
                 adminMevcutUrunleriListele();
                 adminSiparisDefteriniListele();
-            } else { alert("Hatalı Giriş Kodu!"); }
+                grafikBaslat(); // Panel açıldığında grafik motorunu ateşle
+            } else { alert("Hatalı!"); }
         }
 
         function adminPaneliKapat() { document.getElementById('adminPenceresi').classList.remove('acik'); }
 
-        // 📋 4. FİKİR: ADMIN SİPARİŞ DEFTERİ LİSTELEME FONKSİYONU
         function adminSiparisDefteriniListele() {
             let alan = document.getElementById('adminSiparisDefteri');
-            if (siparisler.length === 0) { alan.innerHTML = "Henüz gelen sipariş yok."; return; }
+            if (siparisler.length === 0) { alan.innerHTML = "Sipariş yok."; return; }
             let html = "";
             siparisler.slice().reverse().forEach(s => {
-                html += `<div style="border-bottom:1px solid #eee;padding:6px 0;">
-                    <b>tarih:</b> ${s.tarih}<br><b>Müşteri:</b> ${s.musteri} (${s.tel})<br>
-                    <b>Ürünler:</b> ${s.urunler}<br><b>Tutar:</b> <span style="color:var(--canli-kirmizi);font-weight:bold;">${s.tutar} TL</span><br>
-                    <b>Adres:</b> <span style="color:var(--yazi-acik);">${s.adres}</span>
-                </div>`;
+                html += `<div style='border-bottom:1px solid #eee;padding:4px 0;'><b>${s.tarih}</b> - ${s.musteri}<br>${s.urunler}<br><b>Ciro:</b> ${s.tutar} TL</div>`;
             });
             alan.innerHTML = html;
         }
 
-        function siparisDefteriniTemizle() {
-            if (confirm("Tüm sipariş geçmişini silmek istediğinize emin misiniz?")) {
-                siparisler = []; localStorage.removeItem('61bazaar_orders'); adminSiparisDefteriniListele();
-            }
-        }
+        function siparisDefteriniTemizle() { if (confirm("Temizlensin mi?")) { siparisler = []; localStorage.removeItem('61bazaar_orders'); adminSiparisDefteriniListele(); grafikGuncelle(); } }
 
-        // 🎫 3. FİKİR: ADMİN KUPON TANIMLAMA FONKSİYONU
         function adminKuponKaydet() {
             let kod = document.getElementById('admKuponKod').value.trim().toUpperCase();
             let yuzde = parseInt(document.getElementById('admKuponYuzde').value);
-            if (!kod || !yuzde) { alert("Lütfen kupon kodu ve indirim yüzdesini eksiksiz girin!"); return; }
-            aktifKupon = { kod: kod, yuzde: yuzde };
+            if (!kod || !yuzde) return; aktifKupon = { kod: kod, yuzde: yuzde };
             localStorage.setItem('61bazaar_coupon', JSON.stringify(aktifKupon));
-            document.getElementById('admAktifKuponMetni').innerText = `Şu an aktif kupon: ${aktifKupon.kod} (%${aktifKupon.yuzde})`;
-            document.getElementById('admKuponKod').value = '';
-            document.getElementById('admKuponYuzde').value = '';
-            alert("Yeni kupon dükkanda başarıyla aktif edildi!");
+            document.getElementById('admAktifKuponMetni').innerText = `Aktif kupon: ${aktifKupon.kod} (%${aktifKupon.yuzde})`;
+            alert("Kupon tanımlandı!");
         }
+
+        // 📊 3. FİKİR MOTORU: GRAFİKSEL CİRO RAPORLAMA FONKSİYONLARI (CHART.JS)
+        function grafikBaslat() {
+            let ctx = document.getElementById('ciroGrafik').getContext('2d');
+            
+            // Tarihlere göre ciroları grupla
+            let ciroVerileri = {};
+            siparisler.forEach(s => {
+                ciroVerileri[s.tarih] = (ciroVerileri[s.tarih] || 0) + s.tutar;
+            });
+
+            let etiketler = Object.keys(ciroVerileri).keys ? Object.keys(ciroVerileri) : ["Veri Yok"];
+            let veriler = Object.values(ciroVerileri).length ? Object.values(ciroVerileri) : [0];
+
+            if(ciroGrafikObjesi) ciroGrafikObjesi.destroy(); // Eski grafik varsa temizle
+
+            ciroGrafikObjesi = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: etiketler,
+                    datasets: [{
+                        label: 'Günlük Ciro (₺)',
+                        data: veriler,
+                        backgroundColor: 'rgba(10, 61, 32, 0.1)',
+                        borderColor: '#0a3d20',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: { scales: { y: { beginAtZero: true } } }
+            });
+        }
+
+        function grafikGuncelle() { if(document.getElementById('adminPenceresi').classList.contains('acik')) grafikBaslat(); }
 
         function adminResimYukle(event) {
             let dosya = event.target.files[0]; if (!dosya) return;
-            let etiket = document.getElementById('yuklemeEtiketi');
-            let kutu = document.getElementById('admUrunGorsel');
-            etiket.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Fotoğraf Yükleniyor...';
-            let formData = new FormData();
-            formData.append("image", dosya);
-
-            let apiKey = "452de0403df321620adab22aa9d52412"; 
-            fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, { method: "POST", body: formData })
-            .then(response => response.json())
-            .then(result => {
-                if (result.success) {
-                    kutu.value = result.data.url;
-                    etiket.innerHTML = '<i class="fa-solid fa-check" style="color:green;"></i> Başarıyla Yüklendi!';
-                } else { alert("Hata!"); etiket.innerHTML = '<i class="fa-solid fa-image"></i> Yeniden Dene'; }
-            }).catch(err => { alert("Bağlantı hatası!"); etiket.innerHTML = '<i class="fa-solid fa-image"></i> Yeniden Dene'; });
+            let etiket = document.getElementById('yuklemeEtiketi'); etiket.innerHTML = 'Yükleniyor...';
+            let formData = new FormData(); formData.append("image", dosya);
+            fetch(`https://api.imgbb.com/1/upload?key=452de0403df321620adab22aa9d52412`, { method: "POST", body: formData })
+            .then(response => response.json()).then(result => {
+                if (result.success) { document.getElementById('admUrunGorsel').value = result.data.url; etiket.innerHTML = 'Yüklendi!'; }
+            });
         }
 
         function adminUrunEkle() {
-            let ad = document.getElementById('admUrunAd').value;
-            let kat = document.getElementById('admUrunKat').value;
-            let fiyat = parseInt(document.getElementById('admUrunFiyat').value);
-            let yorum = document.getElementById('admUrunYorum').value || "Yeni mahsulümüz sofralarınıza lezzet katacak.";
-            let gorsel = document.getElementById('admUrunGorsel').value || 'urunler/mayis-cayi.jpg';
-
-            if (!ad || !fiyat) { alert("Lütfen isim ve fiyat alanlarını doldurun!"); return; }
-
+            let ad = document.getElementById('admUrunAd').value; let kat = document.getElementById('admUrunKat').value; let fiyat = parseInt(document.getElementById('admUrunFiyat').value);
+            let yorum = document.getElementById('admUrunYorum').value || "Yeni mahsulümüz."; let gorsel = document.getElementById('admUrunGorsel').value || 'urunler/mayis-cayi.jpg';
+            if (!ad || !fiyat) return;
             let yeniId = urunler.length > 0 ? urunler[urunler.length - 1].id + 1 : 1;
             urunler.push({ id: yeniId, ad: ad, fiyat: fiyat, kat: kat, gorsel: gorsel, yorum: yorum });
-            vitrinBas(); adminMevcutUrunleriListele();
-            
-            document.getElementById('admUrunAd').value = '';
-            document.getElementById('admUrunFiyat').value = '';
-            document.getElementById('admUrunYorum').value = '';
-            document.getElementById('admUrunGorsel').value = '';
-            document.getElementById('yuklemeEtiketi').innerHTML = '<i class="fa-solid fa-image"></i> Fotoğraf Seç ve Yükle';
-            alert("Ürün vitrine eklendi!");
+            vitrinBas(); adminMevcutUrunleriListele(); alert("Eklendi!");
         }
 
         function adminMevcutUrunleriListele() {
-            let alan = document.getElementById('adminMevcutUrunler');
-            let html = '';
+            let alan = document.getElementById('adminMevcutUrunler'); let html = '';
             urunler.forEach((u, index) => {
-                html += `
-                    <div class="admin-urun-liste-satir">
-                        <div>
-                            <strong>${u.ad}</strong><br>
-                            <input type="number" value="${u.fiyat}" id="p-fiyat-${u.id}" style="width:60px;padding:3px;margin-top:5px;"> TL
-                            <button onclick="adminFiyatGuncelle(${u.id}, ${index})" style="padding:3px 6px;background:var(--kurumsal-yesil);color:white;border:none;border-radius:3px;cursor:pointer;">Güncelle</button>
-                        </div>
-                        <button onclick="adminUrunSil(${u.id})" style="background:none;border:none;color:var(--canli-kirmizi);cursor:pointer;font-size:16px;"><i class="fa-solid fa-trash"></i></button>
-                    </div>
-                `;
-            });
-            alan.innerHTML = html;
+                html += `<div class="admin-urun-liste-satir"><div><strong>${u.ad}</strong><br>${u.fiyat} TL</div>
+                <button onclick="adminUrunSil(${u.id})" style="background:none;border:none;color:var(--canli-kirmizi);cursor:pointer;"><i class="fa-solid fa-trash"></i></button></div>`;
+            }); alan.innerHTML = html;
         }
 
-        function adminFiyatGuncelle(id, index) {
-            let yeniFiyat = parseInt(document.getElementById(`p-fiyat-${id}`).value);
-            if (!yeniFiyat) return; urunler[index].fiyat = yeniFiyat; vitrinBas(); alert("Fiyat güncellendi!");
-        }
-
-        function adminUrunSil(id) {
-            if (confirm("Silsin mi hemşerim?")) { urunler = urunler.filter(u => u.id !== id); vitrinBas(); adminMevcutUrunleriListele(); }
-        }
-
-        function veritabaniYedekle() {
-            let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(urunler));
-            let indirmeElementi = document.createElement('a'); indirmeElementi.setAttribute("href", dataStr);
-            indirmeElementi.setAttribute("download", "61bazaar_magaza_yedek.json");
-            document.body.appendChild(indirmeElementi); indirmeElementi.click(); indirmeElementi.remove();
-        }
-
-        function veritabaniYukle(event) {
-            let dosya = event.target.files[0]; if (!dosya) return;
-            let okuyucu = new FileReader();
-            okuyucu.onload = function(e) {
-                try {
-                    let yuklenenVeri = JSON.parse(e.target.result);
-                    if (Array.isArray(yuklenenVeri)) { urunler = yuklenenVeri; vitrinBas(); adminMevcutUrunleriListele(); alert("Yedek başarıyla yüklendi!"); }
-                } catch (err) { alert("Hata!"); }
-            }; okuyucu.readAsText(dosya);
-        }
+        function adminUrunSil(id) { if (confirm("Silinsin mi?")) { urunler = urunler.filter(u => u.id !== id); vitrinBas(); adminMevcutUrunleriListele(); } }
+        function veritabaniYedekle() { let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(urunler)); let dl = document.createElement('a'); dl.setAttribute("href", dataStr); dl.setAttribute("download", "yedek.json"); dl.click(); }
+        function veritabaniYukle(e) { let dosya = e.target.files[0]; if(!dosya) return; let rd = new FileReader(); rd.onload = function(evt) { urunler = JSON.parse(evt.target.result); vitrinBas(); }; rd.readAsText(dosya); }
 
         function aiAsistanAcKapat() { document.getElementById('aiPenceresi').style.display = document.getElementById('aiPenceresi').style.display === "flex" ? "none" : "flex"; }
-        
         function aiMesajGonder() {
-            let girdiAlani = document.getElementById('aiGirdi'); let mesajText = girdiAlani.value.trim(); if (!mesajText) return;
-            let mesajlarAlani = document.getElementById('aiMesajlar'); mesajlarAlani.innerHTML += `<div class="mesaj user">${mesajText}</div>`;
-            girdiAlani.value = ''; mesajlarAlani.scrollTop = mesajlarAlani.scrollHeight;
+            let gd = document.getElementById('aiGirdi'); let txt = gd.value.trim(); if (!txt) return;
+            let alan = document.getElementById('aiMesajlar'); alan.innerHTML += `<div class="mesaj user">${txt}</div>`; gd.value = ''; alan.scrollTop = alan.scrollHeight;
             setTimeout(() => {
-                let botCevap = aiAkilliCevapUret(mesajText.toLowerCase());
-                mesajlarAlani.innerHTML += `<div class="mesaj bot">${botCevap}</div>`; mesajlarAlani.scrollTop = mesajlarAlani.scrollHeight;
-            }, 600);
+                let cevap = aiAkilliCevapUret(txt.toLowerCase());
+                alan.innerHTML += `<div class="mesaj bot">${cevap}</div>`; alan.scrollTop = alan.scrollHeight;
+            }, 500);
         }
 
-        // 🤖 1. FİKİR MOTORU: DOĞRUDAN MAĞAZA VERİTABANINA CANLI BAĞLI YAPAY ZEKA ASİSTANI
         function aiAkilliCevapUret(soru) {
-            if (soru.includes("merhaba") || soru.includes("selam")) { return "Selamun Aleyküm hemşerim, dükkanımıza hoş geldin! Karışım çay harmanı ünitemizi denedin mi? Fiyat sormak istersen tıkır tıkır listelerim."; }
-            
-            // Eğer müşteri genel olarak fiyatları veya ürünleri sorarsa canlı veritabanını tarar
-            if (soru.includes("çay") && (soru.includes("fiyat") || soru.includes("kaç") || soru.includes("ne kadar"))) {
-                let caylar = urunler.filter(u => u.kat === "cay");
-                let cevap = "<b>Canlı Veritabanından Çekilen Güncel Çay Fiyatlarımız:</b><br>";
-                caylar.forEach(c => cevap += `- ${c.ad}: <b>${c.fiyat} TL</b><br>`);
-                return cevap;
+            let kur = dovizKurlari[gecerliDoviz];
+            let simge = dovizSimgeleri[gecerliDoviz];
+            if (soru.includes("merhaba") || soru.includes("selam")) return "Aleyküm Selam hemşerim dükkana hoş geldin! Canlı fiyatları ve kuponu bizzat veritabanından çekip söyleyebilirim.";
+            if (soru.includes("çay") && (soru.includes("fiyat") || soru.includes("ne kadar"))) {
+                let caylar = urunler.filter(u => u.kat === "cay"); let cevap = "<b>Canlı Çay Fiyatlarımız:</b><br>";
+                caylar.forEach(c => cevap += `- ${c.ad}: <b>${Math.round(c.fiyat * kur)} ${simge}</b><br>`); return cevap;
             }
-            if (soru.includes("fındık") && (soru.includes("fiyat") || soru.includes("kaç") || soru.includes("ne kadar"))) {
-                let findiklar = urunler.filter(u => u.kat === "findik");
-                let cevap = "<b>Canlı Veritabanından Çekilen Güncel Fındık Fiyatlarımız:</b><br>";
-                findiklar.forEach(f => cevap += `- ${f.ad}: <b>${f.fiyat} TL</b><br>`);
-                return cevap;
+            if (soru.includes("fındık") && (soru.includes("fiyat") || soru.includes("ne kadar"))) {
+                let findiklar = urunler.filter(u => u.kat === "findik"); let cevap = "<b>Canlı Fındık Fiyatlarımız:</b><br>";
+                findiklar.forEach(f => cevap += `- ${f.ad}: <b>${Math.round(f.fiyat * kur)} ${simge}</b><br>`); return cevap;
             }
-            if (soru.includes("kupon") || soru.includes("indirim")) {
-                return `Şu an dükkanımızda geçerli aktif bir indirim kuponu var hemşerim! Sepette <b>${aktifKupon.kod}</b> yazarak sepet tutarını anında %${aktifKupon.yuzde} düşürebilirsin!`;
-            }
-            if (soru.includes("kargo") || soru.includes("ücretsiz")) {
-                return "Siparişleriniz Of ve Akçaabat'tan doğrudan kargolanır. 1500 TL ve üzeri siparişlerde kargo tamamen ücretsizdir!";
-            }
-            return "Sorduğun şeyi tam anlayamadım hemşerim. Ama çay fiyatları, fındık çeşitleri veya indirim kuponu yazarsan veritabanından bakar anında söylerim!";
+            if (soru.includes("kupon") || soru.includes("indirim")) return `Şu an geçerli aktif kuponumuz: <b>${aktifKupon.kod}</b> (%${aktifKupon.yuzde} İndirim!)`;
+            return "Şu an tam anlayamadım hemşerim. Ama bana çay fiyatları veya fındık fiyatları yazarsan anlık canlı tablodan bakıp söylerim!";
         }
 
-        window.onload = function() { vitrinBas(); geriSayimBaslat(); karisimHesapla(); };
+        window.onload = function() { vitrinBas(); geriSayimBaslat(); karisimHesapla(); fomoMotoru(); };
     </script>
 </body>
 </html>
