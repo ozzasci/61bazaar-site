@@ -127,7 +127,6 @@
         .yan-panel li { padding: 12px 0; font-size: 14px; border-bottom: 1px solid #f0f0f0; cursor: pointer; font-weight: 500; }
         .yan-panel li:hover { color: var(--canli-kirmizi); }
 
-        /* ⭐ 1. FİKİR: YILDIZ FİLTRELEME ALANI */
         .yildiz-filtre-satir { margin-top: 15px; padding-top: 10px; border-top: 1px dashed #eee; }
         .yildiz-filtre-link { font-size: 13px; color: var(--yazi-koyu); display: block; padding: 5px 0; text-decoration: none; cursor: pointer; }
         .yildiz-filtre-link:hover { color: var(--altin-sarisi); }
@@ -142,7 +141,6 @@
         .kart-yorum-alani { font-size: 12px; color: #555; margin-bottom: 10px; min-height: 38px; background: #fdfbf7; padding: 5px; border-radius: 4px; border-left: 2px solid var(--altin-sarisi); }
         .kart-yildizlar { color: var(--altin-sarisi); margin-bottom: 3px; }
 
-        /* 📊 3. FİKİR: VİTRİN STOK GÖRÜNÜMÜ */
         .kart-stok-durum { font-size: 12px; font-weight: bold; margin-bottom: 10px; }
         .stok-normal { color: #2a9d8f; }
         .stok-kritik { color: #e67e22; background: #fff3e0; padding: 2px 5px; border-radius: 3px; display: inline-block; animation: blinker 1.5s linear infinite; }
@@ -167,7 +165,6 @@
         .form-satir { display: flex; gap: 10px; margin-bottom: 8px; }
         .form-satir input, .kargo-formu-alani textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; box-sizing: border-box; }
 
-        /* 🎁 2. FİKİR: HEDİYE NOTU ALANI STİLLERİ */
         .hediye-paketi-grup { background: #fdf2f4; border: 1px solid #f8d7da; border-radius: 4px; padding: 10px; margin: 10px 0; font-size: 13px; }
         .hediye-paketi-grup label { display: flex; align-items: center; gap: 8px; font-weight: bold; color: #721c24; cursor: pointer; }
         .hediye-paketi-grup textarea { width: 100%; margin-top: 8px; padding: 6px; border: 1px solid #f5c6cb; border-radius: 4px; display: none; box-sizing: border-box; font-size: 12px; resize: none; }
@@ -326,7 +323,6 @@
                 <li onclick="kategoriFiltre('gurme')">Yöresel Gurme & Bal</li>
             </ul>
 
-            <!-- ⭐ 1. FİKİR: PUAN SİSTEMİNE GÖRE FİLTRELEME YAN PANEL MODÜLÜ -->
             <div class="yildiz-filtre-satir">
                 <h4 style="margin:5px 0; font-size:13px; color:var(--kurumsal-yesil);">Müşteri Puanı</h4>
                 <a class="yildiz-filtre-link" onclick="puanFiltre(5)"><i class="fa-solid fa-star" style="color:var(--altin-sarisi)"></i> 5 Yıldızlı Ürünler</a>
@@ -340,10 +336,11 @@
         </section>
     </main>
 
-    <!-- SEPET PENCERESİ -->
+    <!-- SHOPPING CART PANEL -->
     <div class="sepet-penceresi" id="sepetPenceresi">
         <div class="sepet-ust">
             <h3 id="txtCartTitle">Alışveriş Sepetiniz</h3>
+            <!-- 🛠 HARF HATASI DÜZELTİLDİ: sepetiAcKapat() YAPILDI -->
             <span class="sepet-kapat" onclick="sepetiAcKapat()">&times;</span>
         </div>
         <div class="sepet-elemanlar" id="sepetIcerik"></div>
@@ -360,7 +357,6 @@
             </div>
             <textarea id="krgAdres" rows="2" placeholder="Açık Adresiniz..."></textarea>
             
-            <!-- 🎁 2. FİKİR: HEDİYE PAKETİ VE TRABZON KART NOTU MODÜLÜ -->
             <div class="hediye-paketi-grup">
                 <label>
                     <input type="checkbox" id="chkHediyePaketi" onchange="toggleHediyeNotu()">
@@ -383,7 +379,7 @@
         <a href="#" id="whatsappSiparisBtn" class="siparis-tamamla-btn" target="_blank" onclick="siparisGonder()">Siparişi WhatsApp ile Tamamla</a>
     </div>
 
-    <!-- GELİŞMİŞ YÖNETİCİ PANELİ -->
+    <!-- ADMIN PANEL -->
     <div class="admin-penceresi" id="adminPenceresi">
         <div class="sepet-ust">
             <h3>61Bazaar Global Yönetim Paneli</h3>
@@ -418,7 +414,6 @@
             </div>
             <div class="admin-form-grup"><label>Fiyat (Sadece Sayı - ₺)</label><input type="number" id="admUrunFiyat" placeholder="Örn: 240"></div>
             
-            <!-- 📊 1 & 3. FİKİR: ADMIN PANELİ PUAN VE STOK GİRİŞİ -->
             <div class="admin-form-grup"><label>Başlangıç Puanı (1-5 Arası Örn: 5)</label><input type="number" id="admUrunPuan" value="5" min="1" max="5"></div>
             <div class="admin-form-grup"><label>Başlangıç Stok Adedi (Örn: 20)</label><input type="number" id="admUrunStok" value="25"></div>
             
@@ -435,18 +430,18 @@
         </div>
     </div>
 
-    <!-- FOMO BİLDİRİM BALONU -->
+    <!-- FOMO -->
     <div class="fomo-bildirim" id="fomoBildirimKutusu">
         <i class="fa-solid fa-bag-shopping"></i>
         <div id="fomoMetin"><b>Ahmet K. (Trabzon)</b> az önce fındık sipariş verdi!</div>
     </div>
 
-    <!-- AI ASİSTAN -->
+    <!-- AI -->
     <div class="ai-buton" onclick="aiAsistanAcKapat()"><i class="fa-solid fa-robot"></i></div>
     <div class="ai-penceresi" id="aiPenceresi">
         <div class="ai-ust"><span id="txtAiTitle"><i class="fa-solid fa-robot"></i> 61Bazaar Akıllı Asistan</span><span class="sepet-kapat" onclick="aiAsistanAcKapat()">&times;</span></div>
         <div class="ai-mesajlar" id="aiMesajlar">
-            <div class="mesaj bot" id="txtAiWelcome">Selamun Aleyküm hemşerim! Ben 61Bazaar akıllı dükkan asistanıyım. Güncel fiyatlarımızı veya aktif kuponu sorabilirsin. Nasıl yardımcı olayım?</div>
+            <div class="mesaj bot" id="txtAiWelcome">Selamun Aleyküm hemşerim! Ben 61Bazaar akıllı dükkan asistanıyım. Güncel fiyatlarimizi veya aktif kuponu sorabilirsin. Nasıl yardımcı olayım?</div>
         </div>
         <div class="ai-girdi-alani">
             <input type="text" id="aiGirdi" placeholder="Mesajınızı yazın..." onkeypress="if(event.key === 'Enter') aiMesajGonder()">
@@ -505,7 +500,6 @@
             }
         };
 
-        // 📊 1 & 3. FİKİR ENTEGRASYONU: VARSAYILAN ÜRÜNLERE STOK VE YILDIZ PUANI EKLEDİK
         const varsayilanUrunler = [
             { id: 1, ad: "Mayıs İlk Sürgün Filiz Çayı (1000 G)", fiyat: 240, kat: "cay", gorsel: "urunler/mayis-cayi.jpg", yorum: "Kokusu ve demi tam istediğim gibi, taptaze. - Kerem A.", puan: 5, stok: 12 },
             { id: 2, ad: "Of Hasadı Altınbaş Siyah Çay (1000 G)", fiyat: 230, kat: "cay", gorsel: "urunler/of-cayi.jpg", yorum: "Halis mulis Of çayı, burukluğu harika. - Merve Y.", puan: 5, stok: 2 },
@@ -538,12 +532,9 @@
             let d = diller[gecerliDil];
 
             urunler.forEach(urun => {
-                // ⭐ 1. FİKİR PUAN FİLTRELEME SORGUSU
                 if (puanFiltresi > 0 && urun.puan < puanFiltresi) return;
-
                 let donusturulmusFiyat = Math.round(urun.fiyat * kur);
                 
-                // 📊 3. FİKİR STOK GÖRÜNÜM ETİKET MOTORU
                 let stokEtiketi = `<span class="kart-stok-durum stok-normal"><i class="fa-solid fa-check"></i> ${d.stokVar} (${urun.stok})</span>`;
                 let butonDurumu = "";
                 if (urun.stok === 0) {
@@ -553,7 +544,6 @@
                     stokEtiketi = `<span class="kart-stok-durum stok-kritik"><i class="fa-solid fa-triangle-exclamation"></i> Son ${urun.stok} Mahsul!</span>`;
                 }
 
-                // Yıldızları dinamik bas
                 let yildizHtml = "";
                 for(let i=1; i<=5; i++){
                     yildizHtml += `<i class="fa-${i <= (urun.puan || 5) ? 'solid' : 'regular'} fa-star"></i>`;
@@ -582,10 +572,8 @@
             document.getElementById('admAktifKuponMetni').innerText = `Aktif kupon: ${aktifKupon.kod} (%${aktifKupon.yuzde})`;
         }
 
-        // ⭐ 1. FİKİR PUAN TETİKLEYİCİ
         function puanFiltre(puan) { vitrinBas(puan); }
 
-        // 🎁 2. FİKİR HEDİYE NOTU KUTU AÇILIŞI
         function toggleHediyeNotu() {
             let chk = document.getElementById('chkHediyePaketi').checked;
             document.getElementById('txtHediyeNotu').style.display = chk ? "block" : "none";
@@ -685,7 +673,6 @@
         }
 
         function sepeteEkle(ad, fiyatTRY, id) {
-            // Eğer id varsa ve stok kontrolü gerekiyorsa
             if (id !== null) {
                 let u = urunler.find(item => item.id === id);
                 let sepetAdet = sepet.find(item => item.id === id)?.adet || 0;
@@ -697,6 +684,9 @@
             sepetiGuncelle();
             document.getElementById('sepetPenceresi').classList.add('acik');
         }
+
+        /* 🛠 SEPET AÇMA / KAPATMA ANA FONKSİYONU */
+        function sepetiAcKapat() { document.getElementById('sepetPenceresi').classList.toggle('acik'); }
 
         function sepetiGuncelle() {
             let icerik = document.getElementById('sepetIcerik');
@@ -719,7 +709,6 @@
                 <button onclick="sepettenSil(${i})" style="background:none;border:none;color:var(--canli-kirmizi);cursor:pointer;"><i class="fa-solid fa-trash"></i></button></div>`;
             });
             
-            // 🎁 2. FİKİR: HEDİYE PAKETİ MATEMATİĞİ (+40 TL)
             let hediyePaketlendiMi = document.getElementById('chkHediyePaketi').checked;
             if (hediyePaketlendiMi) { tTutarTRY += 40; }
 
@@ -754,8 +743,6 @@
             let tTRY = 0; let urunOzeti = "";
             sepet.forEach(u => {
                 urunOzeti += `${u.ad} (X${u.adet}), `; tTRY += (u.fiyat * u.adet);
-                
-                // 📊 3. FİKİR: SİPARİŞ TAMAMLANDIĞINDA STOKTAN DÜŞME MOTORU
                 if (u.id !== null) {
                     let anaUrun = urunler.find(item => item.id === u.id);
                     if(anaUrun) anaUrun.stok = Math.max(0, anaUrun.stok - u.adet);
@@ -768,7 +755,6 @@
 
             if (uygulananIndirimYuzdesi > 0) tTRY = Math.round(tTRY - (tTRY * uygulananIndirimYuzdesi / 100));
 
-            // PANEL HAFIZASINA ALMA
             let yeniSiparis = {
                 tarih: new Date().toLocaleDateString('tr-TR'),
                 musteri: adSoyad, tel: telefon, urunler: urunOzeti + (hp ? " [Hediye Paket]": ""), tutar: tTRY, adres: `${adres} / ${hp ? 'NOT: ' + hNotu : ''}`
@@ -778,7 +764,7 @@
             
             adminSiparisDefteriniListele();
             grafikGuncelle();
-            vitrinBas(); // Stoklar düştüğü için vitrini anlık yenile
+            vitrinBas();
 
             let numara = "905309082276";
             let simge = dovizSimgeleri[gecerliDoviz];
@@ -791,7 +777,7 @@
             sepet.forEach(u => { mesaj += `- ${u.ad} (X${u.adet})\n`; });
             mesaj += `\n*💰 FINAL TOTAL AMOUNT:* ${gosterimTutar} ${simge}`;
             
-            sepet = []; sepetiGuncelle(); // Sepeti temizle
+            sepet = []; sepetiGuncelle();
             document.getElementById('whatsappSiparisBtn').href = `https://wa.me/${numara}?text=${encodeURIComponent(mesaj)}`;
         }
 
@@ -859,13 +845,10 @@
             let yorum = document.getElementById('admUrunYorum').value || "Yeni mahsulümüz."; let gorsel = document.getElementById('admUrunGorsel').value || 'urunler/mayis-cayi.jpg';
             if (!ad || !fiyat) return;
             let yeniId = urunler.length > 0 ? urunler[urunler.length - 1].id + 1 : 1;
-            
-            // ⭐ 1 & 3. FİKİR: ADMIN GİRİŞ OBJESİNE PUAN VE STOK BAĞLANDI
             urunler.push({ id: yeniId, ad: ad, fiyat: fiyat, kat: kat, gorsel: gorsel, yorum: yorum, puan: puan, stok: stok });
             vitrinBas(); adminMevcutUrunleriListele(); alert("Ürün ve stok başarıyla eklendi!");
         }
 
-        function adminMevcutUrunlerLIstele() { adminMevcutUrunleriListele(); }
         function adminMevcutUrunleriListele() {
             let alan = document.getElementById('adminMevcutUrunler'); let html = '';
             urunler.forEach((u, index) => {
